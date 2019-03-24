@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="theme-color" content="#000000" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="theme-color" content="#000000" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -22,12 +20,74 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <style>
+    html,
+    body {
+      height: 100vh;
+      width: 100vw;
+      margin: 0px;
+    }
+
+    * {
+      margin: 0px;
+    }
+
+    .App {
+      text-align: center;
+    }
+
+    .App-logo {
+      height: 275px;
+      width: 275px;
+      pointer-events: none;
+    }
+
+    .App-header {
+      background-color: #282c34;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(10px + 2vmin);
+      color: white;
+    }
+
+    .App-link {
+      color: #61dafb;
+    }
+
+    @keyframes App-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <title>React App</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+
+    <div class="App">
+      <header class="App-header">
+        <img src="%PUBLIC_URL%/logo.png" class="App-logo" alt="logo" />
+        <p>
+          N.D.R.K Institue Of Technology
+        </p>
+        <a class="App-link" href="https://www.google.com/maps/dir/12.9049109,77.6337056/N+D+R+K+Institute+Of+Tecnolagy,+Karnataka+573213/@12.941027,76.2735428,9z/data=!3m1!4b1!4m18!1m7!3m6!1s0x3ba539d5c7c7d605:0xb57005b13a667a6e!2sN+D+R+K+Institute+Of+Tecnolagy,+Karnataka+573213!3b1!8m2!3d12.9756621!4d76.0344765!4m9!1m1!4e1!1m5!1m1!1s0x3ba539d5c7c7d605:0xb57005b13a667a6e!2m2!1d76.0344765!2d12.9756621!3e3"
+          target="_blank" rel="noopener noreferrer">
+          Hassan
+        </a>
+      </header>
+    </div>
+  </div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -37,5 +97,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
