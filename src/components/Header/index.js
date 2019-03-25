@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import "./style.css";
 import logo from "../../logo.png";
+import { IonToolbar, IonTitle, IonHeader } from '@ionic/react';
 class Header extends Component {
     render() {
         return (
-            <header className="main-header">
-                <img className="logo" src={logo}></img>
-                <h1>N.D.R.K</h1>
-            </header>
+            <IonHeader>
+                <IonToolbar color="dark">
+                    <header className="main-header">
+                        <img className="logo" src={logo}></img>
+                        <IonTitle className="title">N.D.R.K</IonTitle>
+                    </header>
+                </IonToolbar>
+            </IonHeader>
         )
     }
- }
+}
 
- export default Header;
+export default Header;

@@ -1,11 +1,7 @@
 .main-header {
-    background: #282c34;
-    min-height: 60px;
-    height: 12vh;
     display: flex;
     color: white;
     align-items: center;
-    padding: 5px;
 }
 
 .main-header .logo {
@@ -14,7 +10,6 @@
     max-width: 65px;
 }
 
-.main-header h1 {
-    padding-left: calc(40% - 75px);
-    flex: 3;
+.main-header .title {
+    padding-left: calc(45% - 75px);
 }
