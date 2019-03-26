@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IonGrid, IonRow, IonCol, IonSlides, IonSlide, IonCard, IonCardHeader, IonCardTitle, IonIcon, IonTitle } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonSlides, IonSlide, IonRippleEffect } from '@ionic/react';
 import slide0 from "../../images/0.jpg";
 import slide1 from "../../images/1.jpg";
 import slide2 from "../../images/2.jpg";
@@ -19,6 +19,8 @@ import imgGallery from "../../images/gallery.svg";
 import imgMap from "../../images/locate.svg";
 import imgContact from "../../images/contact.svg";
 import imgNotification from "../../images/notification.svg";
+import imgLogin from "../../images/login.svg";
+import imgSignup from "../../images/signup.svg";
 
 const menuSectionData = [
     {
@@ -62,6 +64,7 @@ const menuSectionData = [
 const Tile = ({ src, text, onClick }) => {
     return (
         <div style={{ padding: "10px 5px" }} onClick={onClick}>
+            <IonRippleEffect></IonRippleEffect>
             <img src={src} style={{ width: "35px", height: "35px", margin: "auto" }}>
             </img>
             <figcaption style={{ fontSize: "0.8em", color: "gray" }}>{text}</figcaption>
@@ -118,6 +121,14 @@ class MainPage extends Component {
                                 </IonCol>
                             }))
                         }
+                    </IonRow>
+                    <IonRow style={{ justifyContent: "space-between" }}>
+                        <IonCol size="4">
+                            <Tile src={imgSignup} text="Sign Up" />
+                        </IonCol>
+                        <IonCol size="4">
+                            <Tile src={imgLogin} text="Login" />
+                        </IonCol>
                     </IonRow>
                 </IonGrid>
             </section>

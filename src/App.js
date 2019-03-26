@@ -3,6 +3,7 @@ import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
+import LoginPage from "./components/LoginPage";
 
 import {
   IonApp,
@@ -39,9 +40,10 @@ class App extends Component {
   render() {
     return (
       <IonApp>
-        <Header />
+        <Header title="Login" />
         <IonContent>
-          <MainPage></MainPage>
+          {/* <MainPage></MainPage> */}
+          <LoginPage />
         </IonContent>
       </IonApp>
     );
