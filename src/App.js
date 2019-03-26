@@ -4,20 +4,12 @@ import '@ionic/core/css/ionic.bundle.css';
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
 import LoginPage from "./components/LoginPage";
+import StudentSignUpPage from "./components/StudentSignUpPage";
+import FacultySignUpPage from "./components/FacultySignUp";
 
 import {
   IonApp,
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonContent,
-  IonHeader,
-  IonImg,
-  IonTitle,
-  IonToolbar,
 } from '@ionic/react';
 
 class App extends Component {
@@ -44,6 +36,8 @@ class App extends Component {
         <IonContent>
           {/* <MainPage></MainPage> */}
           <LoginPage />
+          {/* <StudentSignUpPage /> */}
+          {/* <FacultySignUpPage /> */}
         </IonContent>
       </IonApp>
     );

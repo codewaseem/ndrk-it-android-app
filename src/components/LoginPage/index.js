@@ -11,19 +11,24 @@ class LoginPage extends Component {
                 </img>
                 <IonItem>
                     <IonLabel color="dark"><IonIcon name="mail" /></IonLabel>
-                    <IonInput></IonInput>
+                    <IonInput placeholder="Email"></IonInput>
                 </IonItem>
                 <IonItem>
                     <IonLabel color="dark">
                         <IonIcon name="key" />
                     </IonLabel>
-                    <IonInput type="password"></IonInput>
+                    <IonInput placeholder="Password" type="password"></IonInput>
                 </IonItem>
                 <IonButton style={{ marginTop: "25px", width: "35%" }} color="dark" expand="block"><IonIcon color="light" name="unlock" style={{ marginRight: "5px" }} /> Login</IonButton>
                 <p className="go-signup">
                     Don't have an account?
                     <br />
                     <a>Sign Up</a> here.
+                    <br />
+                    <br />
+                    Forgot Password?
+                    <br />
+                    <a>Reset</a> here.
                 </p>
             </div>
         );
