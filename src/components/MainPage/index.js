@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { IonGrid, IonRow, IonCol, IonSlides, IonSlide, IonRippleEffect } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonSlides, IonSlide } from '@ionic/react';
+import Tile from "../Tile";
 import slide0 from "../../images/0.jpg";
 import slide1 from "../../images/1.jpg";
 import slide2 from "../../images/2.jpg";
@@ -60,17 +61,6 @@ const menuSectionData = [
         imgSrc: imgContact
     }
 ]
-
-const Tile = ({ src, text, onClick }) => {
-    return (
-        <div style={{ padding: "10px 5px" }} onClick={onClick}>
-            <IonRippleEffect></IonRippleEffect>
-            <img src={src} style={{ width: "35px", height: "35px", margin: "auto" }}>
-            </img>
-            <figcaption style={{ fontSize: "0.8em", color: "gray" }}>{text}</figcaption>
-        </div>
-    )
-}
 
 const slideOpts = {
     effect: 'flip',

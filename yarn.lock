@@ -767,6 +767,18 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
+"@ionic-native/core@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.0.0.tgz#df81c39da968125970b602b8461be728bd0c0c87"
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/google-maps@^5.0.0-beta.27":
+  version "5.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/@ionic-native/google-maps/-/google-maps-5.0.0-beta.27.tgz#215116c69ca6b949044a9882ba04d6efa30eff4d"
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic/core@^4.0.2":
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/@ionic/core/-/core-4.1.2.tgz#cbabd9ae65936f56b1dc6de021cf79778dc991da"
@@ -880,6 +892,10 @@
     "@svgr/plugin-jsx" "^4.1.0"
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
+
+"@types/cordova@latest":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/cordova/-/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
 
 "@types/history@*":
   version "4.7.2"

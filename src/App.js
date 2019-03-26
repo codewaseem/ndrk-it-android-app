@@ -6,6 +6,7 @@ import MainPage from "./components/MainPage";
 import LoginPage from "./components/LoginPage";
 import StudentSignUpPage from "./components/StudentSignUpPage";
 import FacultySignUpPage from "./components/FacultySignUp";
+import StudentHome from "./components/StudentHome";
 
 import {
   IonApp,
@@ -32,12 +33,13 @@ class App extends Component {
   render() {
     return (
       <IonApp>
-        <Header title="Login" />
+        <Header title="Student Menu" />
         <IonContent>
           {/* <MainPage></MainPage> */}
-          <LoginPage />
+          {/* <LoginPage /> */}
           {/* <StudentSignUpPage /> */}
           {/* <FacultySignUpPage /> */}
+          <StudentHome />
         </IonContent>
       </IonApp>
     );
