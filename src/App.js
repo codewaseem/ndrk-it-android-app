@@ -7,6 +7,11 @@ import LoginPage from "./components/LoginPage";
 import StudentSignUpPage from "./components/StudentSignUpPage";
 import FacultySignUpPage from "./components/FacultySignUp";
 import StudentHome from "./components/StudentHome";
+import FacultyHome from "./components/FacultyHome";
+import AdminHome from "./components/AdminHome";
+import AddEventPage from "./components/AddEvent";
+import AddCircularPage from "./components/AddCircular";
+import ChatPage from "./components/ChatPage";
 
 import {
   IonApp,
@@ -33,13 +38,18 @@ class App extends Component {
   render() {
     return (
       <IonApp>
-        <Header title="Student Menu" />
+        <Header title="Add Circular" />
         <IonContent>
           {/* <MainPage></MainPage> */}
           {/* <LoginPage /> */}
           {/* <StudentSignUpPage /> */}
           {/* <FacultySignUpPage /> */}
-          <StudentHome />
+          {/* <StudentHome /> */}
+          {/* <FacultyHome /> */}
+          {/* <AdminHome /> */}
+          {/* <AddEventPage /> */}
+          {/* <AddCircularPage /> */}
+          <ChatPage />
         </IonContent>
       </IonApp>
     );

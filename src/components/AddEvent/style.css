@@ -1,9 +1,11 @@
-.student-home-page {
+.add-event-page {
     height: 100%;
-    width: 100%;
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 30px;
+}
+
+.gray-placeholder {
+    color: gray;
 }
