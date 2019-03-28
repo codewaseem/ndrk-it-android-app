@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <IonApp>
-        <Header title="Add Circular" />
+        <Header title="4th Year CS Chat" />
         <IonContent>
           {/* <MainPage></MainPage> */}
           {/* <LoginPage /> */}
