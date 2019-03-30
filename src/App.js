@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import Header from "./components/Header";
-import LoginPage from "./components/LoginPage";
-import StudentSignUpPage from "./components/StudentSignUpPage";
+import LoginPage from "./pages/LoginPage";
+import StudentSignUpPage from "./pages/StudentSignUpPage";
 import FacultySignUpPage from "./components/FacultySignUp";
 import StudentHome from "./components/StudentHome";
 import FacultyHome from "./components/FacultyHome";
@@ -41,9 +41,9 @@ class App extends Component {
       <IonApp>
         <Header title="4th Year CS Chat" />
         <IonContent>
-          <HomePage></HomePage>
+          {/* <HomePage></HomePage> */}
           {/* <LoginPage /> */}
-          {/* <StudentSignUpPage /> */}
+          <StudentSignUpPage />
           {/* <FacultySignUpPage /> */}
           {/* <StudentHome /> */}
           {/* <FacultyHome /> */}
