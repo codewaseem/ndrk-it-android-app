@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import Header from "./components/Header";
-import MainPage from "./components/MainPage";
 import LoginPage from "./components/LoginPage";
 import StudentSignUpPage from "./components/StudentSignUpPage";
 import FacultySignUpPage from "./components/FacultySignUp";
@@ -12,6 +11,8 @@ import AdminHome from "./components/AdminHome";
 import AddEventPage from "./components/AddEvent";
 import AddCircularPage from "./components/AddCircular";
 import ChatPage from "./components/ChatPage";
+import HomePage from "./pages/HomePage";
+import "./App.css";
 
 import {
   IonApp,
@@ -40,7 +41,7 @@ class App extends Component {
       <IonApp>
         <Header title="4th Year CS Chat" />
         <IonContent>
-          {/* <MainPage></MainPage> */}
+          <HomePage></HomePage>
           {/* <LoginPage /> */}
           {/* <StudentSignUpPage /> */}
           {/* <FacultySignUpPage /> */}
@@ -49,7 +50,7 @@ class App extends Component {
           {/* <AdminHome /> */}
           {/* <AddEventPage /> */}
           {/* <AddCircularPage /> */}
-          <ChatPage />
+          {/* <ChatPage /> */}
         </IonContent>
       </IonApp>
     );
