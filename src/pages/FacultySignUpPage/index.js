@@ -4,7 +4,7 @@ import imgFaculty from "../../images/lecturer.svg";
 import imgBranch from "../../images/branch.svg";
 import imgName from "../../images/name.svg";
 
-import { IonInput, IonLabel, IonIcon, IonSelect, IonSelectOption } from "@ionic/react";
+import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel } from "../../components/FormItems";
 
 
