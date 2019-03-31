@@ -1,15 +1,49 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import imgStudentSignUp from "../../images/student_signup.svg";
-import { IonItem, IonInput, IonLabel, IonIcon } from "@ionic/react";
-import { Form, FormButton, FormFooter, FormImage } from "../../components/FormItems";
+import imgUsn from "../../images/usn.svg";
+import imgName from "../../images/name.svg";
+import imgYear from "../../images/year.svg";
+
+import { IonInput, IonLabel, IonIcon, IonSelect, IonSelectOption } from "@ionic/react";
+import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel } from "../../components/FormItems";
+
 
 class StudentSignUpPage extends Component {
     render() {
         return (
             <CenteredPage>
                 <FormImage src={imgStudentSignUp} alt={"Sign Up"} />
+                <Form>
+                    <FormItem>
+                        <FormImageLabel imgSrc={imgName} />
+                        <IonInput type="text" placeholder="Full Name"></IonInput>
+                    </FormItem>
+                    <FormItem>
+                        <FormImageLabel imgSrc={imgUsn} />
+                        <IonInput type="text" placeholder="USN"></IonInput>
+                    </FormItem>
+                    <FormItem>
+                        <FormImageLabel imgSrc={imgYear} />
+                        <SelectInput placeholder="Current Year">
+                            <IonSelectOption value="1">1st Year</IonSelectOption>
+                            <IonSelectOption value="2">2nd Year</IonSelectOption>
+                            <IonSelectOption value="3">3rd Year</IonSelectOption>
+                            <IonSelectOption value="4">4th Year</IonSelectOption>
+                        </SelectInput>
+                    </FormItem>
+                    <FormItem>
+                        <FormIconLabel iconName="mail" />
+                        <IonInput type="email" placeholder="Email"></IonInput>
+                    </FormItem>
 
+                    <FormItem>
+                        <FormIconLabel iconName="key" />
+                        <IonInput type="password" placeholder="Password"></IonInput>
+                    </FormItem>
+
+                    <FormButton iconName="person-add" buttonText="Sign Up" />
+                </Form>
                 <FormFooter>
                     <p>
                         Already have an account?

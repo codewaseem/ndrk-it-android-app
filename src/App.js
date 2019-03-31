@@ -41,8 +41,8 @@ class App extends Component {
       <IonApp>
         <Header title="4th Year CS Chat" />
         <IonContent>
-          {/* <HomePage></HomePage> */}
-          {/* <LoginPage /> */}
+          <HomePage></HomePage>
+          <LoginPage />
           <StudentSignUpPage />
           {/* <FacultySignUpPage /> */}
           {/* <StudentHome /> */}

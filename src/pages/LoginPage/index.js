@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import imgLoginAvatar from "../../images/login_avatar.svg";
-import { IonItem, IonInput, IonLabel, IonIcon } from "@ionic/react";
-import { Form, FormButton, FormFooter, FormImage } from "../../components/FormItems";
+import { IonInput, IonLabel, IonIcon } from "@ionic/react";
+import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel } from "../../components/FormItems";
 
 class LoginPage extends Component {
     render() {
@@ -10,16 +10,14 @@ class LoginPage extends Component {
             <CenteredPage>
                 <FormImage src={imgLoginAvatar} alt={"Login"} />
                 <Form name="login">
-                    <IonItem>
-                        <IonLabel color="dark"><IonIcon name="mail" /></IonLabel>
+                    <FormItem>
+                        <FormIconLabel iconName="mail" />
                         <IonInput placeholder="Email"></IonInput>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel color="dark">
-                            <IonIcon name="key" />
-                        </IonLabel>
+                    </FormItem>
+                    <FormItem>
+                        <FormIconLabel iconName="key" />
                         <IonInput placeholder="Password" type="password"></IonInput>
-                    </IonItem>
+                    </FormItem>
                     <FormButton iconName="unlock" buttonText="Login" />
                 </Form>
                 <FormFooter>
