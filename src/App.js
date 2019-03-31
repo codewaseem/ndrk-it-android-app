@@ -22,33 +22,38 @@ import {
   IonContent,
 } from '@ionic/react';
 import { RoutesURL } from './staticData';
+import { TitleContext } from './context';
+
+
 
 class App extends Component {
-  
+
+
+  changeTitle = (newTitle) => {
+    this.setState(() => ({
+      title: newTitle
+    }));
+  }
+
+  state = {
+    title: "N.D.R.K",
+    changeTitle: this.changeTitle
+  }
+
   render() {
     return (
       <Router>
         <IonApp>
-          <Header title="4th Year CS Chat" />
-          <IonContent>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/login" component={LoginPage} />
-            <Route exact path={RoutesURL.SIGNUP} component={SignUpPage} />
-            <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
-            <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
-            {/* <Route exact path="/" component={HomePage} /> */}
-
-            {/* <HomePage></HomePage>
-            <LoginPage />
-            <StudentSignUpPage />
-            <FacultySignUpPage /> */}
-            {/* <StudentHome /> */}
-            {/* <FacultyHome /> */}
-            {/* <AdminHome /> */}
-            {/* <AddEventPage />
-            <AddCircularPage /> */}
-            {/* <ChatPage /> */}
-          </IonContent>
+          <TitleContext.Provider value={this.state}>
+            <Header />
+            <IonContent>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/login" component={LoginPage} />
+              <Route exact path={RoutesURL.SIGNUP} component={SignUpPage} />
+              <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
+              <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
+            </IonContent>
+          </TitleContext.Provider>
         </IonApp>
       </Router>
     );

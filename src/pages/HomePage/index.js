@@ -4,8 +4,14 @@ import HeroPage from "../HeroPage";
 import { defaultImageSliderOptions, homePageSliderImagesData, homePageOptions } from "../../staticData";
 import ImageSlider from "../../components/ImageSlider";
 import TilesGrid from "../../components/TilesGrid";
+import { withChangeTitle } from "../../context";
 
 class HomePage extends Component {
+
+    componentDidMount() {
+        this.props.changeTitle("N.D.R.K");
+    }
+
     render() {
         const gridProps = { style: { height: "100%" } };
         const rowProps = { style: { height: "100%" }, "justify-content-between": true, "align-items-center": true };
@@ -20,4 +26,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default withChangeTitle(HomePage);
