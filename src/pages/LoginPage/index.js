@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import imgLoginAvatar from "../../images/login_avatar.svg";
 import { IonInput, IonLabel, IonIcon } from "@ionic/react";
-import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel } from "../../components/FormItems";
+import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
+import { Link } from "react-router-dom";
+import { RoutesURL } from "../../staticData";
 
 class LoginPage extends Component {
     render() {
@@ -21,16 +23,12 @@ class LoginPage extends Component {
                     <FormButton iconName="unlock" buttonText="Login" />
                 </Form>
                 <FormFooter>
-                    <p>
-                        Don't have an account?
-                        <br />
-                        <a>Sign Up</a> here.
-
-                    </p>
+                    <DontHaveAnAccount />
+                    <br />
                     <p>
                         Forgot Password?
                         <br />
-                        <a>Reset</a> here.
+                        <Link to={""}>Reset</Link> here.
                     </p>
                 </FormFooter>
             </CenteredPage>

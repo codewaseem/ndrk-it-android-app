@@ -5,7 +5,9 @@ import imgBranch from "../../images/branch.svg";
 import imgName from "../../images/name.svg";
 
 import { IonInput, IonSelectOption } from "@ionic/react";
-import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel } from "../../components/FormItems";
+import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
+import { Link } from "react-router-dom";
+import { RoutesURL } from "../../staticData";
 
 
 class FacultySignUpPage extends Component {
@@ -41,11 +43,7 @@ class FacultySignUpPage extends Component {
                     <FormButton iconName="person-add" buttonText="Sign Up" />
                 </Form>
                 <FormFooter>
-                    <p>
-                        Already have an account?
-                    <br />
-                        <a>Login</a> here.
-                </p>
+                    <HaveAnAccount />
                 </FormFooter>
             </CenteredPage>
         );

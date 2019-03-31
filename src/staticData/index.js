@@ -19,6 +19,14 @@ import imgNotification from "../images/notification.svg";
 import imgLogin from "../images/login.svg";
 import imgSignup from "../images/signup.svg";
 
+export const RoutesURL = {
+    HOME: "/",
+    STUDENT_SIGNUP: "/signup/student",
+    FACULTY_SIGNUP: "/signup/faculty",
+    SIGNUP: "/signup",
+    LOGIN: "/login"
+};
+
 export const homePageSliderImagesData = [
     { src: slide0, alt: "Slide 0" },
     { src: slide1, alt: "Slide 1" },
@@ -43,46 +51,57 @@ export const defaultImageSliderOptions = {
 export const homePageOptions = [
     {
         name: "Admissions",
-        imgSrc: imgAdmission
+        imgSrc: imgAdmission,
+        url: "/admissions"
     },
     {
         name: "Departments",
-        imgSrc: imgDepartment
+        imgSrc: imgDepartment,
+        url: "/departments"
     },
     {
         name: "Facilities",
-        imgSrc: imgFacility
+        imgSrc: imgFacility,
+        url: "/facilities"
     },
     {
         name: "Events",
-        imgSrc: imgEvent
+        imgSrc: imgEvent,
+        url: "/events"
     },
     {
         name: "Gallery",
-        imgSrc: imgGallery
+        imgSrc: imgGallery,
+        url: "/gallery"
     },
     {
         name: "Notification",
-        imgSrc: imgNotification
+        imgSrc: imgNotification,
+        url: "/notifications"
     },
     {
         name: "About",
-        imgSrc: imgAbout
+        imgSrc: imgAbout,
+        url: "/about"
     },
     {
         name: "Locate",
-        imgSrc: imgMap
+        imgSrc: imgMap,
+        url: "/locate"
     },
     {
         name: "Contact",
-        imgSrc: imgContact
+        imgSrc: imgContact,
+        url: "/contact"
     },
     {
         name: "Sign Up",
-        imgSrc: imgSignup
+        imgSrc: imgSignup,
+        url: RoutesURL.STUDENT_SIGNUP
     },
     {
         name: "Login",
-        imgSrc: imgLogin
+        imgSrc: imgLogin,
+        url: RoutesURL.LOGIN
     }
 ];

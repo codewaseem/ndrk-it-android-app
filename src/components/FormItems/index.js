@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { IonButton, IonIcon, IonItem, IonLabel, IonSelect, IonDatetime } from "@ionic/react";
+import { Link } from "react-router-dom";
+import { RoutesURL } from "../../staticData";
 
 export const FormImage = ({ src, alt }) => {
     return (
@@ -63,5 +65,26 @@ export const SelectInput = ({ children, style, ...props }) => {
 export const DateTimeInput = ({ ...props }) => {
     return (
         <IonDatetime style={{ paddingLeft: "5px" }} {...props}></IonDatetime>
+    );
+}
+
+export const HaveAnAccount = () => {
+    return (
+        <p>
+            Already have an account?
+                    <br />
+            <Link to={RoutesURL.LOGIN}>Login</Link> here.
+        </p>
+    );
+}
+
+export const DontHaveAnAccount = () => {
+    return (
+        <p>
+            Don't have an account?
+                        <br />
+            <Link to={RoutesURL.STUDENT_SIGNUP}>Sign Up</Link> here.
+
+        </p>
     );
 }

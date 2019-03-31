@@ -6,7 +6,9 @@ import imgName from "../../images/name.svg";
 import imgYear from "../../images/year.svg";
 
 import { IonInput, IonSelectOption } from "@ionic/react";
-import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel } from "../../components/FormItems";
+import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
+import { Link } from "react-router-dom";
+import { RoutesURL } from "../../staticData";
 
 
 class StudentSignUpPage extends Component {
@@ -21,7 +23,7 @@ class StudentSignUpPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgUsn} />
-                        <IonInput type="text" style={{textTransform:"uppercase"}} pattern={/[3-4]YG[0-9]{2}(CS|EC|CV|ME)[0-9]{3}/gi} placeholder="USN"></IonInput>
+                        <IonInput type="text" style={{ textTransform: "uppercase" }} pattern={/[3-4]YG[0-9]{2}(CS|EC|CV|ME)[0-9]{3}/gi} placeholder="USN"></IonInput>
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgYear} />
@@ -45,13 +47,16 @@ class StudentSignUpPage extends Component {
                     <FormButton iconName="person-add" buttonText="Sign Up" />
                 </Form>
                 <FormFooter>
+                    <HaveAnAccount />
                     <p>
-                        Already have an account?
-                    <br />
-                        <a>Login</a> here.
-                </p>
+                        <br />
+                        <br />
+                        Are you a faculty?
+                      <br />
+                        <Link to={RoutesURL.FACULTY_SIGNUP}>Sign Up</Link> here.
+                    </p>
                 </FormFooter>
-            </CenteredPage>
+            </CenteredPage >
         );
     }
 }

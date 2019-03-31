@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { IonGrid, IonRow, IonCol } from "@ionic/react";
 import Tile from "../Tile";
-
+import { Link } from "react-router-dom";
 
 
 const TilesGrid = ({ tilesInfo = [], gridProps, rowProps = {}, colProps = {}, tileProps = {} }) => {
@@ -11,8 +11,11 @@ const TilesGrid = ({ tilesInfo = [], gridProps, rowProps = {}, colProps = {}, ti
                 {
                     tilesInfo.map(tileInfo => {
                         return (
+
                             <IonCol key={tileInfo.imgSrc} {...colProps}>
-                                <Tile imgSrc={tileInfo.imgSrc} text={tileInfo.name} {...tileProps} />
+                                <Link to={tileInfo.url}>
+                                    <Tile imgSrc={tileInfo.imgSrc} text={tileInfo.name} {...tileProps} />
+                                </Link>
                             </IonCol>);
                     })
                 }
