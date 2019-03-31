@@ -13,7 +13,7 @@ class FacultySignUpPage extends Component {
         return (
             <CenteredPage>
                 <FormImage src={imgFaculty} alt={"Sign Up"} />
-                <Form>
+                <Form name="faculty-signup">
                     <FormItem>
                         <FormImageLabel imgSrc={imgName} />
                         <IonInput type="text" placeholder="Faculty's Name"></IonInput>

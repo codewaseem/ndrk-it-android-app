@@ -8,7 +8,7 @@ import FacultySignUpPage from "./pages/FacultySignUpPage";
 import StudentHome from "./components/StudentHome";
 import FacultyHome from "./components/FacultyHome";
 import AdminHome from "./components/AdminHome";
-import AddEventPage from "./components/AddEvent";
+import AddEventPage from "./pages/AddEventPage";
 import AddCircularPage from "./components/AddCircular";
 import ChatPage from "./components/ChatPage";
 import HomePage from "./pages/HomePage";
@@ -48,7 +48,7 @@ class App extends Component {
           {/* <StudentHome /> */}
           {/* <FacultyHome /> */}
           {/* <AdminHome /> */}
-          {/* <AddEventPage /> */}
+          <AddEventPage />
           {/* <AddCircularPage /> */}
           {/* <ChatPage /> */}
         </IonContent>

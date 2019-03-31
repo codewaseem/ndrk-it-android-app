@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IonButton, IonIcon, IonItem, IonLabel, IonSelect } from "@ionic/react";
+import { IonButton, IonIcon, IonItem, IonLabel, IonSelect, IonDatetime } from "@ionic/react";
 
 export const FormImage = ({ src, alt }) => {
     return (
@@ -7,9 +7,9 @@ export const FormImage = ({ src, alt }) => {
     );
 }
 
-export const Form = ({ name, children }) => {
+export const Form = ({ name, children, ...props }) => {
     return (
-        <form name={name} className="flex-form">
+        <form name={name} className="flex-form" {...props}>
             {children}
         </form>
     );
@@ -57,5 +57,11 @@ export const SelectInput = ({ children, style, ...props }) => {
         <IonSelect style={{ maxWidth: "calc(100% - 20px)", width: "calc(100% - 20px)", paddingLeft: "5px", ...style }} {...props}>
             {children}
         </IonSelect>
+    );
+}
+
+export const DateTimeInput = ({ ...props }) => {
+    return (
+        <IonDatetime style={{ paddingLeft: "5px" }} {...props}></IonDatetime>
     );
 }

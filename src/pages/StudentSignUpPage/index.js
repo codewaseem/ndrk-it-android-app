@@ -14,7 +14,7 @@ class StudentSignUpPage extends Component {
         return (
             <CenteredPage>
                 <FormImage src={imgStudentSignUp} alt={"Sign Up"} />
-                <Form>
+                <Form name="student-signup">
                     <FormItem>
                         <FormImageLabel imgSrc={imgName} />
                         <IonInput type="text" placeholder="Full Name"></IonInput>
