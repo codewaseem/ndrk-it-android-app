@@ -1,35 +1,30 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import imgStudentSignUp from "../../images/student_signup.svg";
-import imgUsn from "../../images/usn.svg";
+import imgFaculty from "../../images/lecturer.svg";
+import imgBranch from "../../images/branch.svg";
 import imgName from "../../images/name.svg";
-import imgYear from "../../images/year.svg";
 
 import { IonInput, IonLabel, IonIcon, IonSelect, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel } from "../../components/FormItems";
 
 
-class StudentSignUpPage extends Component {
+class FacultySignUpPage extends Component {
     render() {
         return (
             <CenteredPage>
-                <FormImage src={imgStudentSignUp} alt={"Sign Up"} />
+                <FormImage src={imgFaculty} alt={"Sign Up"} />
                 <Form>
                     <FormItem>
                         <FormImageLabel imgSrc={imgName} />
-                        <IonInput type="text" placeholder="Full Name"></IonInput>
+                        <IonInput type="text" placeholder="Faculty's Name"></IonInput>
                     </FormItem>
                     <FormItem>
-                        <FormImageLabel imgSrc={imgUsn} />
-                        <IonInput type="text" style={{textTransform:"uppercase"}} pattern={/[3-4]YG[0-9]{2}(CS|EC|CV|ME)[0-9]{3}/gi} placeholder="USN"></IonInput>
-                    </FormItem>
-                    <FormItem>
-                        <FormImageLabel imgSrc={imgYear} />
-                        <SelectInput placeholder="Current Year">
-                            <IonSelectOption value="1">1st Year</IonSelectOption>
-                            <IonSelectOption value="2">2nd Year</IonSelectOption>
-                            <IonSelectOption value="3">3rd Year</IonSelectOption>
-                            <IonSelectOption value="4">4th Year</IonSelectOption>
+                        <FormImageLabel imgSrc={imgBranch} />
+                        <SelectInput placeholder="Department">
+                            <IonSelectOption value="cs">Computer Science</IonSelectOption>
+                            <IonSelectOption value="ec">Electronics</IonSelectOption>
+                            <IonSelectOption value="cv">Civil</IonSelectOption>
+                            <IonSelectOption value="me">Mechanical</IonSelectOption>
                         </SelectInput>
                     </FormItem>
                     <FormItem>
@@ -41,6 +36,7 @@ class StudentSignUpPage extends Component {
                         <FormIconLabel iconName="key" />
                         <IonInput type="password" placeholder="Password"></IonInput>
                     </FormItem>
+
 
                     <FormButton iconName="person-add" buttonText="Sign Up" />
                 </Form>
@@ -56,4 +52,4 @@ class StudentSignUpPage extends Component {
     }
 }
 
-export default StudentSignUpPage;
+export default FacultySignUpPage;

@@ -4,7 +4,7 @@ import '@ionic/core/css/ionic.bundle.css';
 import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import StudentSignUpPage from "./pages/StudentSignUpPage";
-import FacultySignUpPage from "./components/FacultySignUp";
+import FacultySignUpPage from "./pages/FacultySignUpPage";
 import StudentHome from "./components/StudentHome";
 import FacultyHome from "./components/FacultyHome";
 import AdminHome from "./components/AdminHome";
@@ -44,7 +44,7 @@ class App extends Component {
           <HomePage></HomePage>
           <LoginPage />
           <StudentSignUpPage />
-          {/* <FacultySignUpPage /> */}
+          <FacultySignUpPage />
           {/* <StudentHome /> */}
           {/* <FacultyHome /> */}
           {/* <AdminHome /> */}
