@@ -4,7 +4,7 @@ import HeroPage from "../HeroPage";
 import { defaultImageSliderOptions, homePageSliderImagesData, homePageOptions } from "../../staticData";
 import ImageSlider from "../../components/ImageSlider";
 import TilesGrid from "../../components/TilesGrid";
-import { withChangeTitle } from "../../context";
+import { changeTitle } from "../../context";
 
 class HomePage extends Component {
 
@@ -26,4 +26,4 @@ class HomePage extends Component {
     }
 }
 
-export default withChangeTitle(HomePage);
+export default changeTitle("N.D.R.K")(HomePage);

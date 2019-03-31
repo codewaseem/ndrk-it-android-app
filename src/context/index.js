@@ -5,14 +5,27 @@ export const TitleContext = createContext({
     changeTitle: () => { }
 });
 
-export function withChangeTitle(OriginalComponent) {
-    return function WrapperComponent(props) {
-        return (<TitleContext.Consumer>
-            {({ changeTitle }) => {
-                return <OriginalComponent changeTitle={changeTitle} {...props} />
-            }}
-        </TitleContext.Consumer>
-        );
+export function changeTitle(newTitle) {
+
+    return function (OriginalComponent) {
+        class TitleChanger extends React.Component {
+            componentDidMount() {
+                this.props.changeTitle(newTitle);
+            }
+
+            render() {
+                return <OriginalComponent {...this.props} />;
+            }
+        }
+
+        const WrappedComponent = (props) => {
+            return (<TitleContext.Consumer>
+                {({ changeTitle }) => (<TitleChanger changeTitle={changeTitle} {...props} />)}
+            </TitleContext.Consumer>
+            )
+        }
+
+        return WrappedComponent;
     }
 
 }

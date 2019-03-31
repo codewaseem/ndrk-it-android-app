@@ -5,14 +5,9 @@ import { IonInput, IonLabel, IonIcon } from "@ionic/react";
 import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
 import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
-import { withChangeTitle } from "../../context";
+import { changeTitle } from "../../context";
 
 class LoginPage extends Component {
-
-    componentDidMount() {
-        this.props.changeTitle("Login");
-    }
-
     render() {
         return (
             <CenteredPage>
@@ -42,4 +37,4 @@ class LoginPage extends Component {
     }
 }
 
-export default withChangeTitle(LoginPage);
+export default changeTitle("Login")(LoginPage);
