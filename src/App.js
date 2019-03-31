@@ -9,7 +9,7 @@ import StudentHome from "./components/StudentHome";
 import FacultyHome from "./components/FacultyHome";
 import AdminHome from "./components/AdminHome";
 import AddEventPage from "./pages/AddEventPage";
-import AddCircularPage from "./components/AddCircular";
+import AddCircularPage from "./pages/AddCircularPage";
 import ChatPage from "./components/ChatPage";
 import HomePage from "./pages/HomePage";
 import "./App.css";
@@ -49,7 +49,7 @@ class App extends Component {
           {/* <FacultyHome /> */}
           {/* <AdminHome /> */}
           <AddEventPage />
-          {/* <AddCircularPage /> */}
+          <AddCircularPage />
           {/* <ChatPage /> */}
         </IonContent>
       </IonApp>
