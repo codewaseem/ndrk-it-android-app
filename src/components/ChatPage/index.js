@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./style.css";
-import { IonInput, IonButton, IonTextarea, IonIcon } from "@ionic/react";
+import { IonButton, IonTextarea, IonIcon } from "@ionic/react";
 
 const MessageBox = ({ from, me, message, datetime }) => {
     return (

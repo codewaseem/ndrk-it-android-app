@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { IonSlides, IonSlide } from "@ionic/react";
 
 const ImageSlider = ({ imagesData, ...props }) => {

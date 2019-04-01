@@ -6,8 +6,8 @@ import imgName from "../../images/name.svg";
 
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
-import { Link } from "react-router-dom";
-import { RoutesURL } from "../../staticData";
+// import { Link } from "react-router-dom";
+// import { RoutesURL } from "../../staticData";
 import { withChangedTitle } from "../../context";
 
 

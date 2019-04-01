@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { IonRippleEffect } from "@ionic/react";
+import { vibrate } from '../../helpers';
 
-const Tile = ({ imgSrc, text, onClick, style }) => {
+const Tile = ({ imgSrc, text, style }) => {
     return (
-        <div style={{ padding: "10px 5px", textAlign: "center", ...style }} onClick={onClick}>
+        <div style={{ padding: "10px 5px", textAlign: "center", ...style }} onClick={() => {
+            vibrate();
+        }}>
             <IonRippleEffect></IonRippleEffect>
             <img alt={text} src={imgSrc} style={{ width: "35px", height: "35px", margin: "auto" }}>
             </img>

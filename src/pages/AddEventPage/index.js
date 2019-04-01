@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IonInput, IonTextarea, IonDatetime } from "@ionic/react";
+import { IonInput, IonTextarea } from "@ionic/react";
 import imgEvent from "../../images/exam.svg";
 import { FormItem, FormIconLabel, FormButton, FormImage, Form, DateTimeInput } from "../../components/FormItems";
 import CenteredPage from "../CenteredPage";

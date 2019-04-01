@@ -3,9 +3,9 @@ import CenteredPage from "../CenteredPage";
 import imgLoginAvatar from "../../images/login_avatar.svg";
 import { IonInput } from "@ionic/react";
 import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
-import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
 import { withChangedTitle } from "../../context";
+import { Link } from "react-router-dom";
 
 class LoginPage extends Component {
     render() {

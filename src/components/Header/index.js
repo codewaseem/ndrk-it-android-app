@@ -4,6 +4,7 @@ import logo from "../../logo.png";
 import { IonToolbar, IonTitle, IonHeader, IonButton, IonButtons, IonIcon } from '@ionic/react';
 import { withRouter } from 'react-router';
 import { TitleContext } from '../../context';
+import { vibrate } from '../../helpers';
 
 
 class Header extends Component {
@@ -13,6 +14,7 @@ class Header extends Component {
     }
 
     goBack = () => {
+        vibrate();
         this.props.history.goBack();
     }
 
@@ -38,7 +40,7 @@ class Header extends Component {
                             <header className="main-header">
                                 {
                                     this.state.isMainPage &&
-                                    <img className="logo" src={logo}></img>
+                                    <img alt="Logo NDRK" className="logo" src={logo}></img>
 
                                 }
                                 <IonTitle style={{ visibility: "visible" }} className="title">{title}</IonTitle>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import HeroPage from "../HeroPage";
 import { Redirect } from "react-router";
 import { RoutesURL } from "../../staticData";
 

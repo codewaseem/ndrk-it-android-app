@@ -6,12 +6,12 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import StudentSignUpPage from "./pages/StudentSignUpPage";
 import FacultySignUpPage from "./pages/FacultySignUpPage";
-import StudentHome from "./components/StudentHome";
-import FacultyHome from "./components/FacultyHome";
-import AdminHome from "./components/AdminHome";
-import AddEventPage from "./pages/AddEventPage";
-import AddCircularPage from "./pages/AddCircularPage";
-import ChatPage from "./components/ChatPage";
+// import StudentHome from "./components/StudentHome";
+// import FacultyHome from "./components/FacultyHome";
+// import AdminHome from "./components/AdminHome";
+// import AddEventPage from "./pages/AddEventPage";
+// import AddCircularPage from "./pages/AddCircularPage";
+// import ChatPage from "./components/ChatPage";
 import HomePage from "./pages/HomePage";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";

@@ -7,9 +7,9 @@ import imgYear from "../../images/year.svg";
 
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
-import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
 import { withChangedTitle } from "../../context";
+import { Link } from "react-router-dom";
 
 
 class StudentSignUpPage extends Component {
@@ -51,7 +51,6 @@ class StudentSignUpPage extends Component {
                 <FormFooter>
                     <HaveAnAccount />
                     <p>
-                        <br />
                         <br />
                         Are you a faculty?
                       <br />

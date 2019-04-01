@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { IonGrid, IonRow, IonCol } from "@ionic/react";
 import Tile from "../Tile";
 import { Link } from "react-router-dom";

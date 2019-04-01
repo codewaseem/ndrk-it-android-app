@@ -1,7 +1,8 @@
 import React from "react";
 import { IonButton, IonIcon, IonItem, IonLabel, IonSelect, IonDatetime } from "@ionic/react";
-import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
+import { vibrate } from "../../helpers";
+import { Link } from "react-router-dom";
 
 export const FormImage = ({ src, alt }) => {
     return (
@@ -27,7 +28,10 @@ export const FormFooter = ({ children }) => {
 
 export const FormButton = ({ iconName = "", buttonText = "Click Me", onClick = () => { } }) => {
     return (
-        <IonButton style={{ marginTop: "20px" }} color="dark" expand="block">
+        <IonButton onClick={(...args) => {
+            vibrate();
+            onClick(...args);
+        }} style={{ marginTop: "20px" }} color="dark" expand="block">
             {iconName && <IonIcon color="light" name={iconName} style={{ marginRight: "5px" }} />}
             {buttonText}
         </IonButton>
@@ -44,7 +48,7 @@ export const FormItem = ({ children, style, ...props }) => {
 
 export const FormImageLabel = ({ imgSrc, ...props }) => {
     return (
-        <IonLabel color="dark" style={{ maxWidth: "20px" }} {...props}> <img src={imgSrc} style={{ width: "16px" }} /></IonLabel>
+        <IonLabel color="dark" style={{ maxWidth: "20px" }} {...props}> <img alt="label" src={imgSrc} style={{ width: "16px" }} /></IonLabel>
     );
 }
 
