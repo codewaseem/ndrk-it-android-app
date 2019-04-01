@@ -28,6 +28,9 @@ export const RoutesURL = {
     PASSWORD_RESET: "/password-reset"
 };
 
+export const PARSE_SERVER_URL = "http://localhost:1337/parse"
+export const PARSE_APP_ID = "APPLICATION_ID";
+
 export const homePageSliderImagesData = [
     { src: slide0, alt: "Slide 0" },
     { src: slide1, alt: "Slide 1" },
