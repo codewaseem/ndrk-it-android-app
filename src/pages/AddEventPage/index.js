@@ -3,6 +3,7 @@ import { IonInput, IonTextarea, IonDatetime } from "@ionic/react";
 import imgEvent from "../../images/exam.svg";
 import { FormItem, FormIconLabel, FormButton, FormImage, Form, DateTimeInput } from "../../components/FormItems";
 import CenteredPage from "../CenteredPage";
+import { withChangedTitle } from "../../context";
 
 class AddEventPage extends Component {
     render() {
@@ -36,4 +37,4 @@ class AddEventPage extends Component {
     }
 }
 
-export default AddEventPage;
+export default withChangedTitle("Add Event")(AddEventPage);

@@ -4,13 +4,9 @@ import HeroPage from "../HeroPage";
 import { defaultImageSliderOptions, homePageSliderImagesData, homePageOptions } from "../../staticData";
 import ImageSlider from "../../components/ImageSlider";
 import TilesGrid from "../../components/TilesGrid";
-import { changeTitle } from "../../context";
+import { withChangedTitle } from "../../context";
 
 class HomePage extends Component {
-
-    componentDidMount() {
-        this.props.changeTitle("N.D.R.K");
-    }
 
     render() {
         const gridProps = { style: { height: "100%" } };
@@ -26,4 +22,4 @@ class HomePage extends Component {
     }
 }
 
-export default changeTitle("N.D.R.K")(HomePage);
+export default withChangedTitle("N.D.R.K")(HomePage);

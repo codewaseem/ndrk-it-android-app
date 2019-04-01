@@ -10,11 +10,6 @@ import imgStudyMaterial from "../../images/study_material.svg";
 import imgLogout from "../../images/logout.svg";
 import imgAsk from "../../images/ask.svg";
 import imgMyProfile from "../../images/myprofile.svg";
-import imgFacility from "../../images/facility.svg";
-import imgEvent from "../../images/event.svg";
-import imgGallery from "../../images/gallery.svg";
-import imgMap from "../../images/locate.svg";
-import imgContact from "../../images/contact.svg";
 import imgNotification from "../../images/notification.svg";
 
 

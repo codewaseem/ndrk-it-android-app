@@ -24,7 +24,8 @@ export const RoutesURL = {
     STUDENT_SIGNUP: "/signup/student",
     FACULTY_SIGNUP: "/signup/faculty",
     SIGNUP: "/signup",
-    LOGIN: "/login"
+    LOGIN: "/login",
+    PASSWORD_RESET: "/password-reset"
 };
 
 export const homePageSliderImagesData = [

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import imgLoginAvatar from "../../images/login_avatar.svg";
-import { IonInput, IonLabel, IonIcon } from "@ionic/react";
+import { IonInput } from "@ionic/react";
 import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
 import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
-import { changeTitle } from "../../context";
+import { withChangedTitle } from "../../context";
 
 class LoginPage extends Component {
     render() {
@@ -29,7 +29,7 @@ class LoginPage extends Component {
                     <p>
                         Forgot Password?
                         <br />
-                        <Link to={""}>Reset</Link> here.
+                        <Link to={RoutesURL.PASSWORD_RESET}>Reset</Link> here.
                     </p>
                 </FormFooter>
             </CenteredPage>
@@ -37,4 +37,4 @@ class LoginPage extends Component {
     }
 }
 
-export default changeTitle("Login")(LoginPage);
+export default withChangedTitle("Login")(LoginPage);

@@ -3,6 +3,7 @@ import { IonInput, IonTextarea, IonDatetime } from "@ionic/react";
 import imgNotification from "../../images/notification.svg";
 import { FormItem, FormIconLabel, FormButton, FormImage, Form, DateTimeInput } from "../../components/FormItems";
 import CenteredPage from "../CenteredPage";
+import { withChangedTitle } from "../../context";
 
 class AddCircularPage extends Component {
     render() {
@@ -31,4 +32,4 @@ class AddCircularPage extends Component {
     }
 }
 
-export default AddCircularPage;
+export default withChangedTitle("Add Circular")(AddCircularPage);

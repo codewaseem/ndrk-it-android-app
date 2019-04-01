@@ -8,14 +8,10 @@ import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
 import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
-import { changeTitle } from "../../context";
+import { withChangedTitle } from "../../context";
 
 
 class FacultySignUpPage extends Component {
-
-    componentDidMount() {
-        this.props.changeTitle("Faculty Sign Up");
-    }
 
     render() {
         return (
@@ -56,4 +52,4 @@ class FacultySignUpPage extends Component {
     }
 }
 
-export default changeTitle("Faculty Sign Up")(FacultySignUpPage);
+export default withChangedTitle("Faculty Sign Up")(FacultySignUpPage);

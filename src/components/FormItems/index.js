@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { IonButton, IonIcon, IonItem, IonLabel, IonSelect, IonDatetime } from "@ionic/react";
 import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
