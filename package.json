@@ -9,6 +9,7 @@
     "@ionic/react": "^0.0.5",
     "@types/react-router": "^4.4.5",
     "@types/react-router-dom": "^4.3.1",
+    "parse": "^2.3.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-router": "^5.0.0",
