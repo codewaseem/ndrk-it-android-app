@@ -8,15 +8,15 @@ Parse.serverURL = PARSE_SERVER_URL;
 
 export class Student extends User {
     constructor(name, email, password, usn, year) {
-
+        console.log(email, usn);
         super("Student");
         if (isValidEmail(email) && isValidUsn(usn)) {
             this.setEmail(email);
             this.setUsername(email);
             this.setPassword(password);
             this.set("name", name);
-            this.set("usn", usn);
-            this.set("year", year);
+            this.set("usn", usn.toLowerCase());
+            this.set("year", Number(year));
             this.set("branch", getBranchCodeFromUSN(usn));
             this.set("type", "student");
         } else {

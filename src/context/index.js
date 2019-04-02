@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { checkLogin, login } from "../store/actions";
+import { checkLogin, login, studentSignUp } from "../store/actions";
 import { connect } from "react-redux";
 export const TitleContext = createContext({
     title: "N.D.R.K",
@@ -42,6 +42,9 @@ export function withUser(OriginalComponent) {
             },
             login : (email, password) => {
                 dispatch(login({email, password}));
+            },
+            studentSignUp : (userData) => {
+                dispatch(studentSignUp(userData));
             }
         }
     }

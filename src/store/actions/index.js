@@ -6,7 +6,6 @@ export const START_NETWORK_REQUEST = "START_NETWORK_REQUEST";
 export const NETWORK_REQUEST_SUCCESS = "NETWORK_REQUEST_SUCCESS";
 export const NETWORK_REQUEST_FAILURE = "NETWORK_REQUEST_FAILURE";
 
-export const SIGNUP = "SIGNUP";
 export const SET_USER = "SET_USER";
 export const UNSET_USER = "UNSET_USER";
 
@@ -63,7 +62,7 @@ export function unsetUser() {
     }
 }
 
-export function signUp(newUserData) {
+export function studentSignUp(newUserData) {
     return async function (dispatch) {
         dispatch(startNetworkRequest("Creating new account..."));
         try {
@@ -77,7 +76,7 @@ export function signUp(newUserData) {
             }
         } catch (e) {
             dispatch(notify(failureNotifyConfig("Fail", "Failed to create the account!")));
-            dispatch(networkRequestFailure(e.message));
+            dispatch(networkRequestFailure());
         }
     }
 }
@@ -140,5 +139,5 @@ export function checkLogin() {
 
 
 
-window.signUp = signUp;
+window.signUp = studentSignUp;
 window.checkLogin = checkLogin;

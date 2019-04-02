@@ -28,7 +28,7 @@ export const FormFooter = ({ children }) => {
 
 export const FormButton = ({ iconName = "", buttonText = "Click Me", onClick = () => { } }) => {
     return (
-        <IonButton onClick={(...args) => {
+        <IonButton type="submit" onClick={(...args) => {
             vibrate();
             onClick(...args);
         }} style={{ marginTop: "20px" }} color="dark" expand="block">
