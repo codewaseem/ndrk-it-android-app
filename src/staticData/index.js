@@ -31,6 +31,8 @@ export const RoutesURL = {
 export const PARSE_SERVER_URL = "http://localhost:1337/parse"
 export const PARSE_APP_ID = "APPLICATION_ID";
 
+export const STUDENT_SIGNUP_URL = PARSE_SERVER_URL+"/student-signup"
+
 export const homePageSliderImagesData = [
     { src: slide0, alt: "Slide 0" },
     { src: slide1, alt: "Slide 1" },

@@ -15,16 +15,22 @@ import FacultySignUpPage from "./pages/FacultySignUpPage";
 import HomePage from "./pages/HomePage";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import "./App.css";
 
 import {
   IonApp,
-  IonContent,
+  IonContent
 } from '@ionic/react';
 import { RoutesURL } from './staticData';
-import { TitleContext } from './context';
-
-
+import { TitleContext, withUser } from './context';
+import { connect } from "react-redux";
+import ReduxBlockUi from 'react-block-ui/redux';
+import 'react-block-ui/style.css';
+import { START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE } from './store/actions';
+import 'font-awesome/css/font-awesome.min.css';
+import NotificationsSystem from 'reapop';
+import theme from 'reapop-theme-wybo';
 
 class App extends Component {
 
@@ -37,27 +43,43 @@ class App extends Component {
 
   state = {
     title: "N.D.R.K",
-    changeTitle: this.changeTitle
+    changeTitle: this.changeTitle,
+  }
+
+  componentDidMount() {
+    !this.props.user && this.props.checkLogin();
   }
 
   render() {
+
     return (
-      <Router>
-        <IonApp>
-          <TitleContext.Provider value={this.state}>
-            <Header />
-            <IonContent>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={LoginPage} />
-              <Route exact path={RoutesURL.SIGNUP} component={SignUpPage} />
-              <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
-              <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
-            </IonContent>
-          </TitleContext.Provider>
-        </IonApp>
-      </Router>
+      <ReduxBlockUi tag="div" keepInView style={{ height: "100vh" }} message={this.props.ui.fetchingMessage} block={START_NETWORK_REQUEST} unblock={[NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE]} >
+        <NotificationsSystem theme={theme} />
+        <Router>
+          <IonApp>
+            <TitleContext.Provider value={this.state}>
+              <Header />
+              <IonContent>
+                <Route exact path="/" component={HomePage} />
+                <Route path={RoutesURL.LOGIN} component={LoginPage} />
+                <Route exact path={RoutesURL.SIGNUP} component={SignUpPage} />
+                <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
+                <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
+              </IonContent>
+            </TitleContext.Provider>
+          </IonApp>
+        </Router>
+      </ReduxBlockUi>
     );
+  }
+
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+    ui: state.ui,
   }
 }
 
-export default App;
+export default withUser(connect(mapStateToProps)(App));

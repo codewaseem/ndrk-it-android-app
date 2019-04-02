@@ -7,7 +7,6 @@ import TilesGrid from "../../components/TilesGrid";
 import { withChangedTitle } from "../../context";
 
 class HomePage extends Component {
-
     render() {
         const gridProps = { style: { height: "100%" } };
         const rowProps = { style: { height: "100%" }, "justify-content-between": true, "align-items-center": true };

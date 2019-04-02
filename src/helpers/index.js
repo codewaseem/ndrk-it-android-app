@@ -1,4 +1,5 @@
 const usnRegex = /[1-4]YG[0-9]{2}(CS|EC|CV|ME)[0-9]{3}/gi;
+// eslint-disable-next-line
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const vibrate = (ms = 50) => {

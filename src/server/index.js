@@ -37,3 +37,5 @@ export async function newStudent({ email, password, name, usn, year }) {
         return undefined;
     }
 }
+
+window.User = User;
