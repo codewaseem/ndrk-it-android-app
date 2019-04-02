@@ -18,6 +18,9 @@ import imgContact from "../images/contact.svg";
 import imgNotification from "../images/notification.svg";
 import imgLogin from "../images/login.svg";
 import imgSignup from "../images/signup.svg";
+import imgLogout from "../images/logout.svg";
+
+
 
 export const RoutesURL = {
     HOME: "/",
@@ -25,13 +28,16 @@ export const RoutesURL = {
     FACULTY_SIGNUP: "/signup/faculty",
     SIGNUP: "/signup",
     LOGIN: "/login",
-    PASSWORD_RESET: "/password-reset"
+    FACULTY_HOME: "/faculty",
+    STUDENT_HOME: "/student",
+    PASSWORD_RESET: "/password-reset",
+    LOGOUT: "/logout"
 };
 
 export const PARSE_SERVER_URL = "http://localhost:1337/parse"
 export const PARSE_APP_ID = "APPLICATION_ID";
 
-export const STUDENT_SIGNUP_URL = PARSE_SERVER_URL+"/student-signup"
+export const STUDENT_SIGNUP_URL = PARSE_SERVER_URL + "/student-signup"
 
 export const homePageSliderImagesData = [
     { src: slide0, alt: "Slide 0" },
@@ -99,15 +105,25 @@ export const homePageOptions = [
         name: "Contact",
         imgSrc: imgContact,
         url: "/contact"
-    },
-    {
-        name: "Sign Up",
-        imgSrc: imgSignup,
-        url: RoutesURL.STUDENT_SIGNUP
-    },
-    {
-        name: "Login",
-        imgSrc: imgLogin,
-        url: RoutesURL.LOGIN
     }
 ];
+
+export const loginOrLogoutOptionsData = {
+    loggedIn: [{
+        name: "Logout",
+        imgSrc: imgLogout,
+        url: RoutesURL.LOGOUT
+    }],
+    loggedOut: [
+        {
+            name: "Sign Up",
+            imgSrc: imgSignup,
+            url: RoutesURL.STUDENT_SIGNUP
+        },
+        {
+            name: "Login",
+            imgSrc: imgLogin,
+            url: RoutesURL.LOGIN
+        }
+    ]
+}

@@ -6,6 +6,12 @@ Parse.initialize(PARSE_APP_ID);
 
 Parse.serverURL = PARSE_SERVER_URL;
 
+export const User_Types = {
+    Student: "student",
+    Faculty: "faculty",
+    Admin: "admin"
+}
+
 export class Student extends User {
     constructor(name, email, password, usn, year) {
         console.log(email, usn);
@@ -18,7 +24,7 @@ export class Student extends User {
             this.set("usn", usn.toLowerCase());
             this.set("year", Number(year));
             this.set("branch", getBranchCodeFromUSN(usn));
-            this.set("type", "student");
+            this.set("type", User_Types.Student);
         } else {
             throw new Error("Invalid Email/USN.");
         }
@@ -26,6 +32,24 @@ export class Student extends User {
 }
 
 Object.registerSubclass("Student", Student);
+
+export class Faculty extends User {
+    constructor(name, email, password, branch) {
+        super("Faculty");
+        if (isValidEmail(email)) {
+            this.setEmail(email);
+            this.setUsername(email);
+            this.setPassword(password);
+            this.set("name", name);
+            this.set("branch", branch);
+            this.set("type", User_Types.Faculty);
+        } else {
+            throw new Error("Invalid Email.");
+        }
+    }
+}
+
+Object.registerSubclass("Faculty", Faculty);
 
 export async function newStudent({ email, password, name, usn, year }) {
     try {
@@ -38,4 +62,18 @@ export async function newStudent({ email, password, name, usn, year }) {
     }
 }
 
+export async function newFaculty({ email, password, name, branch }) {
+    try {
+        let newFaculty = new Faculty(name, email, password, branch);
+        let registeredFaculty = await newFaculty.signUp();
+        return registeredFaculty;
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
+}
+
+
+//REMOVE LATER
 window.User = User;
+window.newFaculty = newFaculty;

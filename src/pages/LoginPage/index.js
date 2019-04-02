@@ -4,11 +4,15 @@ import imgLoginAvatar from "../../images/login_avatar.svg";
 import { IonInput } from "@ionic/react";
 import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
 import { RoutesURL } from "../../staticData";
-import { withChangedTitle } from "../../context";
-import { Link } from "react-router-dom";
+import { withChangedTitle, onlyNonUser } from "../../context";
+import { Link, Redirect } from "react-router-dom";
+import { getUserHomeUrl } from "../../helpers";
 
 class LoginPage extends Component {
     render() {
+        if(this.props.user) {
+            return <Redirect to={getUserHomeUrl(this.props.user)} />
+        }
         return (
             <CenteredPage>
                 <FormImage src={imgLoginAvatar} alt={"Login"} />
@@ -37,4 +41,4 @@ class LoginPage extends Component {
     }
 }
 
-export default withChangedTitle("Login")(LoginPage);
+export default onlyNonUser(withChangedTitle("Login")(LoginPage));

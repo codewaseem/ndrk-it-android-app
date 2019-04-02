@@ -8,11 +8,9 @@ import imgYear from "../../images/year.svg";
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
 import { RoutesURL } from "../../staticData";
-import { withChangedTitle, withUser } from "../../context";
+import { withChangedTitle, withUser, withNotify, onlyNonUser } from "../../context";
 import { Link, Redirect } from "react-router-dom";
 import { isValidEmail, isValidUsn } from "../../helpers";
-import { notify } from "reapop";
-import { connect } from "react-redux";
 
 class StudentSignUpPage extends Component {
 
@@ -29,9 +27,6 @@ class StudentSignUpPage extends Component {
     onChangeHandler = (e) => {
         let fieldName = e.target.name;
         let fieldValue = e.target.value;
-
-        console.log(fieldName);
-        if (fieldName === "usn") console.log(fieldValue);
         this.setState(() => {
             return {
                 [fieldName]: fieldValue
@@ -73,7 +68,7 @@ class StudentSignUpPage extends Component {
     }
 
     render() {
-        if(this.props.user) {
+        if (this.props.user) {
             return (
                 <Redirect to={`/${this.props.user.attributes.type}`} />
             );
@@ -130,12 +125,6 @@ class StudentSignUpPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        notify: (title, message, status) => {
-            dispatch(notify({ title, message, status }));
-        }
-    }
-}
 
-export default connect(null, mapDispatchToProps)(withUser((withChangedTitle("Student Sign Up")(StudentSignUpPage))));
+
+export default onlyNonUser(withNotify((withUser((withChangedTitle("Student Sign Up")(StudentSignUpPage))))));

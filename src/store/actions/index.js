@@ -1,4 +1,4 @@
-import { newStudent } from "../../server";
+import { newStudent, newFaculty } from "../../server";
 import { User } from "parse";
 import { notify, POSITIONS } from 'reapop';
 
@@ -62,13 +62,23 @@ export function unsetUser() {
     }
 }
 
-export function studentSignUp(newUserData) {
+
+export function studentSignUp(userData) {
+    return signUp(userData);
+}
+
+
+export function facultySignUp(userData) {
+    return signUp(userData, newFaculty);
+}
+
+function signUp(userData, signUpFunction = newStudent) {
     return async function (dispatch) {
         dispatch(startNetworkRequest("Creating new account..."));
         try {
-            let student = await newStudent(newUserData);
-            if (student) {
-                dispatch(setUser(student));
+            let user = await signUpFunction(userData);
+            if (user) {
+                dispatch(setUser(user));
                 dispatch(networkRequestSuccess());
                 dispatch(notify(successNotifyConfig("Done", "Account Created!")));
             } else {
@@ -80,6 +90,7 @@ export function studentSignUp(newUserData) {
         }
     }
 }
+
 
 export function logoutUser() {
     return async function (dispatch) {
