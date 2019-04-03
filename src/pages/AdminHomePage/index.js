@@ -3,7 +3,7 @@ import SectionedPage from "../SectionedPage";
 // import { greetUser } from "../../helpers";
 import TilesGrid from "../../components/TilesGrid";
 import { AdminHomeOptions } from "../../staticData";
-import { QuickSearchForm } from "../../components/QuickSearchForm";
+import QuickSearchForm from "../../components/QuickSearchForm";
 
 class AdminHomePage extends Component {
 

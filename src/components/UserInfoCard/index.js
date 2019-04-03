@@ -5,7 +5,7 @@ import { User_Types } from "../../server";
 const UserInfoCard = ({ userInfo }) => {
     return (<IonCard>
         <IonCardHeader style={{ padding: "10px" }}>
-            <IonCardSubtitle>User Type: {userInfo.type == User_Types.Faculty ? "Faculty" : "Student"}</IonCardSubtitle>
+            <IonCardSubtitle>User Type: {userInfo.type === User_Types.Faculty ? "Faculty" : "Student"}</IonCardSubtitle>
         </IonCardHeader>
         <IonGrid>
             <IonRow>
@@ -18,7 +18,7 @@ const UserInfoCard = ({ userInfo }) => {
                     <IonLabel color="danger" style={{ textTransform: "capitalize" }}>{userInfo.gender}</IonLabel>
                 </IonCol>
             </IonRow>
-            {userInfo.type == User_Types.Student &&
+            {userInfo.type === User_Types.Student &&
                 <IonRow>
                     <IonCol>
                         <IonIcon name="finger-print"></IonIcon>
@@ -32,7 +32,7 @@ const UserInfoCard = ({ userInfo }) => {
             <IonRow>
                 <IonCol>
                     <IonIcon name="mail" />
-                    <IonLabel color="tertiary">{userInfo.email}</IonLabel>
+                    <IonLabel color="tertiary">{userInfo.username}</IonLabel>
                 </IonCol>
                 <IonCol size="3">
                     <IonIcon name="git-merge" />

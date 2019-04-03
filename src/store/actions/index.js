@@ -1,4 +1,4 @@
-import { newStudent, newFaculty } from "../../server";
+import { newStudent, newFaculty, findUserByEmail } from "../../server";
 import { User } from "parse";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
@@ -180,7 +180,28 @@ export function checkLogin() {
 }
 
 
-
+export function findUserByEmailAction(email) {
+    return async function (dispatch) {
+        dispatch(startNetworkRequest("Finding " + email + " ...."));
+        try {
+            let user = await findUserByEmail(email);
+            console.log("HeR", user);
+            if (user) {
+                dispatch(networkRequestSuccess());
+                dispatch(notify(successNotifyConfig("Found", `User found with the ${email} email`)));
+                console.log("Found", user);
+                return user;
+            } else {
+                dispatch(networkRequestSuccess());
+                dispatch(notify({ ...successNotifyConfig("No User", `There is no user with the ${email} email`), status: "info" }));
+            }
+        } catch {
+            dispatch(networkRequestFailure());
+            dispatch(notify(successNotifyConfig("Error", "Something went wrong while searching!")));
+        }
+    }
+}
 
 window.signUp = studentSignUp;
 window.checkLogin = checkLogin;
+window.findUserByEmail = findUserByEmailAction;

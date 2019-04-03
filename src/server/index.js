@@ -1,4 +1,4 @@
-import Parse, { User, Object } from "parse";
+import Parse, { User, Object, Query } from "parse";
 import { PARSE_APP_ID, PARSE_SERVER_URL } from "../staticData";
 import { isValidEmail, isValidUsn, getBranchCodeFromUSN } from "../helpers";
 
@@ -83,6 +83,32 @@ export async function newFaculty({ email, password, name, branch, gender }) {
 }
 
 
+export async function findUserByEmail(email, userType = User) {
+    let query = new Query(userType);
+    query.equalTo("email", email);
+    const user = await query.first();
+    return user.attributes;
+}
+
+export async function findFacultyByEmail(email) {
+    return findUserByEmail(email, Student);
+}
+
+export async function findStudentByEmail(email) {
+    return findUserByEmail(email, Faculty);
+}
+
+export async function getAllUsers() {
+    let query = new Query(User);
+    query.notEqualTo("type", User_Types.Admin);
+    const users = await query.find();
+    return users;
+}
+
+
 //REMOVE LATER
-window.User = User;
-window.newFaculty = newFaculty;
+// window.User = User;
+// window.findFacultyByEmail = findFacultyByEmail;
+// window.findStudentByEmail = findStudentByEmail;
+// window.findUserByEmail = findUserByEmail;
+// window.getAllUsers = getAllUsers;

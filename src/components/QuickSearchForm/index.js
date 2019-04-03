@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { IonSearchbar } from "@ionic/react";
 import { Form, FormButton } from "../FormItems";
 import UserSearchResult from "../UserSearchResult";
+import { connect } from "react-redux";
+import { findUserByEmailAction } from "../../store/actions";
 
-export class QuickSearchForm extends Component {
+class QuickSearchForm extends Component {
     state = {
-        searchEmail: ""
+        searchEmail: "",
+        searched: false,
+        userInfo: false
     };
     onChangeHandler = (e) => {
         let { name, value } = e.target;
@@ -15,8 +19,17 @@ export class QuickSearchForm extends Component {
             };
         });
     };
-    onSubmitHandler = (e) => {
+    onSubmitHandler = async (e) => {
         e.preventDefault();
+        let userInfo = await this.props.findByEmail(this.state.searchEmail);
+        console.log(userInfo);
+        this.setState(() => {
+            return {
+                userInfo,
+                searched: true
+            }
+        });
+
     };
     render() {
         return (<React.Fragment>
@@ -24,15 +37,17 @@ export class QuickSearchForm extends Component {
                 <IonSearchbar name="searchEmail" onIonChange={this.onChangeHandler} debounce={500} placeholder={"Search user by email"} type="email" value={this.state.searchEmail} />
                 <FormButton type="submit" buttonText="Search" />
             </Form>
-            <UserSearchResult userInfo={{
-                name: "Waseem Ahmed",
-                gender: "male",
-                usn: "4yg13cs022",
-                year: 4,
-                email: "alphawaseem@gmail.com",
-                branch: "cs",
-                type: "student"
-            }} />
+            {this.state.searched && <UserSearchResult userInfo={this.state.userInfo} />}
         </React.Fragment>);
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        findByEmail: (email) => {
+            return dispatch(findUserByEmailAction(email));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(QuickSearchForm);
