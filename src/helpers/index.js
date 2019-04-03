@@ -30,8 +30,9 @@ export const getBranchCodeFromUSN = (usn) => {
     }
 }
 
-export const greetUser = (name, role = User_Types.Student) => {
-    return `Hello, ${name} ${role === User_Types.Student ? "" : "Sir"}`;
+export const greetUser = (user) => {
+    let { name, type } = user.attributes;
+    return `Hello, ${name} ${type === User_Types.Student ? "" : "Sir"}`;
 }
 
 export const getUserHomeUrl = (user) => {

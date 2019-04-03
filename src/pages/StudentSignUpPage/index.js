@@ -11,6 +11,7 @@ import { RoutesURL } from "../../staticData";
 import { withChangedTitle, withUser, withNotify, onlyNonUser } from "../../context";
 import { Link, Redirect } from "react-router-dom";
 import { isValidEmail, isValidUsn } from "../../helpers";
+import { Gender_Options } from "../../server";
 
 class StudentSignUpPage extends Component {
 
@@ -20,8 +21,8 @@ class StudentSignUpPage extends Component {
         year: "",
         email: "",
         password: "",
-        confirmPassword: ""
-
+        confirmPassword: "",
+        userCreated: false
     }
 
     onChangeHandler = (e) => {
@@ -34,9 +35,9 @@ class StudentSignUpPage extends Component {
         });
     }
 
-    onSubmitHandler = (e) => {
+    onSubmitHandler = async (e) => {
         e.preventDefault();
-        let { email, usn, name, year, password, confirmPassword } = this.state;
+        let { email, usn, name, year, gender, password, confirmPassword } = this.state;
         let errorCount = 0;
         if (!isValidEmail(email)) {
             this.props.notify("Invalid", "Email is invalid", "error");
@@ -57,13 +58,28 @@ class StudentSignUpPage extends Component {
             errorCount++;
         }
 
+
+        if (!gender) {
+            this.props.notify("Invalid", "Select your gender!", "error");
+            errorCount++;
+        }
+
         if ((!password || !confirmPassword || password !== confirmPassword)) {
             this.props.notify("Invalid", "Password/Confirm Password mismatch!", "error");
             errorCount++;
         }
 
-        if (errorCount === 0)
-            this.props.studentSignUp({ name, email, usn, year, password });
+        if (errorCount === 0) {
+            let user = await this.props.studentSignUp({ name, email, usn, year, password, gender });
+            if (user) {
+                this.setState(() => {
+                    return {
+                        userCreated: true
+                    }
+                });
+            }
+        }
+
 
     }
 
@@ -71,6 +87,12 @@ class StudentSignUpPage extends Component {
         if (this.props.user) {
             return (
                 <Redirect to={`/${this.props.user.attributes.type}`} />
+            );
+        }
+
+        if (this.state.userCreated) {
+            return (
+                <Redirect to={`${RoutesURL.LOGIN}`} />
             );
         }
         return (
@@ -92,6 +114,16 @@ class StudentSignUpPage extends Component {
                             <IonSelectOption value="2">2nd Year</IonSelectOption>
                             <IonSelectOption value="3">3rd Year</IonSelectOption>
                             <IonSelectOption value="4">4th Year</IonSelectOption>
+                        </SelectInput>
+                    </FormItem>
+                    <FormItem>
+                        <FormIconLabel iconName="male" />
+                        <SelectInput style={{textTransform:"capitalize"}} required={true} onIonChange={this.onChangeHandler} value={this.state.gender} name="gender" placeholder="Gender">
+                            {
+                                Object.keys(Gender_Options).map(genderKey => {
+                                    return <IonSelectOption key={genderKey} value={Gender_Options[genderKey]}>{Gender_Options[genderKey]}</IonSelectOption>
+                                })
+                            }
                         </SelectInput>
                     </FormItem>
                     <FormItem>

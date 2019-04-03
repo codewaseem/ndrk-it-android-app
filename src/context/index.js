@@ -1,11 +1,11 @@
 import React, { createContext } from "react";
-import { checkLogin, login, studentSignUp, facultySignUp } from "../store/actions";
+import { checkLogin, login, studentSignUp, facultySignUp, logoutUser } from "../store/actions";
 import { connect } from "react-redux";
 import { notify } from "reapop";
 import { RoutesURL } from "../staticData";
 import { User } from "parse";
 import { Redirect } from "react-router";
-import { User_Types } from "../server";
+// import { User_Types } from "../server";
 import { getUserHomeUrl } from "../helpers";
 
 export const TitleContext = createContext({
@@ -48,13 +48,16 @@ export function withUser(OriginalComponent) {
                 dispatch(checkLogin());
             },
             login: (email, password) => {
-                dispatch(login({ email, password }));
+                return dispatch(login({ email, password }));
             },
             studentSignUp: (userData) => {
-                dispatch(studentSignUp(userData));
+                return dispatch(studentSignUp(userData));
             },
             facultySignUp: (userData) => {
-                dispatch(facultySignUp(userData));
+                return dispatch(facultySignUp(userData));
+            },
+            logoutUser: () => {
+                dispatch(logoutUser());
             }
         }
     }
@@ -76,19 +79,41 @@ export function withNotify(OriginalComponent) {
 }
 
 export function onlyUser(OriginalComponent, redirectTo = RoutesURL.LOGIN) {
-    let user = User.current();
-    if (user) {
-        return (props) => (<OriginalComponent user={user} {...props} />);
-    } else {
-        return (props) => (<Redirect to={redirectTo} {...props} />);
+    const Comp = (props) => {
+        console.log("onlyUser", props);
+        if (props.user) {
+            return <OriginalComponent {...props} />
+        } else {
+            return <Redirect to={redirectTo} />
+        }
     }
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.auth.user
+        }
+    }
+
+    return connect(mapStateToProps)(Comp);
+
 }
 
 export function onlyNonUser(OriginalComponent) {
-    let user = User.current();
-    if(user) {
-        return (props) => (<Redirect to={getUserHomeUrl(user)} {...props} />);
-    } else {
-        return (props) => (<OriginalComponent {...props} />);
+    const Comp = (props) => {
+        console.log("onlyUser", props);
+        if (!props.user) {
+            return <OriginalComponent {...props} />
+        } else {
+            return <Redirect to={getUserHomeUrl(props.user)} />
+        }
     }
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.auth.user
+        }
+    }
+
+    return connect(mapStateToProps)(Comp);
+
 }

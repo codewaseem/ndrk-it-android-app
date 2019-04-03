@@ -4,7 +4,6 @@ import { loginOrLogoutOptionsData } from "../../staticData";
 import { withUser } from "../../context";
 
 const LoginOrLogout = (props) => {
-    console.log("HERE");
     if(this.props.user) {
         return <TilesGrid tilesInfo={loginOrLogoutOptionsData.loggedIn} {...props}/>
     }

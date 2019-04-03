@@ -3,4 +3,6 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    height: fit-content;
+    min-height: 100%;
 }

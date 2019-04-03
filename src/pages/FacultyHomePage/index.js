@@ -10,7 +10,7 @@ class FacultyHomePage extends Component {
             <Page>
                 <IonItemDivider>
                     <IonLabel>
-                        {this.props.user && greetUser(this.props.user.attributes.name)}
+                        {this.props.user && greetUser(this.props.user)}
                     </IonLabel>
                 </IonItemDivider>
             </Page>

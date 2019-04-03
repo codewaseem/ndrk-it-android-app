@@ -1,12 +1,11 @@
-import { START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER } from "../actions";
+import { SET_REDIRECT_PATH, START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER } from "../actions";
 import { combineReducers } from "redux";
 import { reducer as notificationsReducer } from 'reapop';
 
 let defaultUiState = {
     isFetching: false,
     fetchingMessage: "",
-    successMessage: "",
-    failureMessage: ""
+    redirectPath: ""
 };
 
 function uiReducer(uiState = defaultUiState, action) {
@@ -23,6 +22,12 @@ function uiReducer(uiState = defaultUiState, action) {
             isFetching: false,
             fetchingMessage: ""
         };
+        case SET_REDIRECT_PATH: return {
+            isFetching: false,
+            fetchingMessage: "",
+            redirectPath: action.path
+
+        }
         default: return uiState;
     }
 }

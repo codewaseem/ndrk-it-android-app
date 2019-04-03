@@ -1,9 +1,22 @@
 import React from "react";
-import { User } from "parse";
 import { Redirect } from "react-router";
 import { RoutesURL } from "../../staticData";
+import { withUser } from "../../context";
 
-export default (props) => {
-    User.logOut();
-    return <Redirect to={RoutesURL.HOME} {...props} />
+
+class LogoutPage extends React.Component {
+
+    componentDidMount() {
+        this.props.logoutUser();
+        // window.location.reload();
+    }
+
+    render() {
+        return (
+            <Redirect to={RoutesURL.HOME} />
+        )
+    }
 }
+
+export default withUser(LogoutPage);
+
