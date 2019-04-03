@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import {
   IonApp,
@@ -26,6 +26,7 @@ import FacultyHomePage from "./pages/FacultyHomePage";
 import LogoutPage from './pages/LogoutPage';
 import HomePage from "./pages/HomePage";
 import AdminHomePage from './pages/AdminHomePage';
+import FourNotFourPage from './pages/FourNotFourPage';
 
 // import StudentHome from "./components/StudentHome";
 // import FacultyHome from "./components/FacultyHome";
@@ -62,14 +63,17 @@ class App extends Component {
             <TitleContext.Provider value={this.state}>
               <Header />
               <IonContent>
-                <Route exact path="/" component={HomePage} />
-                <Route path={RoutesURL.LOGIN} component={LoginPage} />
-                <Route exact path={RoutesURL.SIGNUP} component={SignUpPage} />
-                <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
-                <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
-                <Route path={RoutesURL.FACULTY_HOME} component={FacultyHomePage} />
-                <Route path={RoutesURL.ADMIN_HOME} component={AdminHomePage} />
-                <Route path={RoutesURL.LOGOUT} component={LogoutPage} />
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path={RoutesURL.LOGIN} component={LoginPage} />
+                  <Route exact path={RoutesURL.SIGNUP} component={SignUpPage} />
+                  <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
+                  <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
+                  <Route path={RoutesURL.FACULTY_HOME} component={FacultyHomePage} />
+                  <Route path={RoutesURL.ADMIN_HOME} component={AdminHomePage} />
+                  <Route path={RoutesURL.LOGOUT} component={LogoutPage} />
+                  <Route component={FourNotFourPage} />
+                </Switch>
               </IonContent>
             </TitleContext.Provider>
           </IonApp>
