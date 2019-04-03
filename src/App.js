@@ -25,6 +25,7 @@ import FacultySignUpPage from "./pages/FacultySignUpPage";
 import FacultyHomePage from "./pages/FacultyHomePage";
 import LogoutPage from './pages/LogoutPage';
 import HomePage from "./pages/HomePage";
+import AdminHomePage from './pages/AdminHomePage';
 
 // import StudentHome from "./components/StudentHome";
 // import FacultyHome from "./components/FacultyHome";
@@ -67,6 +68,7 @@ class App extends Component {
                 <Route path={RoutesURL.STUDENT_SIGNUP} component={StudentSignUpPage} />
                 <Route path={RoutesURL.FACULTY_SIGNUP} component={FacultySignUpPage} />
                 <Route path={RoutesURL.FACULTY_HOME} component={FacultyHomePage} />
+                <Route path={RoutesURL.ADMIN_HOME} component={AdminHomePage} />
                 <Route path={RoutesURL.LOGOUT} component={LogoutPage} />
               </IonContent>
             </TitleContext.Provider>

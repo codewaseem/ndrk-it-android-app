@@ -19,6 +19,9 @@ import imgNotification from "../images/notification.svg";
 import imgLogin from "../images/login.svg";
 import imgSignup from "../images/signup.svg";
 import imgLogout from "../images/logout.svg";
+import imgVerify from "../images/verify.svg";
+import imgStudent from "../images/student_signup.svg";
+import imgFaculty from "../images/lecturer.svg";
 
 
 
@@ -30,6 +33,7 @@ export const RoutesURL = {
     LOGIN: "/login",
     FACULTY_HOME: "/faculty",
     STUDENT_HOME: "/student",
+    ADMIN_HOME: "/admin",
     PASSWORD_RESET: "/password-reset",
     LOGOUT: "/logout"
 };
@@ -127,3 +131,33 @@ export const loginOrLogoutOptionsData = {
         }
     ]
 }
+
+
+export const AdminHomeOptions = [
+    {
+        name: "Verify Accounts",
+        imgSrc : imgVerify,
+        url : ""
+    },
+    {
+        name: "View Students",
+        imgSrc: imgStudent,
+        url:""
+    },
+    {
+        name: "View Students",
+        imgSrc: imgFaculty,
+        url: ""
+    },
+    {
+        name:"Add Event",
+        imgSrc: imgEvent,
+        url:""
+    },
+    {
+        name:"Add Circular",
+        imgSrc: imgNotification,
+        url:""
+    },
+    ...loginOrLogoutOptionsData.loggedIn
+];

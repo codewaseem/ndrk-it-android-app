@@ -4,7 +4,7 @@ import Tile from "../Tile";
 import { Link } from "react-router-dom";
 
 
-const TilesGrid = ({ tilesInfo = [], gridProps, rowProps = {}, colProps = {}, tileProps = {} }) => {
+const TilesGrid = ({ tilesInfo = [], gridProps, rowProps = {}, colProps = { size: 4 }, tileProps = {} }) => {
     return (
         <IonGrid {...gridProps}>
             <IonRow {...rowProps}>
