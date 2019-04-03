@@ -145,7 +145,7 @@ export const AdminHomeOptions = [
         url:""
     },
     {
-        name: "View Students",
+        name: "View Faculty",
         imgSrc: imgFaculty,
         url: ""
     },
