@@ -197,7 +197,7 @@ export function findUserByEmailAction(email) {
             }
         } catch {
             dispatch(networkRequestFailure());
-            dispatch(notify(successNotifyConfig("Error", "Something went wrong while searching!")));
+            dispatch(notify(failureNotifyConfig("Error", "Something went wrong while searching!")));
         }
     }
 }
