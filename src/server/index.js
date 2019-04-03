@@ -87,7 +87,7 @@ export async function findUserByEmail(email, userType = User) {
     let query = new Query(userType);
     query.equalTo("email", email);
     const user = await query.first();
-    return user.attributes;
+    return user ? user.attributes : undefined;
 }
 
 export async function findFacultyByEmail(email) {
