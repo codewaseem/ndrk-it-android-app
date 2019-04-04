@@ -3,7 +3,6 @@ import { checkLogin, login, studentSignUp, facultySignUp, logoutUser } from "../
 import { connect } from "react-redux";
 import { notify } from "reapop";
 import { RoutesURL } from "../staticData";
-import { User } from "parse";
 import { Redirect } from "react-router";
 // import { User_Types } from "../server";
 import { getUserHomeUrl } from "../helpers";

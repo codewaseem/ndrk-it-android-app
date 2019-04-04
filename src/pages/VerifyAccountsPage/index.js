@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import { IonText } from "@ionic/react";
+import { IonText, IonRefresher, IonRefresherContent } from "@ionic/react";
 import SectionedPage from "../SectionedPage";
 import UserInfoCardList from "../../components/UserInfoCardList";
 import { FormImage } from "../../components/FormItems";
@@ -15,6 +15,10 @@ class VerifyAccountsPage extends Component {
     }
 
     async componentDidMount() {
+        this.getAccounts();
+    }
+
+    getAccounts = async () => {
         let accounts = await this.props.getUnverifiedAccounts();
         if (accounts && accounts.length) {
             this.setState(() => {
@@ -24,11 +28,19 @@ class VerifyAccountsPage extends Component {
             });
         }
     }
-
+    doRefresh = async (...args) => {
+        console.log(args);
+        this.getAccounts();
+    }
     render() {
         if (!this.state.accounts.length) {
             return (
                 <CenteredPage>
+                     <IonRefresher onIonRefresh={this.doRefresh}>
+                                    <IonRefresherContent>
+                                        
+                                    </IonRefresherContent>
+                                </IonRefresher>
                     <FormImage src={imgNoVerify} />
                     <p>
                         <IonText color="dark">
@@ -42,7 +54,17 @@ class VerifyAccountsPage extends Component {
                 <SectionedPage sectionsMap={[
                     {
                         name: "Accounts to verify",
-                        component: (props) => (<UserInfoCardList users={this.state.accounts} />)
+                        component: (props) => (
+                            <React.Fragment>
+                                <IonRefresher onIonRefresh={this.doRefresh}>
+                                    <IonRefresherContent>
+                                        
+                                    </IonRefresherContent>
+                                </IonRefresher>
+                                <UserInfoCardList users={this.state.accounts} />
+                            </React.Fragment>
+
+                        )
                     }
                 ]} />
             )
