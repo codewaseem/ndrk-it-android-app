@@ -76,7 +76,7 @@ class VerifyAccountsPage extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         getUnverifiedAccounts: () => {
-            return dispatch(getUnverifiedAccountsAction());
+            return dispatch(getUnverifiedAccountsAction("You have some accounts to verify", "No accounts to verify"));
         }
     }
 }

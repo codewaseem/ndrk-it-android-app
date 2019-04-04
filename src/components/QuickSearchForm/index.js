@@ -46,7 +46,7 @@ class QuickSearchForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         findByEmail: (email) => {
-            return dispatch(findUserByEmailAction(email));
+            return dispatch(findUserByEmailAction(email, `User found with the email: ${email}` , `No user found with email: ${email}`));
         }
     }
 }

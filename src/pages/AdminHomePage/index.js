@@ -9,6 +9,7 @@ import FourNotFourPage from "../FourNotFourPage";
 import AddEventPage from "../AddEventPage";
 import AddCircularPage from "../AddCircularPage";
 import VerifyAccountsPage from "../VerifyAccountsPage";
+import UpdateProfilePage from "../UpdateProfilePage";
 
 
 
@@ -49,6 +50,7 @@ class AdminHomePage extends Component {
                     <Route path={match.path + AdminHomeRoutes.VIEW_FACULTY} component={() => { }} />
                     <Route path={match.path + AdminHomeRoutes.ADD_EVENT} component={AddEventPage} />
                     <Route path={match.path + AdminHomeRoutes.ADD_CIRCULAR} component={AddCircularPage} />
+                    <Route path={match.path + AdminHomeRoutes.UPDATE_PROFILE+"/:email"} component={UpdateProfilePage} /> 
                     <Route component={FourNotFourPage} />
                 </Switch>
             </React.Fragment>

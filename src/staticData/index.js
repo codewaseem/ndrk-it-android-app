@@ -43,7 +43,8 @@ export const AdminHomeRoutes = {
     VIEW_STUDENTS : "/view-students",
     VIEW_FACULTY : "/view-faculty",
     ADD_EVENT: "/add-event",
-    ADD_CIRCULAR: "/add-circular"
+    ADD_CIRCULAR: "/add-circular",
+    UPDATE_PROFILE: "/update-profile"
 }
 
 export const PARSE_SERVER_URL = "http://localhost:1337/parse"

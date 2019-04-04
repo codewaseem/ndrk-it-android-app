@@ -182,9 +182,9 @@ export function checkLogin() {
 
 function asyncQueryActionHelper(
     queryAsyncFunc = () => { },
+    onResultMessage,
+    onNoResultMessage,
     startNetworkRequestMessage = "Please wait...",
-    onResultMessage = "Results found!",
-    onNoResultMessage = "Nothing found!",
     onErrorThrown = "Something went wrong!"
 ) {
     return async function (dispatch) {
@@ -193,10 +193,10 @@ function asyncQueryActionHelper(
             let result = await queryAsyncFunc();
             dispatch(networkRequestSuccess());
             if (result) {
-                dispatch(notify(successNotifyConfig("Done", onResultMessage)));
+                onResultMessage && dispatch(notify(successNotifyConfig("Done", onResultMessage)));
                 return result;
             } else {
-                dispatch(notify({ ...successNotifyConfig("Done", onNoResultMessage), status: "info" }));
+                onNoResultMessage && dispatch(notify({ ...successNotifyConfig("Done", onNoResultMessage), status: "info" }));
             }
         } catch (e) {
             dispatch(networkRequestFailure());
@@ -205,21 +205,21 @@ function asyncQueryActionHelper(
     }
 }
 
-export const findUserByEmailAction = (email) => {
+export const findUserByEmailAction = (email, successNotificationMessage, failureNotificationMessage) => {
     return asyncQueryActionHelper(
         findUserByEmail.bind(null, email),
+        successNotificationMessage,
+        failureNotificationMessage,
         `Finding user by email ${email}`,
-        `User found with email: ${email}`,
-        `No user found with email: ${email}`
     );
 }
 
-export const getUnverifiedAccountsAction = () => {
+export const getUnverifiedAccountsAction = (successNotificationMessage, failureNotificationMessage) => {
     return asyncQueryActionHelper(
         getUnverifiedAccounts,
+        successNotificationMessage,
+        failureNotificationMessage,
         `Getting unverified accounts`,
-        `You have some accounts to verify`,
-        `No accounts to verify`
     )
 }
 
