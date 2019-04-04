@@ -30,7 +30,7 @@ export class Student extends User {
             this.set("branch", getBranchCodeFromUSN(usn));
             this.set("type", User_Types.Student);
             this.set("gender", gender);
-            this.set("verified", true);
+            this.set("verified", false);
             this.set("graduated", false);
         } else {
             throw new Error("Invalid Email/USN.");
@@ -51,7 +51,7 @@ export class Faculty extends User {
             this.set("branch", branch);
             this.set("gender", gender);
             this.set("type", User_Types.Faculty);
-            this.set("verified", true);
+            this.set("verified", false);
         } else {
             throw new Error("Invalid Email.");
         }
@@ -96,6 +96,13 @@ export async function findFacultyByEmail(email) {
 
 export async function findStudentByEmail(email) {
     return findUserByEmail(email, Faculty);
+}
+
+export async function getUnverifiedAccounts() {
+    let query = new Query(User);
+    query.equalTo("verified", false);
+    const accounts = await query.find();
+    return (accounts && accounts.length) ? accounts.map(acc => acc.attributes) : undefined;
 }
 
 export async function getAllUsers() {

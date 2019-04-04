@@ -21,6 +21,7 @@ class QuickSearchForm extends Component {
     };
     onSubmitHandler = async (e) => {
         e.preventDefault();
+        if (!this.state.searchEmail) return;
         let userInfo = await this.props.findByEmail(this.state.searchEmail);
         console.log(userInfo);
         this.setState(() => {
@@ -34,7 +35,7 @@ class QuickSearchForm extends Component {
     render() {
         return (<React.Fragment>
             <Form onSubmit={this.onSubmitHandler}>
-                <IonSearchbar name="searchEmail" onIonChange={this.onChangeHandler} debounce={500} placeholder={"Search user by email"} type="email" value={this.state.searchEmail} />
+                <IonSearchbar required name="searchEmail" onIonChange={this.onChangeHandler} debounce={500} placeholder={"Search user by email"} type="email" value={this.state.searchEmail} />
                 <FormButton type="submit" buttonText="Search" />
             </Form>
             {this.state.searched && <UserSearchResult userInfo={this.state.userInfo} />}

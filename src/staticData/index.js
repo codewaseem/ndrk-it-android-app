@@ -35,8 +35,16 @@ export const RoutesURL = {
     STUDENT_HOME: "/student",
     ADMIN_HOME: "/admin",
     PASSWORD_RESET: "/password-reset",
-    LOGOUT: "/logout"
+    LOGOUT: "/logout",
 };
+
+export const AdminHomeRoutes = {
+    VERIFY_ACCOUNTS : "/verify-accounts",
+    VIEW_STUDENTS : "/view-students",
+    VIEW_FACULTY : "/view-faculty",
+    ADD_EVENT: "/add-event",
+    ADD_CIRCULAR: "/add-circular"
+}
 
 export const PARSE_SERVER_URL = "http://localhost:1337/parse"
 export const PARSE_APP_ID = "APPLICATION_ID";
@@ -137,27 +145,27 @@ export const AdminHomeOptions = [
     {
         name: "Verify Accounts",
         imgSrc : imgVerify,
-        url : ""
+        url : RoutesURL.ADMIN_HOME + AdminHomeRoutes.VERIFY_ACCOUNTS
     },
     {
         name: "View Students",
         imgSrc: imgStudent,
-        url:""
+        url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.VIEW_STUDENTS
     },
     {
         name: "View Faculty",
         imgSrc: imgFaculty,
-        url: ""
+        url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.VIEW_FACULTY
     },
     {
         name:"Add Event",
         imgSrc: imgEvent,
-        url:""
+        url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.ADD_EVENT
     },
     {
         name:"Add Circular",
         imgSrc: imgNotification,
-        url:""
+        url:RoutesURL.ADMIN_HOME + AdminHomeRoutes.ADD_CIRCULAR
     },
     ...loginOrLogoutOptionsData.loggedIn
 ];

@@ -1,4 +1,4 @@
-import { newStudent, newFaculty, findUserByEmail } from "../../server";
+import { newStudent, newFaculty, findUserByEmail, getUnverifiedAccounts } from "../../server";
 import { User } from "parse";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
@@ -180,28 +180,47 @@ export function checkLogin() {
 }
 
 
-export function findUserByEmailAction(email) {
+function asyncQueryActionHelper(
+    queryAsyncFunc = () => { },
+    startNetworkRequestMessage = "Please wait...",
+    onResultMessage = "Results found!",
+    onNoResultMessage = "Nothing found!",
+    onErrorThrown = "Something went wrong!"
+) {
     return async function (dispatch) {
-        dispatch(startNetworkRequest("Finding " + email + " ...."));
+        dispatch(startNetworkRequest(startNetworkRequestMessage));
         try {
-            let user = await findUserByEmail(email);
-            console.log("HeR", user);
-            if (user) {
-                dispatch(networkRequestSuccess());
-                dispatch(notify(successNotifyConfig("Found", `User found with the ${email} email`)));
-                console.log("Found", user);
-                return user;
+            let result = await queryAsyncFunc();
+            dispatch(networkRequestSuccess());
+            if (result) {
+                dispatch(notify(successNotifyConfig("Done", onResultMessage)));
+                return result;
             } else {
-                dispatch(networkRequestSuccess());
-                dispatch(notify({ ...successNotifyConfig("No User", `There is no user with the ${email} email`), status: "info" }));
+                dispatch(notify({ ...successNotifyConfig("Done", onNoResultMessage), status: "info" }));
             }
-        } catch {
+        } catch (e) {
             dispatch(networkRequestFailure());
-            dispatch(notify(failureNotifyConfig("Error", "Something went wrong while searching!")));
+            dispatch(notify(failureNotifyConfig("Error", onErrorThrown + "\n" + e.message)));
         }
     }
 }
 
-window.signUp = studentSignUp;
-window.checkLogin = checkLogin;
-window.findUserByEmail = findUserByEmailAction;
+export const findUserByEmailAction = (email) => {
+    return asyncQueryActionHelper(
+        findUserByEmail.bind(null, email),
+        `Finding user by email ${email}`,
+        `User found with email: ${email}`,
+        `No user found with email: ${email}`
+    );
+}
+
+export const getUnverifiedAccountsAction = () => {
+    return asyncQueryActionHelper(
+        getUnverifiedAccounts,
+        `Getting unverified accounts`,
+        `You have some accounts to verify`,
+        `No accounts to verify`
+    )
+}
+
+window.getUA = getUnverifiedAccountsAction;
