@@ -109,7 +109,7 @@ class StudentSignUpPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgYear} />
-                        <SelectInput required={true} onIonChange={this.onChangeHandler} value={this.state.academicYear} name="academicYear" placeholder="Current Year">
+                        <SelectInput interfaceOptions={{header:"Academic Year"}} required={true} onIonChange={this.onChangeHandler} value={this.state.academicYear} name="academicYear" placeholder="Current Year">
                             <IonSelectOption value="1">1st Year</IonSelectOption>
                             <IonSelectOption value="2">2nd Year</IonSelectOption>
                             <IonSelectOption value="3">3rd Year</IonSelectOption>
@@ -118,7 +118,7 @@ class StudentSignUpPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="male" />
-                        <SelectInput style={{ textTransform: "capitalize" }} required={true} onIonChange={this.onChangeHandler} value={this.state.gender} name="gender" placeholder="Gender">
+                        <SelectInput interfaceOptions={{header:"Gender"}} style={{ textTransform: "capitalize" }} required={true} onIonChange={this.onChangeHandler} value={this.state.gender} name="gender" placeholder="Gender">
                             {
                                 Object.keys(Gender_Options).map(genderKey => {
                                     return <IonSelectOption key={genderKey} value={Gender_Options[genderKey]}>{Gender_Options[genderKey]}</IonSelectOption>

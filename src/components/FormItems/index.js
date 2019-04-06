@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export const FormImage = ({ src, alt }) => {
     return (
-        <img src={src} alt={alt} style={{ height: "20%", width: "35%" }} />
+        <img src={src} alt={alt} style={{ height: "15%", width: "30%" }} />
     );
 }
 

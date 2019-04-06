@@ -1,6 +1,6 @@
 import Parse, { User, Object as ParseObject, Query } from "parse";
 import { PARSE_APP_ID, PARSE_SERVER_URL } from "../staticData";
-import { isValidEmail, isValidUsn, getBranchCodeFromUSN } from "../helpers";
+import { isValidEmail, isValidUsn } from "../helpers";
 
 Parse.initialize(PARSE_APP_ID);
 
@@ -171,7 +171,8 @@ export const UserManager = (function () {
         let query = new Query(UserInfo);
         query.equalTo("email", email);
         let userInfo = await query.first();
-        return userInfo;
+        if(!userInfo) throw new Error("No such user found!");
+        return userInfo.attributes;
     }
 
     async function _handleUserLogin(user, userInfo) {
@@ -194,7 +195,79 @@ export const UserManager = (function () {
         throw new Error(errorMessage);
     }
 
-    function getAllUsers() {
+    function getUserByEmail(email) {
+        return _getUserInfoByEmail(email);
+    }
+
+    async function getUnverifiedAccounts() {
+        let query = new Query(UserInfo);
+        query.equalTo("verified", false);
+        const accounts = await query.find();
+        if (!accounts) throw new Error("Something went wrong!");
+
+        if (accounts.length === 0) {
+            return null;
+        }
+        else {
+            return accounts && accounts.map(account => account.attributes);
+        }
+    }
+
+    async function setVerified(email) {
+        let query = new Query(UserInfo);
+        query.equalTo("email", email);
+        let userInfo = await query.first();
+        userInfo.set("verified", true);
+        let saved = await userInfo.save();
+        if (!saved) throw new Error("Couldn't update the user info.");
+
+        return saved.attributes;
+    }
+
+    async function updateUserInfo(email, { name, gender, type, branch, usn, academicYear, graduated }) {
+
+        if (!name || !gender || !type || !branch) {
+            throw new Error("Basic User info not provided");
+        }
+
+        if (type === User_Types.Student) {
+            if (!usn || !academicYear) {
+                throw new Error("Student information is not provided");
+            }
+
+            if (!isValidUsn(usn)) {
+                throw new Error("Invalid USN");
+            }
+
+            if (academicYear <= 0 || academicYear > 4) {
+                throw new Error("Invalid year");
+            }
+        }
+
+        if (!Branches[branch]) {
+            throw new Error("Invalid Branch");
+        }
+
+        if (!Gender_Options[gender]) {
+            throw new Error("Invalid Gender");
+        }
+
+        let query = new Query(UserInfo);
+        query.equalTo("email", email);
+        let userInfo = await query.first();
+        if (!userInfo) throw new Error("Failed to fetch user!");
+        let toUpdate = {
+            name, gender, branch
+        };
+
+        if(type === User_Types.Student) {
+             toUpdate = {...toUpdate, usn, academicYear, graduated}
+        }
+        let updatedData = await userInfo.save(toUpdate);
+
+        if(!updatedData) throw new Error("Failed to update user data");
+
+        return updatedData.attributes;
 
     }
 
@@ -202,46 +275,13 @@ export const UserManager = (function () {
         signUp,
         login,
         logout,
-        getAllUsers,
-        checkLogin
+        checkLogin,
+        getUserByEmail,
+        getUnverifiedAccounts,
+        setVerified,
+        updateUserInfo
     }
 })();
-
-export async function getUserInfoById(userId) {
-    let query = new Query(UserInfo);
-    const user = await query.get("4pJVN3xedG")
-    console.log(user.get("name"));
-    return user;
-}
-
-export async function findUserByEmail(email, userType = User) {
-    let query = new Query(userType);
-    query.equalTo("email", email);
-    const user = await query.first();
-    return user;
-}
-
-export async function findFacultyByEmail(email) {
-    return findUserByEmail(email, User);
-}
-
-export async function findStudentByEmail(email) {
-    return findUserByEmail(email, User);
-}
-
-export async function getUnverifiedAccounts() {
-    let query = new Query(User);
-    query.equalTo("verified", false);
-    const accounts = await query.find();
-    return (accounts && accounts.length) ? accounts : undefined;
-}
-
-export async function getAllUsers() {
-    let query = new Query(User);
-    query.notEqualTo("type", User_Types.Admin);
-    const users = await query.find();
-    return users;
-}
 
 window.UserManager = UserManager;
 

@@ -4,7 +4,7 @@ import { User_Types } from "../../server";
 import { Link } from "react-router-dom";
 import { RoutesURL } from "../../staticData";
 
-const UserInfoCard = ({ userInfo, linkTo=`${RoutesURL.ADMIN_HOME}/update-profile/${userInfo.username}` }) => {
+const UserInfoCard = ({ userInfo, linkTo=`${RoutesURL.ADMIN_HOME}/update-profile/${userInfo.email}` }) => {
     return (
         <Link to={linkTo}>
             <IonCard>
@@ -30,13 +30,13 @@ const UserInfoCard = ({ userInfo, linkTo=`${RoutesURL.ADMIN_HOME}/update-profile
                             </IonCol>
                             <IonCol size="3">
                                 <IonIcon name="calendar" />
-                                <IonLabel color="dark"> Year {userInfo.year}</IonLabel>
+                                <IonLabel color="dark"> Year {userInfo.academicYear}</IonLabel>
                             </IonCol>
                         </IonRow>}
                     <IonRow>
                         <IonCol>
                             <IonIcon name="mail" />
-                            <IonLabel color="tertiary">{userInfo.username}</IonLabel>
+                            <IonLabel color="tertiary">{userInfo.email}</IonLabel>
                         </IonCol>
                         <IonCol size="3">
                             <IonIcon name="git-merge" />

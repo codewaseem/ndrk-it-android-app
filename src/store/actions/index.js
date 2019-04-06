@@ -1,5 +1,4 @@
-import { findUserByEmail, getUnverifiedAccounts, UserManager, User_Types } from "../../server";
-import { User } from "parse";
+import { UserManager, User_Types } from "../../server";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
 
@@ -179,7 +178,7 @@ function asyncQueryActionHelper(
 
 export const findUserByEmailAction = (email, successNotificationMessage, failureNotificationMessage) => {
     return asyncQueryActionHelper(
-        findUserByEmail.bind(null, email),
+        UserManager.getUserByEmail.bind(null, email),
         successNotificationMessage,
         failureNotificationMessage,
         `Finding user by email ${email}`,
@@ -188,10 +187,28 @@ export const findUserByEmailAction = (email, successNotificationMessage, failure
 
 export const getUnverifiedAccountsAction = (successNotificationMessage, failureNotificationMessage) => {
     return asyncQueryActionHelper(
-        getUnverifiedAccounts,
+        UserManager.getUnverifiedAccounts,
         successNotificationMessage,
         failureNotificationMessage,
         `Getting unverified accounts`,
+    )
+}
+
+export const setVerified = (email, successNotificationMessage, failureNotificationMessage) => {
+    return asyncQueryActionHelper(
+        UserManager.setVerified.bind(null, email),
+        successNotificationMessage,
+        failureNotificationMessage,
+        `Setting account as verified`
+    )
+}
+
+export const updateUserInfo = (email, data, successNotificationMessage, failureNotificationMessage) => {
+    return asyncQueryActionHelper(
+        UserManager.updateUserInfo.bind(null, email, data),
+        successNotificationMessage,
+        failureNotificationMessage,
+        "Updating user details..."
     )
 }
 
