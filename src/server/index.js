@@ -1,4 +1,4 @@
-import Parse, { User, Object, Query } from "parse";
+import Parse, { User, Object as ParseObject, Query } from "parse";
 import { PARSE_APP_ID, PARSE_SERVER_URL } from "../staticData";
 import { isValidEmail, isValidUsn, getBranchCodeFromUSN } from "../helpers";
 
@@ -16,29 +16,47 @@ export const Gender_Options = {
     Female: "female"
 }
 
+export class UserInfo extends ParseObject {
+    constructor(data = {}) {
+        super("UserInfo");
+        Object.keys(data).map(key => {
+            this.set(key, data[key]);
+        });
+    }
+}
+ParseObject.registerSubclass("UserInfo", UserInfo);
+
+
+export async function getUserInfoById(userId) {
+    let query = new Query(UserInfo);
+    const user = await query.get("4pJVN3xedG")
+    console.log(user.get("name"));
+    return user ? user.attributes : undefined;
+}
+
 export class Student extends User {
-    constructor(name, email, password, usn, year, gender) {
-        console.log(email, usn);
+    constructor(email, password) {
         super("Student");
-        if (isValidEmail(email) && isValidUsn(usn)) {
+        if (isValidEmail(email)) {
             this.setEmail(email);
             this.setUsername(email);
             this.setPassword(password);
-            this.set("name", name);
-            this.set("usn", usn.toLowerCase());
-            this.set("year", Number(year));
-            this.set("branch", getBranchCodeFromUSN(usn));
-            this.set("type", User_Types.Student);
-            this.set("gender", gender);
-            this.set("verified", false);
-            this.set("graduated", false);
+            // this.set("name", name);
+            // this.set("usn", usn.toLowerCase());
+            // this.set("year", Number(year));
+            // this.set("branch", getBranchCodeFromUSN(usn));
+            // this.set("type", User_Types.Student);
+            // this.set("gender", gender);
+            // this.set("verified", false);
+            // this.set("graduated", false);
+
         } else {
             throw new Error("Invalid Email/USN.");
         }
     }
 }
 
-Object.registerSubclass("Student", Student);
+ParseObject.registerSubclass("Student", Student);
 
 export class Faculty extends User {
     constructor(name, email, password, branch, gender) {
@@ -58,13 +76,29 @@ export class Faculty extends User {
     }
 }
 
-Object.registerSubclass("Faculty", Faculty);
+ParseObject.registerSubclass("Faculty", Faculty);
 
 export async function newStudent({ email, password, name, usn, year, gender }) {
     try {
-        let newStudent = new Student(name, email, password, usn, year, gender);
+        let newStudent = new Student(email, password);
         let registeredStudent = await newStudent.signUp();
-        return registeredStudent
+        let studentInfo = new UserInfo({
+            name,
+            email,
+            usn,
+            year,
+            gender,
+            userID: registeredStudent.id,
+            graduated: false,
+            verified: false
+        });
+        let savedInfo = await studentInfo.save();
+        return {
+            attributes: {
+                ...registeredStudent.attributes,
+                ...savedInfo.attributes
+            }
+        };
     } catch (e) {
         console.log(e);
         return undefined;
@@ -114,6 +148,9 @@ export async function getAllUsers() {
 
 
 //REMOVE LATER
+// window.newStudent = newStudent;
+// window.UserInfo = UserInfo;
+window.getUserInfoById = getUserInfoById;
 // window.User = User;
 // window.findFacultyByEmail = findFacultyByEmail;
 // window.findStudentByEmail = findStudentByEmail;
