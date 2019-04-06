@@ -10,7 +10,7 @@ import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, F
 import { RoutesURL } from "../../staticData";
 import { withChangedTitle, withUser, withNotify, onlyNonUser } from "../../context";
 import { Link, Redirect } from "react-router-dom";
-import { isValidEmail, isValidUsn } from "../../helpers";
+import { isValidEmail, isValidUsn, getBranchCodeFromUSN } from "../../helpers";
 import { Gender_Options } from "../../server";
 
 class StudentSignUpPage extends Component {
@@ -18,7 +18,7 @@ class StudentSignUpPage extends Component {
     state = {
         name: "",
         usn: "",
-        year: "",
+        academicYear: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -37,7 +37,7 @@ class StudentSignUpPage extends Component {
 
     onSubmitHandler = async (e) => {
         e.preventDefault();
-        let { email, usn, name, year, gender, password, confirmPassword } = this.state;
+        let { email, usn, name, academicYear, gender, password, confirmPassword } = this.state;
         let errorCount = 0;
         if (!isValidEmail(email)) {
             this.props.notify("Invalid", "Email is invalid", "error");
@@ -53,7 +53,7 @@ class StudentSignUpPage extends Component {
             errorCount++;
         }
 
-        if (!year) {
+        if (!academicYear) {
             this.props.notify("Invalid", "Select your academic year!", "error");
             errorCount++;
         }
@@ -70,7 +70,7 @@ class StudentSignUpPage extends Component {
         }
 
         if (errorCount === 0) {
-            let user = await this.props.studentSignUp({ name, email, usn, year, password, gender });
+            let user = await this.props.studentSignUp({ name, email, usn, academicYear, password, gender, branch: getBranchCodeFromUSN(usn) });
             if (user) {
                 this.setState(() => {
                     return {
@@ -109,7 +109,7 @@ class StudentSignUpPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgYear} />
-                        <SelectInput required={true} onIonChange={this.onChangeHandler} value={this.state.year} name="year" placeholder="Current Year">
+                        <SelectInput required={true} onIonChange={this.onChangeHandler} value={this.state.academicYear} name="academicYear" placeholder="Current Year">
                             <IonSelectOption value="1">1st Year</IonSelectOption>
                             <IonSelectOption value="2">2nd Year</IonSelectOption>
                             <IonSelectOption value="3">3rd Year</IonSelectOption>
@@ -118,7 +118,7 @@ class StudentSignUpPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="male" />
-                        <SelectInput style={{textTransform:"capitalize"}} required={true} onIonChange={this.onChangeHandler} value={this.state.gender} name="gender" placeholder="Gender">
+                        <SelectInput style={{ textTransform: "capitalize" }} required={true} onIonChange={this.onChangeHandler} value={this.state.gender} name="gender" placeholder="Gender">
                             {
                                 Object.keys(Gender_Options).map(genderKey => {
                                     return <IonSelectOption key={genderKey} value={Gender_Options[genderKey]}>{Gender_Options[genderKey]}</IonSelectOption>

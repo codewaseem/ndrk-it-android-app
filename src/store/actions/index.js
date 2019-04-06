@@ -1,4 +1,4 @@
-import { newStudent, newFaculty, findUserByEmail, getUnverifiedAccounts } from "../../server";
+import { newStudent, newFaculty, findUserByEmail, getUnverifiedAccounts, UserManager, User_Types } from "../../server";
 import { User } from "parse";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
@@ -66,7 +66,7 @@ export function unsetUser() {
 
 
 export function studentSignUp(userData) {
-    return signUp(userData);
+    return signUp({ ...userData, type: User_Types.Student });
 }
 
 
@@ -81,23 +81,21 @@ export function setRedirectPath(path) {
     }
 }
 
-function signUp(userData, signUpFunction = newStudent) {
+function signUp(userData) {
     return async function (dispatch) {
         dispatch(startNetworkRequest("Creating new account..."));
         try {
-            let user = await signUpFunction(userData);
+            console.log(userData);
+            let user = await UserManager.signUp(userData);
             if (user) {
-                // dispatch(setUser(user));
                 dispatch(networkRequestSuccess());
                 dispatch(notify(successNotifyConfig("Account Created!", "You can now login once the account is verified by the admin")));
-                // dispatch(setRedirectPath(RoutesURL.LOGIN));
-                User.logOut();
                 return user;
             } else {
                 throw new Error("Failed to create a new account");
             }
         } catch (e) {
-            dispatch(notify(failureNotifyConfig("Fail", "Failed to create the account!")));
+            dispatch(notify(failureNotifyConfig("Fail", e.message)));
             dispatch(networkRequestFailure());
             return undefined;
         }

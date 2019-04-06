@@ -12,20 +12,140 @@ export const User_Types = {
     Admin: "admin"
 }
 export const Gender_Options = {
-    Male: "male",
-    Female: "female"
+    male: "male",
+    female: "female"
+}
+
+export const UserFields = [
+    "name",
+    "email",
+    "gender",
+    "branch",
+    "type"
+];
+
+
+export const StudentFields = [
+    ...UserFields,
+    "usn",
+    "academicYear"
+]
+
+export const Branches = {
+    cs: "Computer Science",
+    ec: "Electronics & Communications",
+    cv: "Civil",
+    me: "Mechanical"
 }
 
 export class UserInfo extends ParseObject {
-    constructor(data = {}) {
+    constructor() {
         super("UserInfo");
-        Object.keys(data).map(key => {
-            this.set(key, data[key]);
-        });
     }
 }
+
 ParseObject.registerSubclass("UserInfo", UserInfo);
 
+
+export const UserManager = (function () {
+
+    async function signUp({
+        email,
+        name,
+        branch,
+        gender,
+        type,
+        usn,
+        academicYear,
+        password
+    }) {
+        if (!email || !name || !gender || !type || !branch || !password) {
+            throw new Error("Basic User info not provided");
+        }
+
+        if (type === User_Types.Student) {
+            if (!usn || !academicYear) {
+                throw new Error("Student information is not provided");
+            }
+
+            if (!isValidUsn(usn)) {
+                throw new Error("Invalid USN");
+            }
+
+            if (academicYear <= 0 || academicYear > 4) {
+                throw new Error("Invalid year");
+            }
+        }
+
+        if (!isValidEmail(email)) {
+            throw new Error("Invalid Email");
+        }
+
+        if (!Branches[branch]) {
+            throw new Error("Invalid Branch");
+        }
+
+        if (!Gender_Options[gender]) {
+            throw new Error("Invalid Gender");
+        }
+
+        if (password + "".length < 8) {
+            throw new Error("Password length is too short!");
+        }
+
+        const newUser = new User();
+        newUser.setEmail(email);
+        newUser.setUsername(email);
+        newUser.setPassword(password);
+
+        let user = await newUser.signUp();
+        if (!user) throw new Error("Sign up failed!");
+
+        const newUserInfo = new UserInfo();
+        let info = {
+            email,
+            name,
+            gender,
+            type,
+            branch,
+            verified: false,
+            parent: user
+        };
+        if (type === User_Types.Student) {
+            info = {
+                ...info,
+                usn,
+                academicYear: Number(academicYear),
+                graduated: false,
+            }
+        }
+        let userInfo = await newUserInfo.save(info);
+        if (!userInfo) throw new Error("Failed to save user info");
+
+        User.logOut();
+
+        return userInfo;
+    }
+
+    function login() {
+
+    }
+
+    function logout() {
+
+    }
+
+    function getAllUsers() {
+
+    }
+
+    return {
+        signUp,
+        login,
+        logout,
+        getAllUsers
+    }
+})();
 
 export async function getUserInfoById(userId) {
     let query = new Query(UserInfo);
@@ -150,9 +270,22 @@ export async function getAllUsers() {
 //REMOVE LATER
 // window.newStudent = newStudent;
 // window.UserInfo = UserInfo;
-window.getUserInfoById = getUserInfoById;
+// window.getUserInfoById = getUserInfoById;
 // window.User = User;
 // window.findFacultyByEmail = findFacultyByEmail;
 // window.findStudentByEmail = findStudentByEmail;
 // window.findUserByEmail = findUserByEmail;
 // window.getAllUsers = getAllUsers;
+
+window.UserManager = UserManager;
+
+window.testUserData = {
+    name: "Waseem Ahmed",
+    email: "email@mail.com",
+    branch: "cs",
+    gender: "male",
+    password: "1234567",
+    type: "student",
+    usn: "4yg13cs022",
+    academicYear: 4
+}
