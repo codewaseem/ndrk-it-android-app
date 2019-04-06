@@ -214,51 +214,6 @@ export async function getUserInfoById(userId) {
     return user;
 }
 
-export class Student extends User {
-    constructor(email, password) {
-        super("Student");
-        if (isValidEmail(email)) {
-            this.setEmail(email);
-            this.setUsername(email);
-            this.setPassword(password);
-            // this.set("name", name);
-            // this.set("usn", usn.toLowerCase());
-            // this.set("year", Number(year));
-            // this.set("branch", getBranchCodeFromUSN(usn));
-            // this.set("type", User_Types.Student);
-            // this.set("gender", gender);
-            // this.set("verified", false);
-            // this.set("graduated", false);
-
-        } else {
-            throw new Error("Invalid Email/USN.");
-        }
-    }
-}
-
-ParseObject.registerSubclass("Student", Student);
-
-export class Faculty extends User {
-    constructor(name, email, password, branch, gender) {
-        super("Faculty");
-        if (isValidEmail(email)) {
-            this.setEmail(email);
-            this.setUsername(email);
-            this.setPassword(password);
-            this.set("name", name);
-            this.set("branch", branch);
-            this.set("gender", gender);
-            this.set("type", User_Types.Faculty);
-            this.set("verified", false);
-        } else {
-            throw new Error("Invalid Email.");
-        }
-    }
-}
-
-ParseObject.registerSubclass("Faculty", Faculty);
-
-
 export async function findUserByEmail(email, userType = User) {
     let query = new Query(userType);
     query.equalTo("email", email);
@@ -267,11 +222,11 @@ export async function findUserByEmail(email, userType = User) {
 }
 
 export async function findFacultyByEmail(email) {
-    return findUserByEmail(email, Student);
+    return findUserByEmail(email, User);
 }
 
 export async function findStudentByEmail(email) {
-    return findUserByEmail(email, Faculty);
+    return findUserByEmail(email, User);
 }
 
 export async function getUnverifiedAccounts() {
@@ -287,17 +242,6 @@ export async function getAllUsers() {
     const users = await query.find();
     return users;
 }
-
-
-//REMOVE LATER
-// window.newStudent = newStudent;
-// window.UserInfo = UserInfo;
-// window.getUserInfoById = getUserInfoById;
-// window.User = User;
-// window.findFacultyByEmail = findFacultyByEmail;
-// window.findStudentByEmail = findStudentByEmail;
-// window.findUserByEmail = findUserByEmail;
-// window.getAllUsers = getAllUsers;
 
 window.UserManager = UserManager;
 

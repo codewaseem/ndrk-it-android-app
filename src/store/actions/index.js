@@ -71,7 +71,7 @@ export function studentSignUp(userData) {
 
 
 export function facultySignUp(userData) {
-    // return signUp(userData, newFaculty);
+    return signUp({ ...userData, type: User_Types.Faculty });
 }
 
 export function setRedirectPath(path) {
