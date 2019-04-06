@@ -22,7 +22,7 @@ class UpdateProfilePage extends Component {
         email: "",
         year: 1,
         graduated: false,
-        verified: false
+        verified: true
     }
 
     onChangeHandler = (e) => {
@@ -64,7 +64,7 @@ class UpdateProfilePage extends Component {
         console.log("STATE", this.state);
         return (
             <CenteredPage>
-                <Form name="update-profile">
+                <Form name="update-profile" onSubmit={(e) => e.preventDefault()}>
                     <FormItem>
                         <FormImageLabel imgSrc={imgName} />
                         <IonInput onIonChange={this.onChangeHandler} required name="name" value={this.state.name} type="text" placeholder="Name"></IonInput>
@@ -89,10 +89,7 @@ class UpdateProfilePage extends Component {
                             }
                         </SelectInput>
                     </FormItem>
-                    <FormItem>
-                        <FormIconLabel iconName="mail" />
-                        <IonInput disabled onIonChange={this.onChangeHandler} required name="email" value={this.state.email} type="email" placeholder="Email"></IonInput>
-                    </FormItem>
+
                     {(this.state.type === User_Types.Student) &&
 
                         <React.Fragment>
@@ -102,7 +99,7 @@ class UpdateProfilePage extends Component {
                             </FormItem>
                             <FormItem>
                                 <FormImageLabel imgSrc={imgYear} />
-                                <SelectInput required={true} onIonChange={this.onChangeHandler} value={this.state.year} name="year" placeholder="Current Year">
+                                <SelectInput required={true} onIonChange={this.onChangeHandler} value={+this.state.year} name="year" placeholder="Current Year">
                                     <IonSelectOption value={1}>1st Year</IonSelectOption>
                                     <IonSelectOption value={2}>2nd Year</IonSelectOption>
                                     <IonSelectOption value={3}>3rd Year</IonSelectOption>
@@ -111,7 +108,7 @@ class UpdateProfilePage extends Component {
                             </FormItem>
                             <FormItem>
                                 <FormImageLabel imgSrc={imgYear} />
-                                <SelectInput required={true} onIonChange={this.onChangeHandler} value={this.state.graduated} name="graduated" placeholder="Graduated">
+                                <SelectInput required={true} onIonChange={this.onChangeHandler} value={!!this.state.graduated} name="graduated" placeholder="Graduated">
                                     <IonSelectOption value={true}>Yes</IonSelectOption>
                                     <IonSelectOption value={false}>No</IonSelectOption>
                                 </SelectInput>
@@ -119,8 +116,12 @@ class UpdateProfilePage extends Component {
                         </React.Fragment>
 
                     }
-
-                    <FormButton iconName="person-add" buttonText="Update" />
+                    <FormItem>
+                        <FormIconLabel iconName="mail" />
+                        <IonInput disabled onIonChange={this.onChangeHandler} required name="email" value={this.state.email} type="email" placeholder="Email"></IonInput>
+                    </FormItem>
+                    {!this.state.verified && <FormButton type="button" color="primary" buttonText="Verify Account" />}
+                    <FormButton type="button" buttonText="Update Details" />
                 </Form>
 
             </CenteredPage>
