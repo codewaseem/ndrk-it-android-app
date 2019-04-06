@@ -127,12 +127,71 @@ export const UserManager = (function () {
         return userInfo;
     }
 
-    function login() {
+    async function login({ email, password }) {
+        if (!email || !password) {
+            throw new Error("Email/Password not provided");
+        }
+        if (!isValidEmail(email)) {
+            throw new Error("Email is invalid");
+        }
 
+        if (password + "".length < 8) {
+            throw new Error("Password length is too short");
+        }
+
+        let user = await User.logIn(email, password);
+        if (!user) throw new Error("Login failed");
+        else {
+
+            let userInfo = await _getUserInfoByEmail(email);
+            if (!userInfo) throw new Error("Failed to fetch user details");
+            else {
+                return _handleUserLogin(user, userInfo);
+            }
+
+        }
     }
 
     function logout() {
+        User.logOut();
+    }
 
+    async function checkLogin() {
+        let user = User.current();
+        if (!user) throw new Error("No user session available");
+        else {
+            let userInfo = await _getUserInfoByEmail(user.get("username"));
+            if (!userInfo) throw new Error("Failed to fetch user details");
+            return _handleUserLogin(user, userInfo);
+        }
+
+    }
+
+    async function _getUserInfoByEmail(email) {
+        let query = new Query(UserInfo);
+        query.equalTo("email", email);
+        let userInfo = await query.first();
+        return userInfo;
+    }
+
+    async function _handleUserLogin(user, userInfo) {
+        if (userInfo.get("verified") && !userInfo.get("graduated")) {
+            let userData = {
+                ...user.attributes,
+                ...userInfo.attributes
+            };
+            return userData;
+        }
+
+        User.logOut();
+        let errorMessage = "";
+        if (!userInfo.get("verified")) {
+            errorMessage = "Your account is not verified by admin yet. Please contact admin";
+        }
+        else if (userInfo.get("graduated")) {
+            errorMessage = "Graduated students are not allowed to login";
+        }
+        throw new Error(errorMessage);
     }
 
     function getAllUsers() {
@@ -143,7 +202,8 @@ export const UserManager = (function () {
         signUp,
         login,
         logout,
-        getAllUsers
+        getAllUsers,
+        checkLogin
     }
 })();
 
@@ -151,7 +211,7 @@ export async function getUserInfoById(userId) {
     let query = new Query(UserInfo);
     const user = await query.get("4pJVN3xedG")
     console.log(user.get("name"));
-    return user ? user.attributes : undefined;
+    return user;
 }
 
 export class Student extends User {
@@ -198,50 +258,12 @@ export class Faculty extends User {
 
 ParseObject.registerSubclass("Faculty", Faculty);
 
-export async function newStudent({ email, password, name, usn, year, gender }) {
-    try {
-        let newStudent = new Student(email, password);
-        let registeredStudent = await newStudent.signUp();
-        let studentInfo = new UserInfo({
-            name,
-            email,
-            usn,
-            year,
-            gender,
-            userID: registeredStudent.id,
-            graduated: false,
-            verified: false
-        });
-        let savedInfo = await studentInfo.save();
-        return {
-            attributes: {
-                ...registeredStudent.attributes,
-                ...savedInfo.attributes
-            }
-        };
-    } catch (e) {
-        console.log(e);
-        return undefined;
-    }
-}
-
-export async function newFaculty({ email, password, name, branch, gender }) {
-    try {
-        let newFaculty = new Faculty(name, email, password, branch, gender);
-        let registeredFaculty = await newFaculty.signUp();
-        return registeredFaculty;
-    } catch (e) {
-        console.log(e);
-        return undefined;
-    }
-}
-
 
 export async function findUserByEmail(email, userType = User) {
     let query = new Query(userType);
     query.equalTo("email", email);
     const user = await query.first();
-    return user ? user.attributes : undefined;
+    return user;
 }
 
 export async function findFacultyByEmail(email) {
@@ -256,7 +278,7 @@ export async function getUnverifiedAccounts() {
     let query = new Query(User);
     query.equalTo("verified", false);
     const accounts = await query.find();
-    return (accounts && accounts.length) ? accounts.map(acc => acc.attributes) : undefined;
+    return (accounts && accounts.length) ? accounts : undefined;
 }
 
 export async function getAllUsers() {

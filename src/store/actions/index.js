@@ -1,4 +1,4 @@
-import { newStudent, newFaculty, findUserByEmail, getUnverifiedAccounts, UserManager, User_Types } from "../../server";
+import { findUserByEmail, getUnverifiedAccounts, UserManager, User_Types } from "../../server";
 import { User } from "parse";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
@@ -71,7 +71,7 @@ export function studentSignUp(userData) {
 
 
 export function facultySignUp(userData) {
-    return signUp(userData, newFaculty);
+    // return signUp(userData, newFaculty);
 }
 
 export function setRedirectPath(path) {
@@ -107,7 +107,7 @@ export function logoutUser() {
     return async function (dispatch) {
         dispatch(startNetworkRequest("Logging out...Bye!"));
         try {
-            User.logOut();
+            UserManager.logout();
             dispatch(unsetUser());
             dispatch(networkRequestSuccess());
         } catch (e) {
@@ -121,58 +121,32 @@ export function login({ email, password }) {
     return async function (dispatch) {
         dispatch(startNetworkRequest("Logging in...."));
         try {
-            let user = await User.logIn(email, password);
-            if (user) {
-                dispatch(networkRequestSuccess());
-                if (user.attributes.verified && !user.attributes.graduated) {
-                    dispatch(setUser(user));
-                    dispatch(notify(successNotifyConfig("Success", "You are now logged in!")));
-                    return user;
-                } else if (user.attributes.graduated) {
-                    dispatch(notify(failureNotifyConfig("Not Allowed", "Graduated students are not allowed to login")));
-                } else {
-                    dispatch(notify({ title: "Alert!", message: "Your account verification is pending!", status: "info" }));
-                }
-                User.logOut();
-                return false;
-            } else {
-                throw new Error("Login failed");
-            }
+            let user = await UserManager.login({ email, password });
+            dispatch(setUser(user));
+            dispatch(networkRequestSuccess());
+            dispatch(notify(successNotifyConfig("Logged In", `Welcome, ${user.name}`)));
+            return user;
         } catch (e) {
             dispatch(unsetUser());
-            dispatch(networkRequestFailure(e.message));
-            return undefined;
+            dispatch(networkRequestFailure());
+            dispatch(notify(failureNotifyConfig("Error", e.message)));
         }
     }
 }
 
 export function checkLogin() {
-    return function (dispatch) {
+    return async function (dispatch) {
         dispatch(startNetworkRequest("Please wait..."));
         try {
-            let user = User.current();
+            let user = await UserManager.checkLogin();
             if (user) {
-
-                if (user.attributes.verified && !user.attributes.graduated) {
-                    dispatch(setUser(user));
-                } else if (!user.attributes.graduated) {
-                    User.logOut();
-                    dispatch(notify({ title: "Alert!", message: "Your account verification is pending!", status: "info" }));
-                } else {
-                    User.logOut();
-                    dispatch(notify({ title: "Alert!", message: "You are not allowed to login!", status: "info" }));
-                }
+                dispatch(setUser(user));
                 dispatch(networkRequestSuccess());
-                dispatch(notify({ ...successNotifyConfig("", `Welcome ${user.attributes.name}!`), status: "default" }));
-            } else {
-                dispatch(networkRequestFailure());
-                // dispatch(notify(failureNotifyConfig("Failed", "")))
-                dispatch(unsetUser());
+                dispatch(notify(successNotifyConfig("Logged In", `Welcome, ${user.name}!`)));
             }
-
         } catch (e) {
             dispatch(unsetUser());
-            dispatch(networkRequestFailure(e.message));
+            dispatch(networkRequestFailure());
         }
     }
 }

@@ -80,7 +80,7 @@ class FacultySignUpPage extends Component {
 
     render() {
         if (this.props.user) {
-            return <Redirect to={"/" + this.props.user.attributes.type} />
+            return <Redirect to={"/" + this.props.user.type} />
         }
         if (this.state.userCreated) {
             return (

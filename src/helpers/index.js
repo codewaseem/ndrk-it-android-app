@@ -31,13 +31,13 @@ export const getBranchCodeFromUSN = (usn) => {
 }
 
 export const greetUser = (user) => {
-    let { name, type } = user.attributes;
+    let { name, type } = user;
     return `Hello, ${name} ${type === User_Types.Student ? "" : "Sir"}`;
 }
 
 export const getUserHomeUrl = (user) => {
     if (user)
-        switch (user.attributes.type) {
+        switch (user.type) {
             case User_Types.Student: return RoutesURL.STUDENT_HOME;
             case User_Types.Faculty: return RoutesURL.FACULTY_HOME;
             case User_Types.Admin: return RoutesURL.ADMIN_HOME;

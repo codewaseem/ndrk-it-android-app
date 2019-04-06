@@ -19,10 +19,7 @@ class LoginPage extends Component {
         e.preventDefault();
         let { email, password } = this.state;
         if (email && password) {
-            let user = await this.props.login(email, password);
-            if (!user) {
-                this.props.notify("Error", "Couldn't login! Is your account verified?", "error");
-            }
+            await this.props.login(email, password);
         } else {
             this.props.notify("Invalid", "Please enter all details", "error");
         }

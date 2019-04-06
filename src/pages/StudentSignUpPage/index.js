@@ -86,7 +86,7 @@ class StudentSignUpPage extends Component {
     render() {
         if (this.props.user) {
             return (
-                <Redirect to={`/${this.props.user.attributes.type}`} />
+                <Redirect to={`/${this.props.user.type}`} />
             );
         }
 
