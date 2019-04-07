@@ -7,12 +7,12 @@ import { FormImage } from "../../components/FormItems";
 import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getFaculty } from "../../store/actions";
-import { withChangedTitle } from "../../context";
+import { withChangedTitle, onlyAdmin } from "../../context";
 
 class ViewFacultyPage extends Component {
 
     state = {
-        fetched:false,
+        fetched: false,
         accounts: []
     }
 
@@ -26,7 +26,7 @@ class ViewFacultyPage extends Component {
             this.setState(() => {
                 return {
                     accounts,
-                    fetched:true
+                    fetched: true
                 };
             });
         }
@@ -38,12 +38,12 @@ class ViewFacultyPage extends Component {
         if (!this.state.accounts.length) {
             return (
                 <CenteredPage>
-                    
+
                     <FormImage src={imgNoVerify} />
                     <p>
                         <IonText color="dark">
                             {this.state.fetched && this.state.accounts.length === 0 ? "No faculty members yet." : "Getting faculty members..."}
-                    </IonText>
+                        </IonText>
                     </p>
                 </CenteredPage>
             )
@@ -54,7 +54,7 @@ class ViewFacultyPage extends Component {
                         name: "All faculty members",
                         component: (props) => (
                             <React.Fragment>
-                                
+
                                 <UserInfoCardList users={this.state.accounts} />
                             </React.Fragment>
 
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withChangedTitle("Faculty Members")(ViewFacultyPage));
+export default connect(null, mapDispatchToProps)(onlyAdmin(withChangedTitle("Faculty Members")(ViewFacultyPage)));

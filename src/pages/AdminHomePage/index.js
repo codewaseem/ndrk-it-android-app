@@ -12,7 +12,7 @@ import VerifyAccountsPage from "../VerifyAccountsPage";
 import UpdateProfilePage from "../UpdateProfilePage";
 import ViewStudentsPage from "../ViewStudentsPage";
 import ViewFacultyPage from "../ViewFacultyPage";
-import { withChangedTitle } from "../../context";
+import { withChangedTitle, onlyAdmin } from "../../context";
 
 
 
@@ -21,10 +21,6 @@ const AdminMenu = (props) => {
     const searchForm = QuickSearchForm;
     return (<SectionedPage
         sectionsMap={[
-            {
-                name: "Welcome Mr. Waseem Ahmed",
-                component: null
-            },
             {
                 name: "Admin Menu",
                 component: adminMenu
@@ -61,4 +57,4 @@ class AdminHomePage extends Component {
     }
 }
 
-export default withChangedTitle("Admin Home")(AdminHomePage);
+export default onlyAdmin(withChangedTitle("Admin Home")(AdminHomePage));

@@ -7,7 +7,7 @@ import { FormImage } from "../../components/FormItems";
 import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getStudents } from "../../store/actions";
-import { withChangedTitle } from "../../context";
+import { withChangedTitle, onlyAdmin } from "../../context";
 
 class ViewStudentsPage extends Component {
 
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withChangedTitle("All Students")(ViewStudentsPage));
+export default connect(null, mapDispatchToProps)(onlyAdmin(withChangedTitle("All Students")(ViewStudentsPage)));

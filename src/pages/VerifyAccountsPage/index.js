@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import { IonText} from "@ionic/react";
+import { IonText } from "@ionic/react";
 import SectionedPage from "../SectionedPage";
 import UserInfoCardList from "../../components/UserInfoCardList";
 import { FormImage } from "../../components/FormItems";
 import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getUnverifiedAccountsAction } from "../../store/actions";
-import { withChangedTitle } from "../../context";
+import { withChangedTitle, onlyAdmin } from "../../context";
 
 class VerifyAccountsPage extends Component {
 
     state = {
-        fetched:false,
+        fetched: false,
         accounts: []
     }
 
@@ -27,7 +27,7 @@ class VerifyAccountsPage extends Component {
             this.setState(() => {
                 return {
                     accounts,
-                    fetched:true
+                    fetched: true
                 };
             });
         }
@@ -39,12 +39,12 @@ class VerifyAccountsPage extends Component {
         if (!this.state.accounts.length) {
             return (
                 <CenteredPage>
-                     
+
                     <FormImage src={imgNoVerify} />
                     <p>
                         <IonText color="dark">
-                        {this.state.fetched && this.state.accounts.length === 0 ? "No accounts to verify." : "Getting accounts..."}
-                    </IonText>
+                            {this.state.fetched && this.state.accounts.length === 0 ? "No accounts to verify." : "Getting accounts..."}
+                        </IonText>
                     </p>
                 </CenteredPage>
             )
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withChangedTitle("Pending Verifications")(VerifyAccountsPage));
+export default connect(null, mapDispatchToProps)(onlyAdmin(withChangedTitle("Pending Verifications")(VerifyAccountsPage)));

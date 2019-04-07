@@ -11,6 +11,7 @@ export const User_Types = {
     Faculty: "faculty",
     Admin: "admin"
 }
+
 export const Gender_Options = {
     male: "male",
     female: "female"
@@ -35,7 +36,8 @@ export const Branches = {
     cs: "Computer Science",
     ec: "Electronics & Communications",
     cv: "Civil",
-    me: "Mechanical"
+    me: "Mechanical",
+    no: "No"
 }
 
 export class UserInfo extends ParseObject {
@@ -384,12 +386,10 @@ window.EventManager = EventManager;
 window.CircularManager = CircularManager;
 
 window.testUserData = {
-    name: "Waseem Ahmed",
-    email: "email@mail.com",
-    branch: "cs",
+    name: "Admin",
+    email: "admin@ndrk.com",
     gender: "male",
-    password: "1234567",
-    type: "student",
-    usn: "4yg13cs022",
-    academicYear: 4
+    password: "12345678",
+    type: "admin",
+    branch:"no"
 }

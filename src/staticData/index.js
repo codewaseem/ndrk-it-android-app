@@ -47,7 +47,7 @@ export const AdminHomeRoutes = {
     UPDATE_PROFILE: "/update-profile"
 }
 
-export const PARSE_SERVER_URL = "http://localhost:1337/parse"
+export const PARSE_SERVER_URL = "https://ndrk-backend.herokuapp.com/parse"
 export const PARSE_APP_ID = "APPLICATION_ID";
 
 export const STUDENT_SIGNUP_URL = PARSE_SERVER_URL + "/student-signup"
@@ -118,6 +118,14 @@ export const homePageOptions = [
         name: "Contact",
         imgSrc: imgContact,
         url: "/contact"
+    }
+];
+
+export const IfAdminOptions = [
+    {
+        name: "Admin Home",
+        imgSrc: imgVerify,
+        url: "/admin"
     }
 ];
 

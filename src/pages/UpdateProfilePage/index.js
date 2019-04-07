@@ -12,7 +12,7 @@ import imgUpdate from "../../images/update.svg";
 import { Gender_Options, User_Types } from "../../server";
 import { connect } from "react-redux";
 import { findUserByEmailAction, setVerified, updateUserInfo } from "../../store/actions";
-import { withChangedTitle } from "../../context";
+import { withChangedTitle, onlyAdmin } from "../../context";
 
 
 class UpdateProfilePage extends Component {
@@ -191,4 +191,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withChangedTitle("Verify/Update")(UpdateProfilePage));
+export default connect(null, mapDispatchToProps)(onlyAdmin(withChangedTitle("Verify/Update")(UpdateProfilePage)));

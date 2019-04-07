@@ -6,6 +6,7 @@ import { RoutesURL } from "../staticData";
 import { Redirect } from "react-router";
 // import { User_Types } from "../server";
 import { getUserHomeUrl } from "../helpers";
+import { User_Types } from "../server";
 
 export const TitleContext = createContext({
     title: "N.D.R.K",
@@ -113,4 +114,42 @@ export function onlyNonUser(OriginalComponent) {
 
     return connect(mapStateToProps)(Comp);
 
+}
+
+export function onlyAdmin(OriginalComponent) {
+    const Comp = (props) => {
+        if (props.user && props.user.type === User_Types.Admin) {
+            return <OriginalComponent {...props} />
+        } else {
+            return <Redirect to={RoutesURL.HOME} />
+        }
+    }
+
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.auth.user
+        }
+    }
+
+    return connect(mapStateToProps)(Comp);
+}
+
+export function onlyNonStudent(OriginalComponent) {
+    const Comp = (props) => {
+        if (props.user && props.user.type !== User_Types.Student) {
+            return <OriginalComponent {...props} />
+        } else {
+            return <Redirect to={RoutesURL.HOME} />
+        }
+    }
+
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.auth.user
+        }
+    }
+
+    return connect(mapStateToProps)(Comp);
 }
