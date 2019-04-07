@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import { IonText} from "@ionic/react";
+import { IonText } from "@ionic/react";
 import SectionedPage from "../SectionedPage";
 import UserInfoCardList from "../../components/UserInfoCardList";
 import { FormImage } from "../../components/FormItems";
 import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
-import { getUnverifiedAccountsAction } from "../../store/actions";
+import { getFaculty } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 
-class VerifyAccountsPage extends Component {
+class ViewFacultyPage extends Component {
 
     state = {
         fetched:false,
@@ -21,8 +21,7 @@ class VerifyAccountsPage extends Component {
     }
 
     getAccounts = async () => {
-        let accounts = await this.props.getUnverifiedAccounts();
-        console.log("A", accounts);
+        let accounts = await this.props.getFaculty();
         if (accounts) {
             this.setState(() => {
                 return {
@@ -39,11 +38,11 @@ class VerifyAccountsPage extends Component {
         if (!this.state.accounts.length) {
             return (
                 <CenteredPage>
-                     
+                    
                     <FormImage src={imgNoVerify} />
                     <p>
                         <IonText color="dark">
-                        {this.state.fetched && this.state.accounts.length === 0 ? "No accounts to verify." : "Getting accounts..."}
+                            {this.state.fetched && this.state.accounts.length === 0 ? "No faculty members yet." : "Getting faculty members..."}
                     </IonText>
                     </p>
                 </CenteredPage>
@@ -52,9 +51,10 @@ class VerifyAccountsPage extends Component {
             return (
                 <SectionedPage sectionsMap={[
                     {
-                        name: "Accounts to verify",
+                        name: "All faculty members",
                         component: (props) => (
                             <React.Fragment>
+                                
                                 <UserInfoCardList users={this.state.accounts} />
                             </React.Fragment>
 
@@ -69,10 +69,10 @@ class VerifyAccountsPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUnverifiedAccounts: () => {
-            return dispatch(getUnverifiedAccountsAction());
+        getFaculty: () => {
+            return dispatch(getFaculty());
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(withChangedTitle("Pending Verifications")(VerifyAccountsPage));
+export default connect(null, mapDispatchToProps)(withChangedTitle("Faculty Members")(ViewFacultyPage));

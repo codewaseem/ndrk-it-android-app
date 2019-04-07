@@ -211,4 +211,14 @@ export const updateUserInfo = (email, data, successNotificationMessage, failureN
     )
 }
 
-window.getUA = getUnverifiedAccountsAction;
+export const getStudents = () => {
+    return asyncQueryActionHelper(
+        UserManager.getStudents
+    );
+}
+
+export const getFaculty = () => {
+    return asyncQueryActionHelper(
+        UserManager.getFaculty
+    );
+}

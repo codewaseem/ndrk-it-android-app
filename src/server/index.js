@@ -206,10 +206,7 @@ export const UserManager = (function () {
         query.equalTo("verified", false);
         const accounts = await query.find();
         if (!accounts) throw new Error("Something went wrong!");
-
-        if (accounts.length === 0) {
-            return null;
-        }
+        
         else {
             return accounts && accounts.map(account => account.attributes);
         }
@@ -272,6 +269,24 @@ export const UserManager = (function () {
 
     }
 
+    async function getStudents() {
+       return getUsersDataByType(User_Types.Student);
+    }
+
+    async function getFaculty() {
+       return getUsersDataByType(User_Types.Faculty);
+    }
+
+    async function getUsersDataByType(type = User_Types.Student) {
+        let query = new Query(UserInfo);
+        query.equalTo("type", type);
+
+        let accounts = await query.find();
+        if (!accounts) throw new Error("Failed to get accounts");
+
+        return accounts.map(account => account.attributes);
+    }
+
     return {
         signUp,
         login,
@@ -280,7 +295,9 @@ export const UserManager = (function () {
         getUserByEmail: getUserDataByEmail,
         getUnverifiedAccounts,
         setVerified,
-        updateUserInfo
+        updateUserInfo,
+        getStudents,
+        getFaculty
     }
 })();
 

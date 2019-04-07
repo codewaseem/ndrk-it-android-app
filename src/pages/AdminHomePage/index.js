@@ -10,6 +10,9 @@ import AddEventPage from "../AddEventPage";
 import AddCircularPage from "../AddCircularPage";
 import VerifyAccountsPage from "../VerifyAccountsPage";
 import UpdateProfilePage from "../UpdateProfilePage";
+import ViewStudentsPage from "../ViewStudentsPage";
+import ViewFacultyPage from "../ViewFacultyPage";
+import { withChangedTitle } from "../../context";
 
 
 
@@ -46,11 +49,11 @@ class AdminHomePage extends Component {
                 <Switch>
                     <Route exact path={match.path} component={AdminMenu} />
                     <Route path={match.path + AdminHomeRoutes.VERIFY_ACCOUNTS} component={VerifyAccountsPage} />
-                    <Route path={match.path + AdminHomeRoutes.VIEW_STUDENTS} component={() => { }} />
-                    <Route path={match.path + AdminHomeRoutes.VIEW_FACULTY} component={() => { }} />
+                    <Route path={match.path + AdminHomeRoutes.VIEW_STUDENTS} component={ViewStudentsPage} />
+                    <Route path={match.path + AdminHomeRoutes.VIEW_FACULTY} component={ViewFacultyPage} />
                     <Route path={match.path + AdminHomeRoutes.ADD_EVENT} component={AddEventPage} />
                     <Route path={match.path + AdminHomeRoutes.ADD_CIRCULAR} component={AddCircularPage} />
-                    <Route path={match.path + AdminHomeRoutes.UPDATE_PROFILE+"/:email"} component={UpdateProfilePage} /> 
+                    <Route path={match.path + AdminHomeRoutes.UPDATE_PROFILE + "/:email"} component={UpdateProfilePage} />
                     <Route component={FourNotFourPage} />
                 </Switch>
             </React.Fragment>
@@ -58,4 +61,4 @@ class AdminHomePage extends Component {
     }
 }
 
-export default AdminHomePage;
+export default withChangedTitle("Admin Home")(AdminHomePage);
