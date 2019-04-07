@@ -55,6 +55,20 @@ export class CollegeEvent extends ParseObject {
     }
 }
 
+ParseObject.registerSubclass("CollegeEvent", CollegeEvent);
+
+
+export class Circular extends ParseObject {
+    constructor(name, endDatetime, description) {
+        super("Circular");
+        this.set("name", name);
+        this.set("endDatetime", endDatetime);
+        this.set("description", description);
+    }
+}
+
+ParseObject.registerSubclass("Circular", Circular);
+
 export const UserManager = (function () {
 
     async function signUp({
@@ -278,11 +292,11 @@ export const UserManager = (function () {
     }
 
     async function getStudents() {
-       return getUsersDataByType(User_Types.Student);
+        return getUsersDataByType(User_Types.Student);
     }
 
     async function getFaculty() {
-       return getUsersDataByType(User_Types.Faculty);
+        return getUsersDataByType(User_Types.Faculty);
     }
 
     async function getUsersDataByType(type = User_Types.Student) {
@@ -309,13 +323,16 @@ export const UserManager = (function () {
     }
 })();
 
-export const EventManager = (function() {
-    
-    async function add({name, datetime, description}) {
+export const EventManager = (function () {
+
+    async function add({ name, datetime, description }) {
+        if(!name || !datetime || !description) {
+            throw new Error("Please provide all the required details");
+        }
         let event = new CollegeEvent(name, datetime, description);
         let savedEvent = await event.save();
 
-        if(!savedEvent) throw new Error("Failed to save the event");
+        if (!savedEvent) throw new Error("Failed to save the event");
 
         return savedEvent.attributes;
     }
@@ -323,7 +340,7 @@ export const EventManager = (function() {
     async function getUpcomingEvents() {
         let query = new Query(CollegeEvent);
         let events = await query.find();
-        if(!events) throw new Error("Failed to get events");
+        if (!events) throw new Error("Failed to get events");
 
         return events.map(event => event.attributes).filter((ev => ev.datetime > Date.now()));
     }
@@ -334,8 +351,37 @@ export const EventManager = (function() {
     };
 })();
 
+
+export const CircularManager = (function () {
+
+    async function add({ name, endDatetime, description }) {
+        if(!name || !endDatetime || !description) {
+            throw new Error("Please provide all the required details");
+        }
+        let circular = new Circular(name, endDatetime, description);
+        let savedCircular = await circular.save();
+
+        if (!savedCircular) throw new Error("Failed to save the event");
+
+        return savedCircular.attributes;
+    }
+
+    async function getCirculars() {
+        let query = new Query(Circular);
+        let circulars = await query.find();
+        if (!circulars) throw new Error("Failed to get circulars");
+        return circulars.map(circular => circular.attributes).filter((c => c.endDatetime > Date.now()));
+    }
+
+    return {
+        add,
+        getCirculars
+    };
+})();
+
 window.UserManager = UserManager;
 window.EventManager = EventManager;
+window.CircularManager = CircularManager;
 
 window.testUserData = {
     name: "Waseem Ahmed",

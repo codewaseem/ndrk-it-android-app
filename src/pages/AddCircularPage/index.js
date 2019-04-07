@@ -4,25 +4,55 @@ import imgNotification from "../../images/notification.svg";
 import { FormItem, FormIconLabel, FormButton, FormImage, Form, DateTimeInput } from "../../components/FormItems";
 import CenteredPage from "../CenteredPage";
 import { withChangedTitle } from "../../context";
+import { connect } from "react-redux";
+import { addCircular } from "../../store/actions";
 
 class AddCircularPage extends Component {
+
+    state = {
+        circularForm: {
+            name: "",
+            endDatetime:"",
+            description: ""
+        }
+    }
+
+    onSubmit = async (e) => {
+        e.preventDefault();
+        let endDatetime = new Date(this.state.circularForm.endDatetime).getTime();
+
+        await this.props.addCircular({ name: this.state.circularForm.name, endDatetime, description: this.state.circularForm.description });
+    }
+
+    onChangeHandler = (e) => {
+        let { name, value } = e.target;
+        this.setState((prevState) => {
+            return {
+                circularForm: {
+                    ...prevState.circularForm,
+                    [name]: value
+                }
+            }
+        });
+    }
+
     render() {
         return (
             <CenteredPage>
                 <FormImage src={imgNotification} />
-                <Form name="add-circular">
+                <Form onSubmit={this.onSubmit} name="add-circular">
                     <FormItem>
                         <FormIconLabel iconName="text" />
-                        <IonInput placeholder="Circular Name" type="text"></IonInput>
+                        <IonInput name="name" onIonChange={this.onChangeHandler} required value={this.state.circularForm.name} placeholder="Circular Name" type="text"></IonInput>
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="calendar" />
 
-                        <DateTimeInput placeholder="Valid Till Date" display-format="DD/MMM/YYYY" />
+                        <DateTimeInput min={(new Date()).toISOString().split("T")[0]} name="endDatetime" onIonChange={this.onChangeHandler} required value={this.state.circularForm.endDatetime} placeholder="Valid Till Date" display-format="DD/MMM/YYYY" />
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="list-box" />
-                        <IonTextarea placeholder="Describe the circular here..." rows={6}></IonTextarea>
+                        <IonTextarea name="description" onIonChange={this.onChangeHandler} required value={this.state.circularForm.description} placeholder="Describe the circular here..." rows={6}></IonTextarea>
                     </FormItem>
                     <FormButton buttonText="Add Circular"></FormButton>
                 </Form>
@@ -31,5 +61,12 @@ class AddCircularPage extends Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addCircular: (data) => {
+            return dispatch(addCircular(data));
+        }
+    }
+}
 
-export default withChangedTitle("Add Circular")(AddCircularPage);
+export default connect(null, mapDispatchToProps)(withChangedTitle("Add Circular")(AddCircularPage));

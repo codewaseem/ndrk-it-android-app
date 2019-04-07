@@ -12,8 +12,8 @@ class AddEventPage extends Component {
     state = {
         eventForm: {
             name: "",
-            date: 0,
-            time: 0,
+            date: "",
+            time: "",
             description: ""
         }
     }
@@ -49,7 +49,7 @@ class AddEventPage extends Component {
                     <FormItem>
                         <FormIconLabel iconName="calendar" />
 
-                        <DateTimeInput onIonChange={this.onChangeHandler} required name="date" placeholder="Event Date" display-format="DD/MMM/YYYY" />
+                        <DateTimeInput min={(new Date()).toISOString().split("T")[0]} onIonChange={this.onChangeHandler} required name="date" placeholder="Event Date" display-format="DD/MMM/YYYY" />
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="clock" />

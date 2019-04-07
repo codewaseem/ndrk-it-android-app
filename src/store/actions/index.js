@@ -1,4 +1,4 @@
-import { UserManager, User_Types, EventManager } from "../../server";
+import { UserManager, User_Types, EventManager, CircularManager } from "../../server";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
 
@@ -238,7 +238,6 @@ export const addEvent = (data) => {
         "Event Added",
         "Failed to add the event",
         "Adding event",
-        "Failed to add the event to database."   
     );
 }
 
@@ -248,6 +247,23 @@ export const getUpcomingEvents = () => {
         null,
         null,
         "Getting upcoming events...",
-        "Failed to get events."
     )
 }  
+
+export const addCircular = (data) => {
+    return asyncQueryActionHelper(
+        CircularManager.add.bind(null, data),
+        "Circular Added!",
+        "Failed to add the circular",
+        "Adding circular",
+    );
+}
+
+export const getCirculars = () => {
+    return asyncQueryActionHelper(
+        CircularManager.getCirculars,
+        null,
+        null,
+        "Getting circulars...",
+    );
+}
