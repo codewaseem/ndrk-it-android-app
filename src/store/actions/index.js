@@ -1,4 +1,4 @@
-import { UserManager, User_Types } from "../../server";
+import { UserManager, User_Types, EventManager } from "../../server";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
 
@@ -213,12 +213,41 @@ export const updateUserInfo = (email, data, successNotificationMessage, failureN
 
 export const getStudents = () => {
     return asyncQueryActionHelper(
-        UserManager.getStudents
+        UserManager.getStudents,
+        null,
+        null,
+        "Getting students....",
+        "Failed to get students"
     );
 }
 
 export const getFaculty = () => {
     return asyncQueryActionHelper(
-        UserManager.getFaculty
+        UserManager.getFaculty,
+        null,
+        null,
+        "Getting faculty members....",
+        "Failed to get faculty members"
     );
 }
+
+
+export const addEvent = (data) => {
+    return asyncQueryActionHelper(
+        EventManager.add.bind(null, data),
+        "Event Added",
+        "Failed to add the event",
+        "Adding event",
+        "Failed to add the event to database."   
+    );
+}
+
+export const getUpcomingEvents = () => {
+    return asyncQueryActionHelper(
+        EventManager.getUpcomingEvents,
+        null,
+        null,
+        "Getting upcoming events...",
+        "Failed to get events."
+    )
+}  

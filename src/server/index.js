@@ -46,6 +46,14 @@ export class UserInfo extends ParseObject {
 
 ParseObject.registerSubclass("UserInfo", UserInfo);
 
+export class CollegeEvent extends ParseObject {
+    constructor(name, datetime, description) {
+        super("CollegeEvent");
+        this.set("name", name);
+        this.set("datetime", datetime);
+        this.set("description", description);
+    }
+}
 
 export const UserManager = (function () {
 
@@ -206,7 +214,7 @@ export const UserManager = (function () {
         query.equalTo("verified", false);
         const accounts = await query.find();
         if (!accounts) throw new Error("Something went wrong!");
-        
+
         else {
             return accounts && accounts.map(account => account.attributes);
         }
@@ -301,7 +309,33 @@ export const UserManager = (function () {
     }
 })();
 
+export const EventManager = (function() {
+    
+    async function add({name, datetime, description}) {
+        let event = new CollegeEvent(name, datetime, description);
+        let savedEvent = await event.save();
+
+        if(!savedEvent) throw new Error("Failed to save the event");
+
+        return savedEvent.attributes;
+    }
+
+    async function getUpcomingEvents() {
+        let query = new Query(CollegeEvent);
+        let events = await query.find();
+        if(!events) throw new Error("Failed to get events");
+
+        return events.map(event => event.attributes).filter((ev => ev.datetime > Date.now()));
+    }
+
+    return {
+        add,
+        getUpcomingEvents
+    };
+})();
+
 window.UserManager = UserManager;
+window.EventManager = EventManager;
 
 window.testUserData = {
     name: "Waseem Ahmed",
