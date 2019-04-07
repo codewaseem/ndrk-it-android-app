@@ -23,7 +23,6 @@ class QuickSearchForm extends Component {
         e.preventDefault();
         if (!this.state.searchEmail) return;
         let userInfo = await this.props.findByEmail(this.state.searchEmail);
-        console.log(userInfo);
         this.setState(() => {
             return {
                 userInfo,

@@ -89,7 +89,7 @@ export const UserManager = (function () {
             throw new Error("Invalid Gender");
         }
 
-        if (password + "".length < 8) {
+        if ((password + "".length) < 8) {
             throw new Error("Password length is too short!");
         }
 
@@ -135,7 +135,7 @@ export const UserManager = (function () {
             throw new Error("Email is invalid");
         }
 
-        if (password + "".length < 8) {
+        if ((password + "".length) < 8) {
             throw new Error("Password length is too short");
         }
 
@@ -171,11 +171,12 @@ export const UserManager = (function () {
         let query = new Query(UserInfo);
         query.equalTo("email", email);
         let userInfo = await query.first();
-        if(!userInfo) throw new Error("No such user found!");
-        return userInfo.attributes;
+        if (!userInfo) throw new Error("No such user found!");
+        return userInfo;
     }
 
     async function _handleUserLogin(user, userInfo) {
+
         if (userInfo.get("verified") && !userInfo.get("graduated")) {
             let userData = {
                 ...user.attributes,
@@ -195,8 +196,9 @@ export const UserManager = (function () {
         throw new Error(errorMessage);
     }
 
-    function getUserByEmail(email) {
-        return _getUserInfoByEmail(email);
+    async function getUserDataByEmail(email) {
+        let userInfo = await _getUserInfoByEmail(email);
+        return userInfo.attributes;
     }
 
     async function getUnverifiedAccounts() {
@@ -214,9 +216,8 @@ export const UserManager = (function () {
     }
 
     async function setVerified(email) {
-        let query = new Query(UserInfo);
-        query.equalTo("email", email);
-        let userInfo = await query.first();
+
+        let userInfo = await _getUserInfoByEmail(email);
         userInfo.set("verified", true);
         let saved = await userInfo.save();
         if (!saved) throw new Error("Couldn't update the user info.");
@@ -230,11 +231,11 @@ export const UserManager = (function () {
             throw new Error("Basic User info not provided");
         }
 
+
         if (type === User_Types.Student) {
             if (!usn || !academicYear) {
                 throw new Error("Student information is not provided");
             }
-
             if (!isValidUsn(usn)) {
                 throw new Error("Invalid USN");
             }
@@ -252,20 +253,20 @@ export const UserManager = (function () {
             throw new Error("Invalid Gender");
         }
 
-        let query = new Query(UserInfo);
-        query.equalTo("email", email);
-        let userInfo = await query.first();
+
+        let userInfo = await _getUserInfoByEmail(email);
         if (!userInfo) throw new Error("Failed to fetch user!");
         let toUpdate = {
             name, gender, branch
         };
 
-        if(type === User_Types.Student) {
-             toUpdate = {...toUpdate, usn, academicYear, graduated}
+        if (type === User_Types.Student) {
+            graduated = Boolean(graduated);
+            toUpdate = { ...toUpdate, usn, academicYear, graduated }
         }
         let updatedData = await userInfo.save(toUpdate);
 
-        if(!updatedData) throw new Error("Failed to update user data");
+        if (!updatedData) throw new Error("Failed to update user data");
 
         return updatedData.attributes;
 
@@ -276,7 +277,7 @@ export const UserManager = (function () {
         login,
         logout,
         checkLogin,
-        getUserByEmail,
+        getUserByEmail: getUserDataByEmail,
         getUnverifiedAccounts,
         setVerified,
         updateUserInfo

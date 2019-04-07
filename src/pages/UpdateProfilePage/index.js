@@ -44,7 +44,6 @@ class UpdateProfilePage extends Component {
             const user = await this.props.findByEmail(this.props.match.params.email);
             if (!user) return;
 
-            console.log(user);
             const { type, name, usn, branch, gender, email, academicYear, graduated, verified } = user;
             this.setState(() => {
                 return {
@@ -65,7 +64,7 @@ class UpdateProfilePage extends Component {
 
     onUpdate = async () => {
         let updatedData = await this.props.updateUserInfo(this.state.email, this.state);
-        console.log(updatedData);
+
         this.setState(() => {
             return {
                 ...updatedData
@@ -120,7 +119,7 @@ class UpdateProfilePage extends Component {
                             <React.Fragment>
                                 <FormItem>
                                     <FormImageLabel imgSrc={imgUsn} />
-                                    <IonInput required={true} onIonChange={this.onChangeHandler} name="usn" value={this.state.usn} type="text" style={{ textTransform: "uppercase" }} pattern="[1-4](YG|yg)[0-9]{2}(CS|cs|EC|ec|CV|cv|ME|me)[0-9]{3}" placeholder="USN"></IonInput>
+                                    <IonInput required={true} onIonChange={this.onChangeHandler} maxlength="10" name="usn" value={this.state.usn} type="text" style={{ textTransform: "uppercase" }} pattern="[1-4](YG|yg)[0-9]{2}(CS|cs|EC|ec|CV|cv|ME|me)[0-9]{3}" placeholder="USN"></IonInput>
                                 </FormItem>
                                 <FormItem>
                                     <FormImageLabel imgSrc={imgYear} />
@@ -134,9 +133,9 @@ class UpdateProfilePage extends Component {
                                 <FormItem>
                                     <FormIconLabel  iconName="rocket"/>
                                     Graduated?
-                                    <SelectInput interfaceOptions={{header:"Is Graduated?"}} required={true} onIonChange={this.onChangeHandler} value={!!this.state.graduated} name="graduated" placeholder="Graduated">
-                                        <IonSelectOption value={true}>Yes</IonSelectOption>
-                                        <IonSelectOption value={false}>No</IonSelectOption>
+                                    <SelectInput interfaceOptions={{header:"Is Graduated?"}} required={true} onIonChange={this.onChangeHandler} value={+this.state.graduated} name="graduated" placeholder="Graduated">
+                                        <IonSelectOption value={1}>Yes</IonSelectOption>
+                                        <IonSelectOption value={0}>No</IonSelectOption>
                                     </SelectInput>
                                 </FormItem>
                             </React.Fragment>

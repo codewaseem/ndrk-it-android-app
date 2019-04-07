@@ -50,7 +50,7 @@ class LoginPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="key" />
-                        <IonInput onIonChange={this.onChangeHandler} required name="password" value={this.state.password} placeholder="Password" type="password"></IonInput>
+                        <IonInput minlength={8} onIonChange={this.onChangeHandler} required name="password" value={this.state.password} placeholder="Password" type="password"></IonInput>
                     </FormItem>
                     <FormButton iconName="unlock" buttonText="Login" />
                 </Form>

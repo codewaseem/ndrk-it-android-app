@@ -121,12 +121,12 @@ class FacultySignUpPage extends Component {
 
                     <FormItem>
                         <FormIconLabel iconName="key" />
-                        <IonInput onIonChange={this.onChangeHandler} required name="password" value={this.state.password} type="password" placeholder="Password"></IonInput>
+                        <IonInput minlength={8} onIonChange={this.onChangeHandler} required name="password" value={this.state.password} type="password" placeholder="Password"></IonInput>
                     </FormItem>
 
                     <FormItem>
                         <FormIconLabel iconName="key" />
-                        <IonInput onIonChange={this.onChangeHandler} required name="confirmPassword" type="password" value={this.state.confirmPassword} placeholder="Confirm Password"></IonInput>
+                        <IonInput minlength={8} onIonChange={this.onChangeHandler} required name="confirmPassword" type="password" value={this.state.confirmPassword} placeholder="Confirm Password"></IonInput>
                     </FormItem>
 
 

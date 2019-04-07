@@ -133,12 +133,12 @@ class StudentSignUpPage extends Component {
 
                     <FormItem>
                         <FormIconLabel iconName="key" />
-                        <IonInput required={true} onIonChange={this.onChangeHandler} value={this.state.password} name="password" type="password" placeholder="Password"></IonInput>
+                        <IonInput minlength={8} required={true} onIonChange={this.onChangeHandler} value={this.state.password} name="password" type="password" placeholder="Password"></IonInput>
                     </FormItem>
 
                     <FormItem>
                         <FormIconLabel iconName="key" />
-                        <IonInput required={true} onIonChange={this.onChangeHandler} value={this.state.confirmPassword} name="confirmPassword" type="password" placeholder="Confirm Password"></IonInput>
+                        <IonInput minlength={8} required={true} onIonChange={this.onChangeHandler} value={this.state.confirmPassword} name="confirmPassword" type="password" placeholder="Confirm Password"></IonInput>
                     </FormItem>
 
                     <FormButton iconName="person-add" buttonText="Sign Up" />

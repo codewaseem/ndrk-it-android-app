@@ -84,7 +84,6 @@ function signUp(userData) {
     return async function (dispatch) {
         dispatch(startNetworkRequest("Creating new account..."));
         try {
-            console.log(userData);
             let user = await UserManager.signUp(userData);
             if (user) {
                 dispatch(networkRequestSuccess());

@@ -29,7 +29,6 @@ class VerifyAccountsPage extends Component {
         }
     }
     doRefresh = async (...args) => {
-        console.log(args);
         this.getAccounts();
     }
     render() {

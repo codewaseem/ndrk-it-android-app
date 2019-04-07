@@ -79,7 +79,6 @@ export function withNotify(OriginalComponent) {
 
 export function onlyUser(OriginalComponent, redirectTo = RoutesURL.LOGIN) {
     const Comp = (props) => {
-        console.log("onlyUser", props);
         if (props.user) {
             return <OriginalComponent {...props} />
         } else {
@@ -99,7 +98,6 @@ export function onlyUser(OriginalComponent, redirectTo = RoutesURL.LOGIN) {
 
 export function onlyNonUser(OriginalComponent) {
     const Comp = (props) => {
-        console.log("onlyUser", props);
         if (!props.user) {
             return <OriginalComponent {...props} />
         } else {
