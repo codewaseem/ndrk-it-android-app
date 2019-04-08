@@ -49,11 +49,8 @@ export class UserInfo extends ParseObject {
 ParseObject.registerSubclass("UserInfo", UserInfo);
 
 export class CollegeEvent extends ParseObject {
-    constructor(name, datetime, description) {
+    constructor() {
         super("CollegeEvent");
-        this.set("name", name);
-        this.set("datetime", datetime);
-        this.set("description", description);
     }
 }
 
@@ -61,17 +58,16 @@ ParseObject.registerSubclass("CollegeEvent", CollegeEvent);
 
 
 export class Circular extends ParseObject {
-    constructor(name, endDatetime, description) {
+    constructor() {
         super("Circular");
-        this.set("name", name);
-        this.set("endDatetime", endDatetime);
-        this.set("description", description);
     }
 }
 
 ParseObject.registerSubclass("Circular", Circular);
 
 export const UserManager = (function () {
+
+    let loggedInUserData;
 
     async function signUp({
         email,
@@ -174,9 +170,11 @@ export const UserManager = (function () {
             }
 
         }
+
     }
 
     function logout() {
+        loggedInUserData = null;
         User.logOut();
     }
 
@@ -206,6 +204,7 @@ export const UserManager = (function () {
                 ...user.attributes,
                 ...userInfo.attributes
             };
+            loggedInUserData = userData;
             return userData;
         }
 
@@ -321,7 +320,8 @@ export const UserManager = (function () {
         setVerified,
         updateUserInfo,
         getStudents,
-        getFaculty
+        getFaculty,
+        getCurrentUser : () => (loggedInUserData)
     }
 })();
 
@@ -331,8 +331,28 @@ export const EventManager = (function () {
         if(!name || !datetime || !description) {
             throw new Error("Please provide all the required details");
         }
-        let event = new CollegeEvent(name, datetime, description);
-        let savedEvent = await event.save();
+        let currentUser = UserManager.getCurrentUser();
+        let branch;
+        let postedBy;
+
+        if(currentUser.type === User_Types.Faculty) {
+            branch = currentUser.branch;
+            postedBy = User_Types.Faculty;
+        } else if( currentUser.type === User_Types.Admin) {
+            branch = "all";
+            postedBy = User_Types.Admin
+        } else {
+            throw new Error("You are not allowed to post an event!");
+        }
+        
+        let event = new CollegeEvent();
+        let savedEvent = await event.save({
+            name, 
+            datetime,
+            description,
+            branch,
+            postedBy
+        });
 
         if (!savedEvent) throw new Error("Failed to save the event");
 
@@ -360,8 +380,28 @@ export const CircularManager = (function () {
         if(!name || !endDatetime || !description) {
             throw new Error("Please provide all the required details");
         }
-        let circular = new Circular(name, endDatetime, description);
-        let savedCircular = await circular.save();
+        let currentUser = UserManager.getCurrentUser();
+        let branch;
+        let postedBy;
+
+        if(currentUser.type === User_Types.Faculty) {
+            branch = currentUser.branch;
+            postedBy = User_Types.Faculty;
+        } else if( currentUser.type === User_Types.Admin) {
+            branch = "all";
+            postedBy = User_Types.Admin
+        } else {
+            throw new Error("You are not allowed to post a circular!");
+        }
+
+        let circular = new Circular();
+        let savedCircular = await circular.save({
+            name,
+            endDatetime,
+            description,
+            branch,
+            postedBy
+        });
 
         if (!savedCircular) throw new Error("Failed to save the event");
 

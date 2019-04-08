@@ -22,6 +22,11 @@ import imgLogout from "../images/logout.svg";
 import imgVerify from "../images/verify.svg";
 import imgStudent from "../images/student_signup.svg";
 import imgFaculty from "../images/lecturer.svg";
+import imgHome from "../images/home.svg";
+import imgExam from "../images/exam.svg";
+import imgStudyMaterial from "../images/study_material.svg";
+import imgAsk from "../images/ask.svg";
+import imgMyProfile from "../images/myprofile.svg";
 
 
 
@@ -129,6 +134,22 @@ export const IfAdminOptions = [
     }
 ];
 
+export const IfFacultyOptions = [
+    {
+        name: "Faculty Home",
+        imgSrc: imgFaculty,
+        url : "/faculty"
+    }
+];
+
+export const IfStudentOptions = [
+    {
+        name: "Student Home",
+        imgSrc: imgStudent,
+        url : "/student"
+    }
+]
+
 export const loginOrLogoutOptionsData = {
     loggedIn: [{
         name: "Logout",
@@ -178,3 +199,39 @@ export const AdminHomeOptions = [
     },
     ...loginOrLogoutOptionsData.loggedIn
 ];
+
+export const FacultyHomeRoutes = {
+    ADD_EVENT : "/add-event",
+    ADD_CIRCULAR: "/add-circular",
+    ADD_STUDY_MATERIALS : "/add-study-material",
+    CHAT : "/chat",
+}
+
+export const FacultyHomeOptions = [
+    {
+        name: "Home",
+        imgSrc : imgHome,
+        url : RoutesURL.HOME
+    },
+    {
+        name: "Add Event",
+        imgSrc: imgEvent,
+        url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_EVENT
+    },
+    {
+        name: "Add Circular",
+        imgSrc: imgNotification,
+        url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_CIRCULAR
+    },
+    {
+        name: "Add Study Materials",
+        imgSrc: imgStudyMaterial,
+        url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_STUDY_MATERIALS
+    },
+    {
+        name: "Chat (Q&A)",
+        imgSrc: imgAsk,
+        url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.CHAT
+    },
+    ...loginOrLogoutOptionsData.loggedIn
+]

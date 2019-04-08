@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import HeroPage from "../HeroPage";
 
-import { defaultImageSliderOptions, homePageSliderImagesData, homePageOptions, loginOrLogoutOptionsData, IfAdminOptions } from "../../staticData";
+import { defaultImageSliderOptions, homePageSliderImagesData, homePageOptions, loginOrLogoutOptionsData, IfAdminOptions, IfFacultyOptions, IfStudentOptions } from "../../staticData";
 import ImageSlider from "../../components/ImageSlider";
 import TilesGrid from "../../components/TilesGrid";
 import { withChangedTitle, withUser } from "../../context";
@@ -13,12 +13,16 @@ class HomePage extends Component {
         const rowProps = { style: { height: "100%" }, "justify-content-between": true, "align-items-center": true };
         const colProps = { size: 4 };
         const { user } = this.props;
-        let adminOptions = [];
+        let userOptions = [];
         if (user && user.type === User_Types.Admin) {
-            adminOptions = IfAdminOptions;
+            userOptions = IfAdminOptions;
+        } else if (user && user.type === User_Types.Faculty) {
+            userOptions = IfFacultyOptions;
+        } else if(user && user.type === User_Types.Student) {
+            userOptions = IfStudentOptions;
         }
         const loginOrLogoutOptions = user ? loginOrLogoutOptionsData.loggedIn : loginOrLogoutOptionsData.loggedOut;
-        const homeOptions = [...homePageOptions, ...loginOrLogoutOptions, ...adminOptions];
+        const homeOptions = [...homePageOptions, ...loginOrLogoutOptions, ...userOptions];
         return (
             <HeroPage heroHeightPercentage={35}>
                 <ImageSlider pager imagesData={homePageSliderImagesData} options={defaultImageSliderOptions} />

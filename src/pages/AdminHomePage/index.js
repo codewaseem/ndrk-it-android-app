@@ -12,15 +12,19 @@ import VerifyAccountsPage from "../VerifyAccountsPage";
 import UpdateProfilePage from "../UpdateProfilePage";
 import ViewStudentsPage from "../ViewStudentsPage";
 import ViewFacultyPage from "../ViewFacultyPage";
-import { withChangedTitle, onlyAdmin } from "../../context";
+import { withChangedTitle, onlyAdmin, withUser } from "../../context";
 
 
 
-const AdminMenu = (props) => {
+const AdminMenu = withUser((props) => {
     const adminMenu = (props) => (<TilesGrid tilesInfo={AdminHomeOptions} {...props} />);
     const searchForm = QuickSearchForm;
     return (<SectionedPage
         sectionsMap={[
+            {
+                name: `Welcome, ${props.user && props.user.name}`,
+                component:null
+            },
             {
                 name: "Admin Menu",
                 component: adminMenu
@@ -33,7 +37,7 @@ const AdminMenu = (props) => {
         ]}
         {...props}
     />);
-}
+});
 
 class AdminHomePage extends Component {
 
