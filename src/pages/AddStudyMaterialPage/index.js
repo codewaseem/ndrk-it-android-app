@@ -17,7 +17,7 @@ class AddStudyMaterialPage extends Component {
 
     fileInput = React.createRef();
 
-    maxFileSizeLimit = 5;//mb (size/1024)/1024).toFixed(4); /
+    maxFileSizeLimit = 5; //mb (size/1024)/1024).toFixed(4); /
 
     onSubmitHandler = async (e) => {
         e.preventDefault();

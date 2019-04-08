@@ -23,10 +23,12 @@ import imgVerify from "../images/verify.svg";
 import imgStudent from "../images/student_signup.svg";
 import imgFaculty from "../images/lecturer.svg";
 import imgHome from "../images/home.svg";
-import imgExam from "../images/exam.svg";
+// import imgExam from "../images/exam.svg";
 import imgStudyMaterial from "../images/study_material.svg";
 import imgAsk from "../images/ask.svg";
-import imgMyProfile from "../images/myprofile.svg";
+import imgBook from "../images/notebook.svg";
+
+// import imgMyProfile from "../images/myprofile.svg";
 
 
 
@@ -204,6 +206,7 @@ export const FacultyHomeRoutes = {
     ADD_EVENT : "/add-event",
     ADD_CIRCULAR: "/add-circular",
     ADD_STUDY_MATERIALS : "/add-study-material",
+    VIEW_STUDY_MATERIALS : "/view-study-material",
     CHAT : "/chat",
 }
 
@@ -225,8 +228,13 @@ export const FacultyHomeOptions = [
     },
     {
         name: "Add Study Materials",
-        imgSrc: imgStudyMaterial,
+        imgSrc: imgBook,
         url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_STUDY_MATERIALS
+    },
+    {
+        name : "View Study Materials",
+        imgSrc: imgStudyMaterial,
+        url : RoutesURL.FACULTY_HOME + FacultyHomeRoutes.VIEW_STUDY_MATERIALS
     },
     {
         name: "Chat (Q&A)",

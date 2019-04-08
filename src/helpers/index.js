@@ -45,3 +45,15 @@ export const getUserHomeUrl = (user) => {
         }
     else return RoutesURL.HOME;
 }
+
+export const getPostfixedYear = (year) => {
+    let postFix = "";
+    switch(Number(year)){
+        case 1 : postFix = "st";break;
+        case 2 : postFix = "nd";break;
+        case 3 : postFix = "rd"; break;
+        case 4 : postFix = "th"; break;
+        default: break;
+    }
+    return `${year}${postFix}`;
+}

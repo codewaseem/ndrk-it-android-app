@@ -437,6 +437,7 @@ export const StudyMaterialManager = (function () {
             throw new Error("Please provide all the file data");
         }
         let file = new ParseFile(name, fileData, type);
+        let { size } = fileData;
         let currentUser = UserManager.getCurrentUser();
         let branch;
         let postedBy;
@@ -455,6 +456,7 @@ export const StudyMaterialManager = (function () {
             title,
             branch,
             postedBy,
+            size,
             file_url: savedFile.url(),
             forYear: Number(forYear)
         });
@@ -467,17 +469,20 @@ export const StudyMaterialManager = (function () {
 
     async function getStudyMaterials() {
         let currentUser = UserManager.getCurrentUser();
-        if(currentUser.type !== User_Types.Student || currentUser.type !== User_Types.Faculty) {
+
+        if (!currentUser) throw new Error("Try again!");
+
+        if (currentUser.type !== User_Types.Student && currentUser.type !== User_Types.Faculty) {
             throw new Error("Only students and faculty members can view study materials");
         }
 
-        let {branch} = currentUser;
+        let { branch } = currentUser;
 
         let query = new Query(FileInfo);
         query.equalTo("branch", branch);
         let filesInfo = await query.find();
 
-        if(!filesInfo) throw new Error("Failed to fetch documents");
+        if (!filesInfo) throw new Error("Failed to fetch documents");
 
         return filesInfo.map(fileInfo => fileInfo.attributes);
 
