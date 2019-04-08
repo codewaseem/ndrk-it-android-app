@@ -23,7 +23,10 @@ class AddEventPage extends Component {
         let datetimeString = String(this.state.eventForm.date).split('T')[0] + "T" + String(this.state.eventForm.time).split('T')[1]
         let datetime = new Date(datetimeString).getTime();
 
-        await this.props.addEvent({name:this.state.eventForm.name,datetime, description: this.state.eventForm.description});
+        let done = await this.props.addEvent({ name: this.state.eventForm.name, datetime, description: this.state.eventForm.description });
+        if (done) {
+            this.resetForm();
+        }
     }
 
     onChangeHandler = (e) => {
@@ -37,6 +40,20 @@ class AddEventPage extends Component {
             }
         });
     }
+
+    resetForm = () => {
+        this.setState(() => {
+            return {
+                eventForm: {
+                    name: "",
+                    date: "",
+                    time: "",
+                    description: ""
+                }
+            }
+        });
+    }
+
     render() {
         return (
             <CenteredPage>
@@ -44,21 +61,21 @@ class AddEventPage extends Component {
                 <Form onSubmit={this.onSubmit} name="add-event">
                     <FormItem>
                         <FormIconLabel iconName="text" />
-                        <IonInput onIonChange={this.onChangeHandler} required name="name" placeholder="Event Name" type="text"></IonInput>
+                        <IonInput onIonChange={this.onChangeHandler} required name="name" value={this.state.eventForm.name} placeholder="Event Name" type="text"></IonInput>
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="calendar" />
 
-                        <DateTimeInput min={(new Date()).toISOString().split("T")[0]} onIonChange={this.onChangeHandler} required name="date" placeholder="Event Date" display-format="DD/MMM/YYYY" />
+                        <DateTimeInput value={this.state.eventForm.date} min={(new Date()).toISOString().split("T")[0]} onIonChange={this.onChangeHandler} required name="date" placeholder="Event Date" display-format="DD/MMM/YYYY" />
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="clock" />
 
-                        <DateTimeInput onIonChange={this.onChangeHandler} name="time" required disabled={!this.state.eventForm.date} placeholder="Event Start Time" display-format="hh:mm A" />
+                        <DateTimeInput value={this.state.eventForm.time} onIonChange={this.onChangeHandler} name="time" required disabled={!this.state.eventForm.date} placeholder="Event Start Time" display-format="hh:mm A" />
                     </FormItem>
                     <FormItem>
                         <FormIconLabel iconName="list-box" />
-                        <IonTextarea onIonChange={this.onChangeHandler} name="description" required placeholder="Describe the event here..." rows={6}></IonTextarea>
+                        <IonTextarea value={this.state.eventForm.description} onIonChange={this.onChangeHandler} name="description" required placeholder="Describe the event here..." rows={6}></IonTextarea>
                     </FormItem>
                     <FormButton buttonText="Add Event"></FormButton>
                 </Form>

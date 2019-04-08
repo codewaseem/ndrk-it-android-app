@@ -12,7 +12,7 @@ class AddCircularPage extends Component {
     state = {
         circularForm: {
             name: "",
-            endDatetime:"",
+            endDatetime: "",
             description: ""
         }
     }
@@ -21,7 +21,10 @@ class AddCircularPage extends Component {
         e.preventDefault();
         let endDatetime = new Date(this.state.circularForm.endDatetime).getTime();
 
-        await this.props.addCircular({ name: this.state.circularForm.name, endDatetime, description: this.state.circularForm.description });
+        let done = await this.props.addCircular({ name: this.state.circularForm.name, endDatetime, description: this.state.circularForm.description });
+        if(done) {
+            this.resetForm();
+        }
     }
 
     onChangeHandler = (e) => {
@@ -36,6 +39,17 @@ class AddCircularPage extends Component {
         });
     }
 
+    resetForm = () => {
+        this.setState(() => {
+            return {
+                circularForm: {
+                    name: "",
+                    endDatetime: "",
+                    description: ""
+                }
+            }
+        });
+    }
     render() {
         return (
             <CenteredPage>
