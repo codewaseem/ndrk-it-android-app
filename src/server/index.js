@@ -1,4 +1,4 @@
-import Parse, { User, Object as ParseObject, Query } from "parse";
+import Parse, { User, Object as ParseObject, Query, File as ParseFile } from "parse";
 import { PARSE_APP_ID, PARSE_SERVER_URL } from "../staticData";
 import { isValidEmail, isValidUsn } from "../helpers";
 
@@ -321,33 +321,33 @@ export const UserManager = (function () {
         updateUserInfo,
         getStudents,
         getFaculty,
-        getCurrentUser : () => (loggedInUserData)
+        getCurrentUser: () => (loggedInUserData)
     }
 })();
 
 export const EventManager = (function () {
 
     async function add({ name, datetime, description }) {
-        if(!name || !datetime || !description) {
+        if (!name || !datetime || !description) {
             throw new Error("Please provide all the required details");
         }
         let currentUser = UserManager.getCurrentUser();
         let branch;
         let postedBy;
 
-        if(currentUser.type === User_Types.Faculty) {
+        if (currentUser.type === User_Types.Faculty) {
             branch = currentUser.branch;
             postedBy = User_Types.Faculty;
-        } else if( currentUser.type === User_Types.Admin) {
+        } else if (currentUser.type === User_Types.Admin) {
             branch = "all";
             postedBy = User_Types.Admin
         } else {
             throw new Error("You are not allowed to post an event!");
         }
-        
+
         let event = new CollegeEvent();
         let savedEvent = await event.save({
-            name, 
+            name,
             datetime,
             description,
             branch,
@@ -377,17 +377,17 @@ export const EventManager = (function () {
 export const CircularManager = (function () {
 
     async function add({ name, endDatetime, description }) {
-        if(!name || !endDatetime || !description) {
+        if (!name || !endDatetime || !description) {
             throw new Error("Please provide all the required details");
         }
         let currentUser = UserManager.getCurrentUser();
         let branch;
         let postedBy;
 
-        if(currentUser.type === User_Types.Faculty) {
+        if (currentUser.type === User_Types.Faculty) {
             branch = currentUser.branch;
             postedBy = User_Types.Faculty;
-        } else if( currentUser.type === User_Types.Admin) {
+        } else if (currentUser.type === User_Types.Admin) {
             branch = "all";
             postedBy = User_Types.Admin
         } else {
@@ -421,6 +421,74 @@ export const CircularManager = (function () {
     };
 })();
 
+class FileInfo extends ParseObject {
+    constructor() {
+        super("FileInfo");
+    }
+}
+
+ParseObject.registerSubclass("FileInfo", FileInfo);
+
+
+export const StudyMaterialManager = (function () {
+
+    async function uploadStudyMaterial({ title, name, fileData, type, forYear }) {
+        if (!name || !fileData || !type) {
+            throw new Error("Please provide all the file data");
+        }
+        let file = new ParseFile(name, fileData, type);
+        let currentUser = UserManager.getCurrentUser();
+        let branch;
+        let postedBy;
+
+        if (currentUser.type === User_Types.Faculty) {
+            branch = currentUser.branch;
+            postedBy = currentUser.email;
+        } else {
+            throw new Error("You cannot upload a file");
+        }
+        let savedFile = await file.save();
+        let fileInfo = new FileInfo();
+
+
+        let savedFileInfo = await fileInfo.save({
+            title,
+            branch,
+            postedBy,
+            file_url: savedFile.url(),
+            forYear: Number(forYear)
+        });
+
+        if (!savedFileInfo) throw new Error("Failed to upload the file");
+
+        return savedFileInfo.attributes;
+
+    }
+
+    async function getStudyMaterials() {
+        let currentUser = UserManager.getCurrentUser();
+        if(currentUser.type !== User_Types.Student || currentUser.type !== User_Types.Faculty) {
+            throw new Error("Only students and faculty members can view study materials");
+        }
+
+        let {branch} = currentUser;
+
+        let query = new Query(FileInfo);
+        query.equalTo("branch", branch);
+        let filesInfo = await query.find();
+
+        if(!filesInfo) throw new Error("Failed to fetch documents");
+
+        return filesInfo.map(fileInfo => fileInfo.attributes);
+
+    }
+
+    return {
+        uploadStudyMaterial,
+        getStudyMaterials
+    }
+})();
+
 window.UserManager = UserManager;
 window.EventManager = EventManager;
 window.CircularManager = CircularManager;
@@ -431,5 +499,5 @@ window.testUserData = {
     gender: "male",
     password: "12345678",
     type: "admin",
-    branch:"no"
+    branch: "no"
 }

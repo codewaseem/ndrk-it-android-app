@@ -1,4 +1,4 @@
-import { UserManager, User_Types, EventManager, CircularManager } from "../../server";
+import { UserManager, User_Types, EventManager, CircularManager, StudyMaterialManager } from "../../server";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
 
@@ -266,4 +266,22 @@ export const getCirculars = () => {
         null,
         "Getting circulars...",
     );
+}
+
+export const uploadStudyMaterial = (data) => {
+    return asyncQueryActionHelper(
+        StudyMaterialManager.uploadStudyMaterial.bind(null, data),
+        "File added",
+        "Failed to upload the file",
+        "Uploading file...."
+    )
+}
+
+export const getStudyMaterials = () => {
+    return asyncQueryActionHelper(
+        StudyMaterialManager.getStudyMaterials,
+        null,
+        "No files added yet",
+        "Getting study materials for your branch"
+    )
 }

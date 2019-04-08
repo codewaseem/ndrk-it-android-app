@@ -8,6 +8,7 @@ import FourNotFourPage from "../FourNotFourPage";
 import AddEventPage from "../AddEventPage";
 import AddCircularPage from "../AddCircularPage";
 import { withChangedTitle, withUser } from "../../context";
+import AddStudyMaterialPage from "../AddStudyMaterialPage";
 
 
 
@@ -41,7 +42,7 @@ class FacultyHomePage extends Component {
                     <Route exact path={match.path} component={FacultyMenu} />
                     <Route path={match.path + FacultyHomeRoutes.ADD_EVENT} component={AddEventPage} />
                     <Route path={match.path + FacultyHomeRoutes.ADD_CIRCULAR} component={AddCircularPage} />
-                    <Route path={match.path + FacultyHomeRoutes.ADD_STUDY_MATERIALS} component={null} />
+                    <Route path={match.path + FacultyHomeRoutes.ADD_STUDY_MATERIALS} component={AddStudyMaterialPage} />
                     <Route component={FourNotFourPage} />
                 </Switch>
             </React.Fragment>
