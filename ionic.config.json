@@ -1,0 +1,7 @@
+{
+  "name": "NDRK IT",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "custom"
+}
