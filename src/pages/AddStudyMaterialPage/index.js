@@ -7,12 +7,15 @@ import { FormItem, Form, FormButton, FormImage, FormIconLabel, FormImageLabel, S
 import { withChangedTitle, withUser, withNotify } from "../../context";
 import { uploadStudyMaterial } from "../../store/actions";
 import { connect } from "react-redux";
+// import { FileChooser } from "@ionic-native/file-chooser";
+
+// window.FileChooser = FileChooser;
 
 class AddStudyMaterialPage extends Component {
 
     state = {
         name: "",
-        academicYear:""
+        academicYear: ""
     }
 
     fileInput = React.createRef();
@@ -22,7 +25,7 @@ class AddStudyMaterialPage extends Component {
     onSubmitHandler = async (e) => {
         e.preventDefault();
         let file = this.fileInput.current.firstElementChild.files[0];
-        let {name, size, type } = file;
+        let { name, size, type } = file;
         let title = this.state.name;
         let forYear = this.state.academicYear;
         if (size / (1024 * 1024) > this.maxFileSizeLimit) {
@@ -36,7 +39,7 @@ class AddStudyMaterialPage extends Component {
                 forYear
             });
 
-            if(done) {
+            if (done) {
                 this.resetForm();
             }
         }
@@ -58,10 +61,22 @@ class AddStudyMaterialPage extends Component {
         this.fileInput.current.firstElementChild.value = "";
         this.setState(() => {
             return {
-                name:"",
-                academicYear:""
+                name: "",
+                academicYear: ""
             }
         });
+    }
+
+    onFileChooserClick = async () => {
+
+        // if(window.cordova) {
+        //     alert("Select file");
+        //     FileChooser.open().then(uri => {
+        //         alert("File received");
+        //         console.log(uri);
+        //     }).catch(console.error);
+        // }        
+
     }
 
     render() {
@@ -75,14 +90,14 @@ class AddStudyMaterialPage extends Component {
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgYear} />
-                        <SelectInput interfaceOptions={{header:"Academic Year"}} required={true} onIonChange={this.onChangeHandler} value={this.state.academicYear} name="academicYear" placeholder="For which year students?">
+                        <SelectInput interfaceOptions={{ header: "Academic Year" }} required={true} onIonChange={this.onChangeHandler} value={this.state.academicYear} name="academicYear" placeholder="For which year students?">
                             <IonSelectOption value="1">1st Year</IonSelectOption>
                             <IonSelectOption value="2">2nd Year</IonSelectOption>
                             <IonSelectOption value="3">3rd Year</IonSelectOption>
                             <IonSelectOption value="4">4th Year</IonSelectOption>
                         </SelectInput>
                     </FormItem>
-                    <FormItem>
+                    <FormItem onClick={this.onFileChooserClick}>
                         <FormIconLabel iconName="document" />
                         <IonInput required name="file" ref={this.fileInput} placeholder="Select File" type="file" accept=".pdf"></IonInput>
                     </FormItem>

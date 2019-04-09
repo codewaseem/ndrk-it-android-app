@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "^1.0.0-beta.19",
-    "@capacitor/cli": "1.0.0-beta.19",
-    "@capacitor/core": "1.0.0-beta.19",
     "@ionic/react": "^0.0.5",
     "@types/react-router": "^4.4.5",
     "@types/react-router-dom": "^4.3.1",
