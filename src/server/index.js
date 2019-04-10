@@ -497,6 +497,7 @@ export const StudyMaterialManager = (function () {
 window.UserManager = UserManager;
 window.EventManager = EventManager;
 window.CircularManager = CircularManager;
+window.StudyMaterialManager = StudyMaterialManager;
 
 window.testUserData = {
     name: "Admin",

@@ -132,7 +132,7 @@ public class CordovaPlugin {
      * @return                Whether the action was valid.
      */
     public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
-        return false;
+        return true;
     }
 
     /**

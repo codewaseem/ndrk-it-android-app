@@ -7,9 +7,9 @@ import { FormItem, Form, FormButton, FormImage, FormIconLabel, FormImageLabel, S
 import { withChangedTitle, withUser, withNotify } from "../../context";
 import { uploadStudyMaterial } from "../../store/actions";
 import { connect } from "react-redux";
-// import { FileChooser } from "@ionic-native/file-chooser";
+import { FileChooser } from "@ionic-native/file-chooser";
 
-// window.FileChooser = FileChooser;
+window.FileChooser = FileChooser;
 
 class AddStudyMaterialPage extends Component {
 
@@ -68,14 +68,18 @@ class AddStudyMaterialPage extends Component {
     }
 
     onFileChooserClick = async () => {
+        if(window.cordova) {
+            alert("Select file");
+            FileChooser.open().then(async (uri) => {
+                let fileUrl = window.Ionic.WebView.convertFileSrc(uri);
+                window.receivedUri = uri;
+                window.fileUrl = fileUrl;
+                let blob = await fetch(fileUrl).then(r => r.blob());
+                window.blob = blob;
+                window.finalFile = new File([blob], "name");
 
-        // if(window.cordova) {
-        //     alert("Select file");
-        //     FileChooser.open().then(uri => {
-        //         alert("File received");
-        //         console.log(uri);
-        //     }).catch(console.error);
-        // }        
+            }).catch(console.error);
+        }        
 
     }
 
