@@ -926,24 +926,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@ionic-native/android-permissions@^5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/android-permissions/-/android-permissions-5.4.0.tgz#4c636c0fcfac4878e9f749745a855999fc6a6a25"
-  integrity sha512-eDJes+4oQDHahbGBJ8SEFAIPjGXIEiRV6D4sqfwzWcwkD6eTskGAwiEDfzecZLGA/SyATGHRTebpKJT0x8e9Xg==
-  dependencies:
-    "@types/cordova" latest
-
 "@ionic-native/core@^5.4.0":
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.4.0.tgz#4bb126d9f14c337be65542bb5f653bc202ee9dbf"
   integrity sha512-GSrwIcOqGq9a7axYGVDPvIS0FoBRPNIC6b4RkcC0rcvjbIDebgZG7zsZ2x6mhe4HC7fTUV2y8qBO8timMHv3oA==
-  dependencies:
-    "@types/cordova" latest
-
-"@ionic-native/file-chooser@^5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/file-chooser/-/file-chooser-5.4.0.tgz#aaca52998de1a161e6f0f883b3caa908328bb8da"
-  integrity sha512-Mx0acIgFDFr/DqrIj+mIQnaTCLB4xFy3/CPujx7FOzM5+KxU1m1fk7slvbb9juLRjikRqjXrZ/WFOvZ1wJkDJw==
   dependencies:
     "@types/cordova" latest
 
@@ -2359,10 +2345,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000918, caniuse-lite@^1.0.30000929, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000957.tgz#fb1026bf184d7d62c685205358c3b24b9e29f7b3"
   integrity sha512-8wxNrjAzyiHcLXN/iunskqQnJquQQ6VX8JHfW5kLgAPRSiSuKZiNfmIkP5j7jgyXqAQBSoXyJxfnbCFS0ThSiQ==
 
-capacitor-filepicker-plugin@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/capacitor-filepicker-plugin/-/capacitor-filepicker-plugin-0.0.1.tgz#e095e532cf6832d0050e0b293bebd9dfe8e959cf"
-  integrity sha512-+G9r+9IGURmo0f+e82N4Rg2T68DgNpP2RDEg1ruU4Gc9U+uGnEojPZ8aEuadMG4I4LP07KMych+gga/TnvpASg==
+capacitor-filepicker-plugin@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/capacitor-filepicker-plugin/-/capacitor-filepicker-plugin-0.0.3.tgz#4041d84656fab40c99a94606dd3ed943dd210445"
+  integrity sha512-OTG50/bUrMF/xLdt7qcB6+Sgi2H8riwNyMmRK0kJ1fGOA2/F4WIOBfYxWdXAFWdY2CATxkEpZtvS/GtyY7uasA==
   dependencies:
     "@capacitor/core" latest
 
@@ -2776,16 +2762,6 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
-
-cordova-plugin-android-permissions@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-android-permissions/-/cordova-plugin-android-permissions-1.0.0.tgz#9e7c116be668eb7dfa41491b13d8d47da9548149"
-  integrity sha1-nnwRa+Zo6336QUkbE9jUfalUgUk=
-
-cordova-plugin-filechooser@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-filechooser/-/cordova-plugin-filechooser-1.2.0.tgz#3a3a3d9c5bef733076f1f6b59e465f60a0d96577"
-  integrity sha512-ycL9ML3wlRQ8wfK7vCG8gobv1f3VIdO52m0LA9mPSzLblbu0AXJs89yCRxZB87+08/V96qBxrmkxMsMmVYu5wA==
 
 core-js-compat@^3.0.0:
   version "3.0.1"
@@ -6679,7 +6655,7 @@ mime@^1.2.11, mime@^1.4.1:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@^2.0.3, mime@^2.3.1:
+mime@^2.0.3, mime@^2.3.1, mime@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.2.tgz#ce5229a5e99ffc313abac806b482c10e7ba6ac78"
   integrity sha512-zJBfZDkwRu+j3Pdd2aHsR5GfH2jIWhmL1ZzBoc+X+3JEti2hbArWcyJ+1laC1D2/U/W1a/+Cegj0/OnEU2ybjg==

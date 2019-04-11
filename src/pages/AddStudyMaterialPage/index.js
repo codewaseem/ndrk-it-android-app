@@ -7,18 +7,15 @@ import { FormItem, Form, FormButton, FormImage, FormIconLabel, FormImageLabel, S
 import { withChangedTitle, withUser, withNotify } from "../../context";
 import { uploadStudyMaterial } from "../../store/actions";
 import { connect } from "react-redux";
-import { FileChooser } from "@ionic-native/file-chooser";
-import { AndroidPermissions } from "@ionic-native/android-permissions";
-import { FilePickerPlugin} from "capacitor-filepicker-plugin";
-
-window.FileChooser = FileChooser;
-window.FilePickerPlugin = FilePickerPlugin;
+import { Capacitor } from "@capacitor/core";
+import mime from "mime";
 
 class AddStudyMaterialPage extends Component {
 
     state = {
-        name: "",
-        academicYear: ""
+        title: "",
+        academicYear: "",
+        file:null
     }
 
     fileInput = React.createRef();
@@ -27,18 +24,29 @@ class AddStudyMaterialPage extends Component {
 
     onSubmitHandler = async (e) => {
         e.preventDefault();
-        let file = this.fileInput.current.firstElementChild.files[0];
-        let { name, size, type } = file;
-        let title = this.state.name;
+
+        let file = null; 
+        if(Capacitor.isNative) {
+            file = this.state.file
+        } else {
+            file  = this.fileInput.current.firstElementChild.files[0];
+        }
+
+        if(!file) {
+            this.props.notify("No input", "No file selected/doesn't exists", "error");
+            return;
+        }
+
+        let { size } = file;
+        let title = this.state.title;
         let forYear = this.state.academicYear;
         if (size / (1024 * 1024) > this.maxFileSizeLimit) {
-            this.props.notify("Limit Exceed", "Please upload files below 5MB", "error")
+            this.props.notify("Limit Exceed", "Please upload files below 5MB", "error");
+            return;
         } else {
             let done = await this.props.uploadStudyMaterial({
                 title,
-                name,
                 fileData: file,
-                type,
                 forYear
             });
 
@@ -64,37 +72,51 @@ class AddStudyMaterialPage extends Component {
         this.fileInput.current.firstElementChild.value = "";
         this.setState(() => {
             return {
-                name: "",
-                academicYear: ""
+                title: "",
+                academicYear: "",
+                file:null
             }
         });
     }
 
-    onFileChooserClick = async () => {
-        if(window.cordova) {
-            alert("Select file");
-            window.AndroidPermissions = AndroidPermissions;
-            FileChooser.open().then(async (uri) => {
-                let fileUrl = window.Ionic.WebView.convertFileSrc(uri);
-                window.receivedUri = uri;
-                window.fileUrl = fileUrl;
-                let blob = await fetch(fileUrl).then(r => r.blob());
-                window.blob = blob;
-                window.finalFile = new File([blob], "name");
-
-            }).catch(console.error);
+    pickFile = async () => {
+        if(!Capacitor.isNative) {
+            return;
+        } else {
+            this.handleNativeFileSelect();
         }        
+    }
 
+    handleNativeFileSelect = async () => {
+        if(Capacitor && Capacitor.isNative && Capacitor.Plugins.FilePicker) {
+            let fileInfo = await Capacitor.Plugins.FilePicker.pick();
+            
+            let fileBlob = await fetch(window.Ionic.WebView.convertFileSrc(fileInfo.uri)).then(r => r.blob());
+            let ext = mime.getExtension(fileBlob.type);
+            let file = new File([fileBlob],`file.${ext}`);
+            this.setState(() => {
+               return {
+                   file
+               }
+            });
+            this.fileInput.current.firstElementChild.value = fileInfo.uri;
+
+        } else {
+            console.log("Filepicker plugin not installed");
+        }
     }
 
     render() {
+
+        let isNative = Capacitor.isNative;
+
         return (
             <CenteredPage>
                 <FormImage src={imgStudy} alt={"Add Study"} />
                 <Form onSubmit={this.onSubmitHandler} name="add-study">
                     <FormItem>
                         <FormIconLabel iconName="text" />
-                        <IonInput name="name" onIonChange={this.onChangeHandler} required value={this.state.name} placeholder="Name" type="text"></IonInput>
+                        <IonInput name="title" onIonChange={this.onChangeHandler} required value={this.state.title} placeholder="Name" type="text"></IonInput>
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgYear} />
@@ -105,9 +127,9 @@ class AddStudyMaterialPage extends Component {
                             <IonSelectOption value="4">4th Year</IonSelectOption>
                         </SelectInput>
                     </FormItem>
-                    <FormItem onClick={this.onFileChooserClick}>
+                    <FormItem onClick={this.pickFile}>
                         <FormIconLabel iconName="document" />
-                        <IonInput required name="file" ref={this.fileInput} placeholder="Select File" type="file" accept=".pdf"></IonInput>
+                        <IonInput required name="file" ref={this.fileInput} placeholder="Select File" type={this.state.file? "url" : "file"}></IonInput>
                     </FormItem>
                     <FormButton iconName="cloud-upload" buttonText="Upload" />
                 </Form>

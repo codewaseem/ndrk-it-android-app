@@ -432,11 +432,11 @@ ParseObject.registerSubclass("FileInfo", FileInfo);
 
 export const StudyMaterialManager = (function () {
 
-    async function uploadStudyMaterial({ title, name, fileData, type, forYear }) {
-        if (!name || !fileData || !type) {
+    async function uploadStudyMaterial({ title, fileData, forYear }) {
+        if (!title || !fileData || !forYear) {
             throw new Error("Please provide all the file data");
         }
-        let file = new ParseFile(name, fileData, type);
+        let file = new ParseFile(title.split(" ").join("_"), fileData);
         let { size } = fileData;
         let currentUser = UserManager.getCurrentUser();
         let branch;
