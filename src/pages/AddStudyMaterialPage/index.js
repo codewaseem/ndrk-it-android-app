@@ -107,9 +107,6 @@ class AddStudyMaterialPage extends Component {
     }
 
     render() {
-
-        let isNative = Capacitor.isNative;
-
         return (
             <CenteredPage>
                 <FormImage src={imgStudy} alt={"Add Study"} />
