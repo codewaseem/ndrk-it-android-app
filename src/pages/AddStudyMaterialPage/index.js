@@ -15,7 +15,8 @@ class AddStudyMaterialPage extends Component {
     state = {
         title: "",
         academicYear: "",
-        file:null
+        file:null,
+        uri:""
     }
 
     fileInput = React.createRef();
@@ -74,7 +75,8 @@ class AddStudyMaterialPage extends Component {
             return {
                 title: "",
                 academicYear: "",
-                file:null
+                file:null,
+                uri:""
             }
         });
     }
@@ -96,10 +98,10 @@ class AddStudyMaterialPage extends Component {
             let file = new File([fileBlob],`file.${ext}`);
             this.setState(() => {
                return {
-                   file
+                   file,
+                   uri: fileInfo.uri
                }
             });
-            this.fileInput.current.firstElementChild.value = fileInfo.uri;
 
         } else {
             console.log("Filepicker plugin not installed");
@@ -126,7 +128,7 @@ class AddStudyMaterialPage extends Component {
                     </FormItem>
                     <FormItem onClick={this.pickFile}>
                         <FormIconLabel iconName="document" />
-                        <IonInput required name="file" ref={this.fileInput} placeholder="Select File" type={this.state.file? "url" : "file"}></IonInput>
+                        <IonInput required name="file" ref={this.fileInput} placeholder="Select File" type={Capacitor.isNative? "url" : "file"} value={this.state.uri ? this.state.uri : ""  }></IonInput>
                     </FormItem>
                     <FormButton iconName="cloud-upload" buttonText="Upload" />
                 </Form>
