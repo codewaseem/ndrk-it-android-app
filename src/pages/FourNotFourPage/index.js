@@ -9,7 +9,7 @@ class FourNotFourPage extends Component {
         return (
             <CenteredPage>
                 <FormImage src={img404} />
-                <p style={{ textAlign: "center" }}><IonText color="danger"><h2>Page not found!</h2></IonText></p>
+                <p style={{ textAlign: "center" }}><IonText color="danger">Page not found!</IonText></p>
             </CenteredPage>
         );
     }

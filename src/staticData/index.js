@@ -23,11 +23,11 @@ import imgVerify from "../images/verify.svg";
 import imgStudent from "../images/student_signup.svg";
 import imgFaculty from "../images/lecturer.svg";
 import imgHome from "../images/home.svg";
-// import imgExam from "../images/exam.svg";
+import imgExam from "../images/exam.svg";
+import imgResult from "../images/result.svg";
 import imgStudyMaterial from "../images/study_material.svg";
 import imgAsk from "../images/ask.svg";
 import imgBook from "../images/notebook.svg";
-
 // import imgMyProfile from "../images/myprofile.svg";
 
 
@@ -243,3 +243,82 @@ export const FacultyHomeOptions = [
     },
     ...loginOrLogoutOptionsData.loggedIn
 ]
+
+
+export const StudentHomeRoutes = {
+    VIEW_EVENT : "/view-event",
+    VIEW_CIRCULAR: "/view-circular",
+    VIEW_STUDY_MATERIALS : "/view-study-material",
+    CHAT : "/chat",
+    EXAMS: "/exams",
+    RESULT: "/results",
+    MY_PROFILE: "/my-profile"
+}
+
+export const StudentHomeOptions = [
+    {
+        name: "Home",
+        imgSrc : imgHome,
+        url : RoutesURL.HOME
+    },
+    {
+        name: "Exams",
+        imgSrc : imgExam,
+        url : RoutesURL.STUDENT_HOME + StudentHomeRoutes.EXAMS
+    },
+    {
+        name: "Results",
+        imgSrc : imgResult,
+        url : RoutesURL.STUDENT_HOME + StudentHomeRoutes.RESULT
+    },
+    {
+        name: "View Study Materials",
+        imgSrc: imgStudyMaterial,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_STUDY_MATERIALS
+    },
+    {
+        name: "Chat (Q&A)",
+        imgSrc: imgAsk,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.CHAT
+    },
+    ...loginOrLogoutOptionsData.loggedIn
+
+    // {
+    //     name: "My Profile",
+    //     imgSrc: imgMyProfile, 
+    //     url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.MY_PROFILE
+    // }
+];
+
+export const GeneralOptionsForStudents = [
+    {
+        name: "View Event",
+        imgSrc: imgEvent,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_EVENT
+    },
+    {
+        name: "View Circular",
+        imgSrc: imgNotification,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_CIRCULAR
+    },
+    {
+        name: "Facilities",
+        imgSrc: imgFacility,
+        url: "/facilities"
+    },
+    {
+        name: "Gallery",
+        imgSrc: imgGallery,
+        url: "/gallery"
+    },
+    {
+        name: "Locate",
+        imgSrc: imgMap,
+        url: "/locate"
+    },
+    {
+        name: "Contact",
+        imgSrc: imgContact,
+        url: "/contact"
+    }
+];
