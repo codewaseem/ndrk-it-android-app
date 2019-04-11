@@ -1,0 +1,7 @@
+{
+  "appId": "in.ndrk.it",
+  "appName": "NDRK IT",
+  "bundledWebRuntime": false,
+  "webDir": "build",
+  "linuxAndroidStudioPath" : "/home/waseem/android-studio/bin/studio.sh"
+}

@@ -8,8 +8,11 @@ import { withChangedTitle, withUser, withNotify } from "../../context";
 import { uploadStudyMaterial } from "../../store/actions";
 import { connect } from "react-redux";
 import { FileChooser } from "@ionic-native/file-chooser";
+import { AndroidPermissions } from "@ionic-native/android-permissions";
+import { FilePickerPlugin} from "capacitor-filepicker-plugin";
 
 window.FileChooser = FileChooser;
+window.FilePickerPlugin = FilePickerPlugin;
 
 class AddStudyMaterialPage extends Component {
 
@@ -70,6 +73,7 @@ class AddStudyMaterialPage extends Component {
     onFileChooserClick = async () => {
         if(window.cordova) {
             alert("Select file");
+            window.AndroidPermissions = AndroidPermissions;
             FileChooser.open().then(async (uri) => {
                 let fileUrl = window.Ionic.WebView.convertFileSrc(uri);
                 window.receivedUri = uri;

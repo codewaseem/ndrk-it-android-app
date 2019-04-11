@@ -1,7 +1,7 @@
 {
   "name": "NDRK IT",
   "integrations": {
-    "cordova": {}
+    "capacitor": {}
   },
   "type": "custom"
 }

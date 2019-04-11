@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NDRK IT</string>
+    <string name="title_activity_main">NDRK IT</string>
+    <string name="package_name">in.ndrk.it</string>
+    <string name="fileprovider_authority">in.ndrk.it.fileprovider</string>
+    <string name="custom_url_scheme">in.ndrk.it</string>
+</resources>
