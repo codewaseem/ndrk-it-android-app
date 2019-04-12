@@ -241,9 +241,9 @@ export const addEvent = (data) => {
     );
 }
 
-export const getUpcomingEvents = () => {
+export const getUpcomingEvents = (branchType="all") => {
     return asyncQueryActionHelper(
-        EventManager.getUpcomingEvents,
+        branchType === "all" ? EventManager.getCommonEvents : EventManager.getBranchEvents,
         null,
         null,
         "Getting upcoming events...",
@@ -259,9 +259,9 @@ export const addCircular = (data) => {
     );
 }
 
-export const getCirculars = () => {
+export const getCirculars = (branchType="all") => {
     return asyncQueryActionHelper(
-        CircularManager.getCirculars,
+        branchType === "all" ? CircularManager.getCommonCirculars : CircularManager.getBranchCirculars,
         null,
         null,
         "Getting circulars...",

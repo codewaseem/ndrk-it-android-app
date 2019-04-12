@@ -359,17 +359,26 @@ export const EventManager = (function () {
         return savedEvent.attributes;
     }
 
-    async function getUpcomingEvents() {
+    async function getCommonEvents() {
         let query = new Query(CollegeEvent);
+        query.equalTo("branch", "all");
         let events = await query.find();
         if (!events) throw new Error("Failed to get events");
+        return events.map(event => event.attributes).filter((e => e.datetime > Date.now()));
+    }
 
-        return events.map(event => event.attributes).filter((ev => ev.datetime > Date.now()));
+    async function getBranchEvents() {
+        let query = new Query(CollegeEvent);
+        query.equalTo("branch", UserManager.getCurrentUser() ? UserManager.getCurrentUser().branch : "all");
+        let events = await query.find();
+        if (!events) throw new Error("Failed to get events");
+        return events.map(event => event.attributes).filter((e => e.datetime > Date.now()));
     }
 
     return {
         add,
-        getUpcomingEvents
+        getCommonEvents,
+        getBranchEvents
     };
 })();
 
@@ -408,8 +417,17 @@ export const CircularManager = (function () {
         return savedCircular.attributes;
     }
 
-    async function getCirculars() {
+    async function getCommonCirculars() {
         let query = new Query(Circular);
+        query.equalTo("branch", "all");
+        let circulars = await query.find();
+        if (!circulars) throw new Error("Failed to get circulars");
+        return circulars.map(circular => circular.attributes).filter((c => c.endDatetime > Date.now()));
+    }
+
+    async function getBranchCirculars() {
+        let query = new Query(Circular);
+        query.equalTo("branch", UserManager.getCurrentUser() ? UserManager.getCurrentUser().branch : "all");
         let circulars = await query.find();
         if (!circulars) throw new Error("Failed to get circulars");
         return circulars.map(circular => circular.attributes).filter((c => c.endDatetime > Date.now()));
@@ -417,7 +435,8 @@ export const CircularManager = (function () {
 
     return {
         add,
-        getCirculars
+        getCommonCirculars,
+        getBranchCirculars
     };
 })();
 

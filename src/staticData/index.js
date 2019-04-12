@@ -43,6 +43,8 @@ export const RoutesURL = {
     ADMIN_HOME: "/admin",
     PASSWORD_RESET: "/password-reset",
     LOGOUT: "/logout",
+    VIEW_EVENTS: "/common-events",
+    VIEW_CIRCULARS: "/common-circulars"
 };
 
 export const AdminHomeRoutes = {
@@ -246,8 +248,8 @@ export const FacultyHomeOptions = [
 
 
 export const StudentHomeRoutes = {
-    VIEW_EVENT : "/view-event",
-    VIEW_CIRCULAR: "/view-circular",
+    VIEW_EVENTS : "/branch-events",
+    VIEW_CIRCULARS: "/branch-circulars",
     VIEW_STUDY_MATERIALS : "/view-study-material",
     CHAT : "/chat",
     EXAMS: "/exams",
@@ -277,6 +279,16 @@ export const StudentHomeOptions = [
         url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_STUDY_MATERIALS
     },
     {
+        name: "Branch Events",
+        imgSrc: imgEvent,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_EVENTS
+    },
+    {
+        name: "Branch Circulars",
+        imgSrc: imgNotification,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_CIRCULARS
+    },
+    {
         name: "Chat (Q&A)",
         imgSrc: imgAsk,
         url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.CHAT
@@ -292,14 +304,14 @@ export const StudentHomeOptions = [
 
 export const GeneralOptionsForStudents = [
     {
-        name: "View Event",
+        name: "Common Events",
         imgSrc: imgEvent,
-        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_EVENT
+        url: RoutesURL.VIEW_EVENTS
     },
     {
-        name: "View Circular",
+        name: "Common Circulars",
         imgSrc: imgNotification,
-        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_CIRCULAR
+        url: RoutesURL.VIEW_CIRCULARS
     },
     {
         name: "Facilities",

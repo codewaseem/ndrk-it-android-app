@@ -8,6 +8,7 @@ import { withChangedTitle, withUser } from "../../context";
 import ViewStudyMaterialsPage from "../ViewStudyMaterialsPage";
 import ExamPage from "../ExamPage";
 import ResultPage from "../ResultPage";
+import ViewEventsPage from "../ViewEventsPage";
 
 
 
@@ -47,8 +48,8 @@ class StudentHomePage extends Component {
                     <Route path={match.path + StudentHomeRoutes.EXAMS} component={ExamPage} />
                     <Route path={match.path + StudentHomeRoutes.RESULT} component={ResultPage} />
 
-                    {/* <Route path={match.path + StudentHomeRoutes.VIEW_EVENT} component={() => {}} /> */}
-                    {/* <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULAR} component={() => {}} /> */}
+                    <Route path={match.path + StudentHomeRoutes.VIEW_EVENTS} component={ViewEventsPage} />
+                    {/* <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULARS} component={() => {}} /> */}
                     <Route path={match.path + StudentHomeRoutes.VIEW_STUDY_MATERIALS} component={ViewStudyMaterialsPage} />
                     <Route component={FourNotFourPage} />
                 </Switch>

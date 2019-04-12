@@ -28,6 +28,7 @@ import HomePage from "./pages/HomePage";
 import AdminHomePage from './pages/AdminHomePage';
 import FourNotFourPage from './pages/FourNotFourPage';
 import StudentHomePage from './pages/StudentHomePage';
+import ViewEventsPage from './pages/ViewEventsPage';
 
 // import StudentHome from "./components/StudentHome";
 // import FacultyHome from "./components/FacultyHome";
@@ -73,6 +74,7 @@ class App extends Component {
                   <Route path={RoutesURL.FACULTY_HOME} component={FacultyHomePage} />
                   <Route path={RoutesURL.ADMIN_HOME} component={AdminHomePage} />
                   <Route path={RoutesURL.STUDENT_HOME} component={StudentHomePage} />
+                  <Route path={RoutesURL.VIEW_EVENTS} component={ViewEventsPage} />
                   <Route path={RoutesURL.LOGOUT} component={LogoutPage} />
                   <Route component={FourNotFourPage} />
                 </Switch>
