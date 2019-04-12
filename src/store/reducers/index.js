@@ -78,18 +78,10 @@ function chatReducer(chat = {
     switch (action.type) {
         case SET_MESSAGES: {
             let { messages } = action;
-            let newChat = {};
-            messages.forEach(message => {
-                if (!newChat[message.branch])
-                    newChat[message.branch] = chat[message.branch]
-
-                newChat[message.branch][message.academicYear] = [
-                    ...newChat[message.branch][message.academicYear],
-                    message
-                ];
-            });
+            let newChat = {...chat};
+            newChat[messages[0].branch][messages[0].academicYear] = messages;
+            
             return {
-                ...chat,
                 ...newChat
             };
 
