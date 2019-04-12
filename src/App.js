@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 
 import { START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE } from './store/actions';
 import { RoutesURL } from './staticData';
-import { TitleContext, withUser } from './context';
+import { withUser } from './context';
 import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -40,19 +40,6 @@ import ViewCircularsPage from './pages/ViewCircularsPage';
 
 class App extends Component {
 
-
-  changeTitle = (newTitle) => {
-    if (newTitle !== this.state.title)
-      this.setState(() => ({
-        title: newTitle
-      }));
-  }
-
-  state = {
-    title: "N.D.R.K",
-    changeTitle: this.changeTitle,
-  }
-
   componentDidMount() {
     !this.props.user && this.props.checkLogin();
   }
@@ -64,7 +51,6 @@ class App extends Component {
         <NotificationsSystem theme={theme} />
         <Router>
           <IonApp>
-            <TitleContext.Provider value={this.state}>
               <Header />
               <IonContent>
                 <Switch>
@@ -82,7 +68,6 @@ class App extends Component {
                   <Route component={FourNotFourPage} />
                 </Switch>
               </IonContent>
-            </TitleContext.Provider>
           </IonApp>
         </Router>
       </ReduxBlockUi>

@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
+import React, {  Component } from "react";
 import SectionedPage from "../SectionedPage";
 import TilesGrid from "../../components/TilesGrid";
 import { StudentHomeOptions, StudentHomeRoutes, GeneralOptionsForStudents } from "../../staticData";
-import { Route, Switch } from "react-router";
+import { Route, Switch, withRouter } from "react-router";
 import FourNotFourPage from "../FourNotFourPage";
 import { withChangedTitle, withUser, onlyStudent, withChat } from "../../context";
 import ViewStudyMaterialsPage from "../ViewStudyMaterialsPage";
@@ -16,7 +16,7 @@ import { User_Types } from "../../server";
 
 
 
-const StudentMenu = withUser((props) => {
+const StudentMenu =  withChangedTitle("Student Home")(withUser((props) => {
     const menu = (props) => (<TilesGrid tilesInfo={StudentHomeOptions} {...props} />);
     const generalMenu = (props) => (<TilesGrid tilesInfo={GeneralOptionsForStudents} {...props} />);
     return (<SectionedPage
@@ -37,13 +37,11 @@ const StudentMenu = withUser((props) => {
         ]}
         {...props}
     />);
-});
+}));
 
-class StudentHomePage extends PureComponent {
+class StudentHomePage extends Component {
 
-    state = {
-        titleSet:false
-    }
+   
     componentDidMount() {
         console.log(this.props);
         let user = this.props.user;
@@ -53,15 +51,19 @@ class StudentHomePage extends PureComponent {
         }
     }
 
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    
+    
     render() {
 
         const { match } = this.props;
         return (
             <React.Fragment>
                 <Switch>
-                    <Route exact path={match.path} component={() => {
-                        return <StudentMenu props={this.props} />
-                    }} />
+                    <Route exact path={match.path} component={StudentMenu} />
                     <Route path={match.path + StudentHomeRoutes.EXAMS} component={ExamPage} />
                     <Route path={match.path + StudentHomeRoutes.RESULT} component={ResultPage} />
 
@@ -69,7 +71,7 @@ class StudentHomePage extends PureComponent {
                     <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULARS} component={ViewCircularsPage} />
                     <Route path={match.path + StudentHomeRoutes.VIEW_STUDY_MATERIALS} component={ViewStudyMaterialsPage} />
                     <Route exact path={match.path + StudentHomeRoutes.CHAT} component={ChatPageSelector} />
-                    <Route path={match.path + StudentHomeRoutes.CHAT + "/:branch/:academicYear"} component={ChatPage} />
+                    <Route  path={match.path + StudentHomeRoutes.CHAT + "/:branch/:academicYear"} component={ChatPage} />
                     <Route component={FourNotFourPage} />
                 </Switch>
             </React.Fragment>
@@ -77,4 +79,4 @@ class StudentHomePage extends PureComponent {
     }
 }
 
-export default withChat(onlyStudent(withChangedTitle("Student Home")(StudentHomePage)));
+export default withChangedTitle("Student Home")(withRouter(withChat(onlyStudent((StudentHomePage)))));

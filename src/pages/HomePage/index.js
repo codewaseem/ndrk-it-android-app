@@ -13,6 +13,7 @@ class HomePage extends Component {
         const rowProps = { style: { height: "100%" }, "justify-content-between": true, "align-items-center": true };
         const colProps = { size: 4 };
         const { user } = this.props;
+
         let userOptions = [];
         if (user && user.type === User_Types.Admin) {
             userOptions = IfAdminOptions;
@@ -32,4 +33,4 @@ class HomePage extends Component {
     }
 }
 
-export default withUser(withChangedTitle("N.D.R.K")(HomePage));
+export default withChangedTitle("N.D.R.K")(withUser(HomePage));

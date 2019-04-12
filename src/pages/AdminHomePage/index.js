@@ -16,7 +16,7 @@ import { withChangedTitle, onlyAdmin, withUser } from "../../context";
 
 
 
-const AdminMenu = withUser((props) => {
+const AdminMenu = withChangedTitle("Admin Home")(withUser((props) => {
     const adminMenu = (props) => (<TilesGrid tilesInfo={AdminHomeOptions} {...props} />);
     const searchForm = QuickSearchForm;
     return (<SectionedPage
@@ -37,7 +37,7 @@ const AdminMenu = withUser((props) => {
         ]}
         {...props}
     />);
-});
+}));
 
 class AdminHomePage extends Component {
 

@@ -13,6 +13,15 @@ export const UNSET_USER = "UNSET_USER";
 export const SET_MESSAGES = "SET_MESSAGES";
 export const ADD_MESSAGE = "ADD_MESSAGE";
 
+export const SET_APP_TITLE = "SET_APP_TITLE";
+
+export const setAppTitle = (title) => {
+    return {
+        type: SET_APP_TITLE,
+        title
+    }
+}
+
 // Notification actions
 const successNotifyConfig = (title, message) => {
     return {

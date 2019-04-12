@@ -1,5 +1,5 @@
-import React, { createContext } from "react";
-import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages } from "../store/actions";
+import React from "react";
+import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages, setAppTitle } from "../store/actions";
 import { connect } from "react-redux";
 import { notify } from "reapop";
 import { RoutesURL } from "../staticData";
@@ -8,33 +8,38 @@ import { Redirect } from "react-router";
 import { getUserHomeUrl } from "../helpers";
 import { User_Types } from "../server";
 
-export const TitleContext = createContext({
-    title: "N.D.R.K",
-    changeTitle: () => { }
-});
-
 export function withChangedTitle(newTitle) {
 
     return function (OriginalComponent) {
-        class TitleChanger extends React.Component {
-
+        class Comp extends React.Component {
             componentDidMount() {
-                if (this.props.title !== newTitle)
-                    this.props.changeTitle(newTitle);
+                if (this.props.appTitle !== newTitle) {
+                    this.props.setAppTitle(newTitle);
+                }
             }
-
+            
             render() {
-                return <OriginalComponent {...this.props} />;
+                return <OriginalComponent {...this.props} />
             }
         }
 
-        return (props) => {
-            return (<TitleContext.Consumer>
-                {({ title, changeTitle }) => (<TitleChanger title={title} changeTitle={changeTitle} {...props} />)}
-            </TitleContext.Consumer>
-            )
+        const mapStateToProps = (state) => {
+            return {
+                appTitle: state.ui.appTitle
+            }
         }
+
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                setAppTitle: (newTitle) => {
+                    dispatch(setAppTitle(newTitle));
+                }
+            }
+        }
+
+        return connect(mapStateToProps, mapDispatchToProps)(Comp);
     }
+
 }
 
 export function withUser(OriginalComponent) {

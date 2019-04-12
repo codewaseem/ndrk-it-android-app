@@ -1,33 +1,42 @@
-import { SET_REDIRECT_PATH, START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER, SET_MESSAGES, ADD_MESSAGE } from "../actions";
+import { SET_REDIRECT_PATH, START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER, SET_MESSAGES, ADD_MESSAGE, SET_APP_TITLE } from "../actions";
 import { combineReducers } from "redux";
 import { reducer as notificationsReducer } from 'reapop';
 
 let defaultUiState = {
     isFetching: false,
     fetchingMessage: "",
-    redirectPath: ""
+    redirectPath: "",
+    appTitle: "N.D.R.K"
 };
 
 function uiReducer(uiState = defaultUiState, action) {
     switch (action.type) {
         case START_NETWORK_REQUEST: return {
+            ...uiState,
             isFetching: true,
             fetchingMessage: action.message,
         };
         case NETWORK_REQUEST_SUCCESS: return {
-            isFetching: false,
-            fetchingMessage: ""
-        };
-        case NETWORK_REQUEST_FAILURE: return {
-            isFetching: false,
-            fetchingMessage: ""
-        };
-        case SET_REDIRECT_PATH: return {
+            ...uiState,
             isFetching: false,
             fetchingMessage: "",
-            redirectPath: action.path
+        };
+        case NETWORK_REQUEST_FAILURE: return {
+            ...uiState,
+            isFetching: false,
+            fetchingMessage: "",
 
+        };
+        case SET_REDIRECT_PATH: return {
+            ...uiState,
+            redirectPath: action.path,
         }
+
+        case SET_APP_TITLE :  return {
+            ...uiState,
+            appTitle : action.title
+        }
+
         default: return uiState;
     }
 }

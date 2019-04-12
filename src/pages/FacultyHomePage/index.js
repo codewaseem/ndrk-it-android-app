@@ -14,7 +14,7 @@ import ChatPage from "../ChatPage";
 
 
 
-const FacultyMenu = withUser((props) => {
+const FacultyMenu = withChangedTitle("Faculty Home")(withUser((props) => {
     const adminMenu = (props) => (<TilesGrid tilesInfo={FacultyHomeOptions} {...props} />);
 
     return (<SectionedPage
@@ -31,7 +31,7 @@ const FacultyMenu = withUser((props) => {
         ]}
         {...props}
     />);
-});
+}));
 
 class FacultyHomePage extends Component {
 
