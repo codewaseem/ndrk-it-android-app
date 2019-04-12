@@ -7,7 +7,7 @@ import { Route, Switch } from "react-router";
 import FourNotFourPage from "../FourNotFourPage";
 import AddEventPage from "../AddEventPage";
 import AddCircularPage from "../AddCircularPage";
-import { withChangedTitle, withUser } from "../../context";
+import { withChangedTitle, withUser, onlyFaculty } from "../../context";
 import AddStudyMaterialPage from "../AddStudyMaterialPage";
 import ViewStudyMaterialsPage from "../ViewStudyMaterialsPage";
 import ChatPage from "../ChatPage";
@@ -21,7 +21,7 @@ const FacultyMenu = withUser((props) => {
         sectionsMap={[
             {
                 name: `Welcome, ${props.user && props.user.name}`,
-                component:null
+                component: null
             },
             {
                 name: "Faculty Menu",
@@ -54,4 +54,4 @@ class FacultyHomePage extends Component {
     }
 }
 
-export default withChangedTitle("Faculty Home")(FacultyHomePage);
+export default onlyFaculty(withChangedTitle("Faculty Home")(FacultyHomePage));

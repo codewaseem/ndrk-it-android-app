@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { getCirculars } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 import { IonCard, IonCardSubtitle, IonCardHeader, IonText, IonCardTitle, IonCardContent } from "@ionic/react";
+import moment from "moment";
 
 class ViewCircularsPage extends Component {
 
@@ -60,7 +61,7 @@ class ViewCircularsPage extends Component {
                                         <IonCard key={circular.endDatetime}>
                                             <IonCardHeader style={{ padding: "10px" }}>
                                                 <IonCardTitle>{circular.name}</IonCardTitle>
-                                                <IonCardSubtitle>Valid till {date.toLocaleDateString()}</IonCardSubtitle>
+                                                <IonCardSubtitle>Valid till {date.toLocaleDateString()} ({moment(circular.endDatetime).fromNow()}) </IonCardSubtitle>
                                             </IonCardHeader>
                                             <IonCardContent>
                                                 <IonText>

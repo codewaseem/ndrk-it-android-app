@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { getUpcomingEvents } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 import { IonCard, IonCardSubtitle, IonCardHeader, IonText, IonCardTitle, IonCardContent } from "@ionic/react";
+import moment from "moment";
 
 class ViewEventsPage extends Component {
 
@@ -65,7 +66,7 @@ class ViewEventsPage extends Component {
                                         <IonCard key={event.datetime}>
                                             <IonCardHeader style={{ padding: "10px" }}>
                                                 <IonCardTitle>{event.name}</IonCardTitle>
-                                                <IonCardSubtitle>On {date.toLocaleDateString()}, Starts at {hours < 10 ? "0" + hours : hours}:{minutes < 10 ? "0" + minutes : minutes} {amOrPm}</IonCardSubtitle>
+                                                <IonCardSubtitle>On {date.toLocaleDateString()}, Starts at {hours < 10 ? "0" + hours : hours}:{minutes < 10 ? "0" + minutes : minutes} {amOrPm} ({moment(event.datetime).fromNow()})</IonCardSubtitle>
                                             </IonCardHeader>
                                             <IonCardContent>
                                                 <IonText>

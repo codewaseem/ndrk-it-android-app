@@ -1,42 +1,58 @@
 import React, { Component } from "react";
 import "./style.css";
 import { IonButton, IonTextarea, IonIcon } from "@ionic/react";
+import { withChangedTitle, withChat } from "../../context";
+import { withRouter } from "react-router";
+import moment from "moment";
 
-const MessageBox = ({ from, me, message, datetime }) => {
+const MessageBox = ({ me, message }) => {
     return (
         <section className={`message-box-container ${me ? "me" : "you"}`}>
             <header>
-                {from} {me ? "(Me)" : ""}
+                {message.fromName} {me ? "(Me)" : ""}
             </header>
             <article>
-                {message}
+                {message.message}
             </article>
             <footer>
-                {new Date().toLocaleTimeString()}
+                {moment(message.createdAt).fromNow()}
             </footer>
         </section>
     );
 }
 
 class ChatPage extends Component {
+
+    scrollLastRef = React.createRef();
+
+    scrollToBottom = () => {
+        this.scrollLastRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    componentDidMount() {
+        if (this.props.user) {
+            let { branch, academicYear } = this.props.match.params;
+            this.props.getClassroomMessages({branch, academicYear});
+        }
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     render() {
+        let { branch, academicYear } = this.props.match.params;
+        let messages = this.props.chat[branch][academicYear] || [];
         return (
             <section className="chat-page">
                 <section className="messages">
-                    <MessageBox from="Darshan" message="When is the last date to submit the assignment?" />
-                    <MessageBox me from="Chandan" message="I don't know." />
-                    <MessageBox from="Nayan" message="Last date is next monday." />
-                    <MessageBox from="Darshan" message="Thanks!" />
-                    <MessageBox me from="Chandan" message="Thanks bro!" />
-                    <MessageBox me from="Chandan" message="Did you guys finish the assignment?" />
-                    <MessageBox from="Nayan" message="No!" />
-                    <MessageBox from="Darshan" message="Not yet!" />
-                    <MessageBox from="Nayan" message="Last date is next monday." />
-                    <MessageBox from="Darshan" message="Thanks!" />
-                    <MessageBox me from="Chandan" message="Thanks bro!" />
-                    <MessageBox me from="Chandan" message="Did you guys finish the assignment?" />
-                    <MessageBox from="Nayan" message="No!" />
-                    <MessageBox from="Darshan" message="Not yet!" />
+                    {
+                        messages.map(message => {
+                            return <MessageBox me={message.fromEmail === this.props.user.email} message={message} />;
+                        })
+                    }
+                    <div ref={this.scrollLastRef}></div>
                 </section>
                 <section className="write-message">
                     <IonTextarea style={{ maxWidth: "80%", height: "40px", background: "white", borderRadius: "20px" }} placeholder="Type a message"></IonTextarea>
@@ -48,4 +64,4 @@ class ChatPage extends Component {
 }
 
 
-export default ChatPage;
+export default withRouter(withChat(withChangedTitle("Classroom Chat")(ChatPage)));

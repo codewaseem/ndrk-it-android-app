@@ -14,6 +14,7 @@
     "cross-fetch": "^3.0.2",
     "font-awesome": "^4.7.0",
     "mime": "^2.4.2",
+    "moment": "^2.24.0",
     "parse": "^2.3.1",
     "react": "^16.8.5",
     "react-block-ui": "^1.1.3",

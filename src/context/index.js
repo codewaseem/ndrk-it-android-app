@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { checkLogin, login, studentSignUp, facultySignUp, logoutUser } from "../store/actions";
+import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages } from "../store/actions";
 import { connect } from "react-redux";
 import { notify } from "reapop";
 import { RoutesURL } from "../staticData";
@@ -17,8 +17,10 @@ export function withChangedTitle(newTitle) {
 
     return function (OriginalComponent) {
         class TitleChanger extends React.Component {
+
             componentDidMount() {
-                this.props.changeTitle(newTitle);
+                if (this.props.title !== newTitle)
+                    this.props.changeTitle(newTitle);
             }
 
             render() {
@@ -28,7 +30,7 @@ export function withChangedTitle(newTitle) {
 
         return (props) => {
             return (<TitleContext.Consumer>
-                {({ changeTitle }) => (<TitleChanger changeTitle={changeTitle} {...props} />)}
+                {({ title, changeTitle }) => (<TitleChanger title={title} changeTitle={changeTitle} {...props} />)}
             </TitleContext.Consumer>
             )
         }
@@ -135,9 +137,9 @@ export function onlyAdmin(OriginalComponent) {
     return connect(mapStateToProps)(Comp);
 }
 
-export function onlyNonStudent(OriginalComponent) {
+export function onlyFaculty(OriginalComponent) {
     const Comp = (props) => {
-        if (props.user && props.user.type !== User_Types.Student) {
+        if (props.user && props.user.type === User_Types.Faculty) {
             return <OriginalComponent {...props} />
         } else {
             return <Redirect to={RoutesURL.HOME} />
@@ -152,4 +154,47 @@ export function onlyNonStudent(OriginalComponent) {
     }
 
     return connect(mapStateToProps)(Comp);
+}
+
+export function onlyStudent(OriginalComponent) {
+    const Comp = (props) => {
+        if (props.user && props.user.type === User_Types.Student) {
+            return <OriginalComponent {...props} />
+        } else {
+            return <Redirect to={RoutesURL.HOME} />
+        }
+    }
+
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.auth.user
+        }
+    }
+
+    return connect(mapStateToProps)(Comp);
+}
+
+export function withChat(OriginalComponent) {
+
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.auth.user,
+            chat: state.chat
+        };
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            postMessage: (data) => {
+                return dispatch(postMessage(data));
+            },
+            getClassroomMessages: (data, silent) => {
+                return dispatch(getClassroomMessages(data, silent));
+            }
+        }
+    }
+
+    return connect(mapStateToProps, mapDispatchToProps)(OriginalComponent);
 }

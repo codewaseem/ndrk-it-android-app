@@ -537,6 +537,7 @@ ParseObject.registerSubclass("Message", Message);
 export const Messenger = (function () {
 
     function postMessage(message, branch, academicYear) {
+        academicYear = +academicYear;
         if (!message || !branch || !academicYear) {
             throw new Error("Please provide all the details");
         }
@@ -579,6 +580,7 @@ export const Messenger = (function () {
     }
 
     async function getClassroomMessages(branch, academicYear) {
+        academicYear = +academicYear;
         let byBranchQuery = new Query(Message);
         byBranchQuery.equalTo("branch", branch);
         let byAcademicYearQuery = new Query(Message);

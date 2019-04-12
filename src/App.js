@@ -42,9 +42,10 @@ class App extends Component {
 
 
   changeTitle = (newTitle) => {
-    this.setState(() => ({
-      title: newTitle
-    }));
+    if (newTitle !== this.state.title)
+      this.setState(() => ({
+        title: newTitle
+      }));
   }
 
   state = {
