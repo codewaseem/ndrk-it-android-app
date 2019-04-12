@@ -9,6 +9,7 @@ import ViewStudyMaterialsPage from "../ViewStudyMaterialsPage";
 import ExamPage from "../ExamPage";
 import ResultPage from "../ResultPage";
 import ViewEventsPage from "../ViewEventsPage";
+import ViewCircularsPage from "../ViewCircularsPage";
 
 
 
@@ -49,7 +50,7 @@ class StudentHomePage extends Component {
                     <Route path={match.path + StudentHomeRoutes.RESULT} component={ResultPage} />
 
                     <Route path={match.path + StudentHomeRoutes.VIEW_EVENTS} component={ViewEventsPage} />
-                    {/* <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULARS} component={() => {}} /> */}
+                    <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULARS} component={ViewCircularsPage} />
                     <Route path={match.path + StudentHomeRoutes.VIEW_STUDY_MATERIALS} component={ViewStudyMaterialsPage} />
                     <Route component={FourNotFourPage} />
                 </Switch>
