@@ -10,6 +10,7 @@ import ExamPage from "../ExamPage";
 import ResultPage from "../ResultPage";
 import ViewEventsPage from "../ViewEventsPage";
 import ViewCircularsPage from "../ViewCircularsPage";
+import ChatPage from "../ChatPage";
 
 
 
@@ -52,6 +53,7 @@ class StudentHomePage extends Component {
                     <Route path={match.path + StudentHomeRoutes.VIEW_EVENTS} component={ViewEventsPage} />
                     <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULARS} component={ViewCircularsPage} />
                     <Route path={match.path + StudentHomeRoutes.VIEW_STUDY_MATERIALS} component={ViewStudyMaterialsPage} />
+                    <Route path={match.path + StudentHomeRoutes.CHAT} component={ChatPage} />
                     <Route component={FourNotFourPage} />
                 </Switch>
             </React.Fragment>

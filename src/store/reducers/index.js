@@ -1,7 +1,6 @@
 import { SET_REDIRECT_PATH, START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER, SET_MESSAGES, ADD_MESSAGE } from "../actions";
 import { combineReducers } from "redux";
 import { reducer as notificationsReducer } from 'reapop';
-import { Branches } from "../../server";
 
 let defaultUiState = {
     isFetching: false,
@@ -80,7 +79,7 @@ function chatReducer(chat = {
             let { messages } = action;
             let newChat = {...chat};
             newChat[messages[0].branch][messages[0].academicYear] = messages;
-            
+
             return {
                 ...newChat
             };

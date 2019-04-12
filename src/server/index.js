@@ -516,7 +516,7 @@ export const StudyMaterialManager = (function () {
 
 class Message extends ParseObject {
     constructor() {
-        super("Message"); 
+        super("Message");
     }
 
     setFields(message, branch, academicYear, fromName, fromEmail) {
@@ -558,12 +558,12 @@ export const Messenger = (function () {
             throw new Error("You are not allowed to post message in this branch");
         }
 
-       return _saveMessage(message, branch, academicYear, name, email);
+        return _saveMessage(message, branch, academicYear, name, email);
     }
 
     async function _handleStudentPostMessage(message, givenBranch, givenYear) {
-        let {name, email, branch, academicYear} = UserManager.getCurrentUser();
-        if(givenBranch!=branch || givenYear != academicYear) {
+        let { name, email, branch, academicYear } = UserManager.getCurrentUser();
+        if (givenBranch !== branch || givenYear !== academicYear) {
             throw new Error("You are not allowed to post message here");
         }
 
@@ -583,7 +583,7 @@ export const Messenger = (function () {
         byBranchQuery.equalTo("branch", branch);
         let byAcademicYearQuery = new Query(Message);
         byAcademicYearQuery.equalTo("academicYear", academicYear);
-       
+
         let classroomMessagesQuery = new Query.and(
             byBranchQuery,
             byAcademicYearQuery
