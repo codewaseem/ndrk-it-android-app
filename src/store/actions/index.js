@@ -1,4 +1,4 @@
-import { UserManager, User_Types, EventManager, CircularManager, StudyMaterialManager } from "../../server";
+import { UserManager, User_Types, EventManager, CircularManager, StudyMaterialManager, Messenger } from "../../server";
 import { notify, POSITIONS } from 'reapop';
 // import { RoutesURL } from "../../staticData";
 
@@ -9,6 +9,9 @@ export const SET_REDIRECT_PATH = "SET_REDIRECT_PATH";
 
 export const SET_USER = "SET_USER";
 export const UNSET_USER = "UNSET_USER";
+
+export const SET_MESSAGES = "SET_MESSAGES";
+export const ADD_MESSAGE = "ADD_MESSAGE";
 
 // Notification actions
 const successNotifyConfig = (title, message) => {
@@ -77,6 +80,20 @@ export function setRedirectPath(path) {
     return {
         type: SET_REDIRECT_PATH,
         path
+    }
+}
+
+export function setMessages(messages) {
+    return {
+        type: SET_MESSAGES,
+        messages
+    }
+}
+
+export function addMessage(message) {
+    return {
+        type: ADD_MESSAGE,
+        message
     }
 }
 
@@ -241,14 +258,14 @@ export const addEvent = (data) => {
     );
 }
 
-export const getUpcomingEvents = (branchType="all") => {
+export const getUpcomingEvents = (branchType = "all") => {
     return asyncQueryActionHelper(
         branchType === "all" ? EventManager.getCommonEvents : EventManager.getBranchEvents,
         null,
         null,
         "Getting upcoming events...",
     )
-}  
+}
 
 export const addCircular = (data) => {
     return asyncQueryActionHelper(
@@ -259,7 +276,7 @@ export const addCircular = (data) => {
     );
 }
 
-export const getCirculars = (branchType="all") => {
+export const getCirculars = (branchType = "all") => {
     return asyncQueryActionHelper(
         branchType === "all" ? CircularManager.getCommonCirculars : CircularManager.getBranchCirculars,
         null,
@@ -285,3 +302,43 @@ export const getStudyMaterials = () => {
         "Getting study materials for your branch"
     )
 }
+
+export const postMessage = ({ message, branch, academicYear }) => {
+    return async function (dispatch) {
+        try {
+            let postedMessage = await Messenger.postMessage(message, branch, academicYear);
+            if (!postedMessage) {
+                dispatch(notify(failureNotifyConfig("Failed", "Failed to post the message")));
+                return;
+            } else {
+                dispatch(addMessage(postedMessage));
+                return postedMessage;
+            }
+
+        } catch (e) {
+            dispatch(notify(failureNotifyConfig("Error", e.message)));
+        }
+    }
+}
+
+export const getClassroomMessages = ({branch, academicYear}, silent=true) => {
+    return async function (dispatch) {
+        try {
+            (!silent) && dispatch(notify(successNotifyConfig("Syncing messages...")));
+            let messages = await Messenger.getClassroomMessages(branch, academicYear);
+            if(messages && messages.length) {
+                console.log('setting messages');
+                dispatch(setMessages(messages));
+            } else if(messages.length === 0) {
+                console.log("No messages yet!");
+                (!silent) && dispatch(notify({ ...successNotifyConfig("Done", "No messages yet!"), status: "info" }));
+            }
+        } catch (e) {
+            console.log(e);
+            (!silent) && dispatch(notify(failureNotifyConfig("Error", e.message)));
+        }
+    }
+}
+
+window.postMessage = postMessage;
+window.getClassroomMessages = getClassroomMessages;

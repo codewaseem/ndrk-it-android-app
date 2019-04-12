@@ -1,6 +1,7 @@
-import { SET_REDIRECT_PATH, START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER } from "../actions";
+import { SET_REDIRECT_PATH, START_NETWORK_REQUEST, NETWORK_REQUEST_SUCCESS, NETWORK_REQUEST_FAILURE, SET_USER, UNSET_USER, SET_MESSAGES, ADD_MESSAGE } from "../actions";
 import { combineReducers } from "redux";
 import { reducer as notificationsReducer } from 'reapop';
+import { Branches } from "../../server";
 
 let defaultUiState = {
     isFetching: false,
@@ -48,6 +49,61 @@ function authReducer(auth = defaultAuthState, action) {
     }
 }
 
+function chatReducer(chat = {
+    cs: {
+        1: [],
+        2: [],
+        3: [],
+        4: []
+    },
+    ec: {
+        1: [],
+        2: [],
+        3: [],
+        4: []
+    },
+    cv: {
+        1: [],
+        2: [],
+        3: [],
+        4: []
+    },
+    me: {
+        1: [],
+        2: [],
+        3: [],
+        4: []
+    }
+}, action) {
+    switch (action.type) {
+        case SET_MESSAGES: {
+            let { messages } = action;
+            let newChat = {};
+            messages.forEach(message => {
+                if (!newChat[message.branch])
+                    newChat[message.branch] = chat[message.branch]
+
+                newChat[message.branch][message.academicYear] = [
+                    ...newChat[message.branch][message.academicYear],
+                    message
+                ];
+            });
+            return {
+                ...chat,
+                ...newChat
+            };
+
+        }
+        case ADD_MESSAGE: {
+            let { branch, academicYear } = action.message;
+            let newChat = {...chat};
+            newChat[branch][academicYear] = [...chat[branch][academicYear], action.message];
+            return newChat;
+        };
+        default: return chat;
+    }
+}
+
 // default value for notifications
 const defaultNotification = {
     status: 'info',
@@ -61,7 +117,8 @@ const defaultNotification = {
 const rootReducer = combineReducers({
     notifications: notificationsReducer(defaultNotification),
     ui: uiReducer,
-    auth: authReducer
+    auth: authReducer,
+    chat: chatReducer
 });
 
 export default rootReducer;

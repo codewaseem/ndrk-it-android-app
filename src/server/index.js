@@ -513,10 +513,97 @@ export const StudyMaterialManager = (function () {
     }
 })();
 
+
+class Message extends ParseObject {
+    constructor() {
+        super("Message"); 
+    }
+
+    setFields(message, branch, academicYear, fromName, fromEmail) {
+        if (!message || !branch || !academicYear || !fromName || !fromEmail) {
+            throw new Error("Required details not provided! [Message]");
+        } else {
+            this.set("message", message);
+            this.set("branch", branch);
+            this.set("academicYear", academicYear);
+            this.set("fromName", fromName);
+            this.set("fromEmail", fromEmail);
+        }
+    }
+}
+
+ParseObject.registerSubclass("Message", Message);
+
+export const Messenger = (function () {
+
+    function postMessage(message, branch, academicYear) {
+        if (!message || !branch || !academicYear) {
+            throw new Error("Please provide all the details");
+        }
+        let currentUser = UserManager.getCurrentUser();
+        if (!currentUser) {
+            throw new Error("Please login first");
+        } else {
+            if (currentUser.type === User_Types.Faculty) {
+                return _handleFacultyPostMessage(message, branch, academicYear);
+            } else {
+                return _handleStudentPostMessage(message, branch, academicYear);
+            }
+        }
+    }
+
+    async function _handleFacultyPostMessage(message, givenBranch, academicYear) {
+        let { name, email, branch } = UserManager.getCurrentUser();
+        if (branch !== givenBranch) {
+            throw new Error("You are not allowed to post message in this branch");
+        }
+
+       return _saveMessage(message, branch, academicYear, name, email);
+    }
+
+    async function _handleStudentPostMessage(message, givenBranch, givenYear) {
+        let {name, email, branch, academicYear} = UserManager.getCurrentUser();
+        if(givenBranch!=branch || givenYear != academicYear) {
+            throw new Error("You are not allowed to post message here");
+        }
+
+        return _saveMessage(message, branch, academicYear, name, email);
+    }
+
+    async function _saveMessage(message, branch, academicYear, name, email) {
+        let newMessage = new Message();
+        newMessage.setFields(message, branch, academicYear, name, email);
+        let postedMessage = await newMessage.save();
+
+        return postedMessage.attributes;
+    }
+
+    async function getClassroomMessages(branch, academicYear) {
+        let byBranchQuery = new Query(Message);
+        byBranchQuery.equalTo("branch", branch);
+        let byAcademicYearQuery = new Query(Message);
+        byAcademicYearQuery.equalTo("academicYear", academicYear);
+       
+        let classroomMessagesQuery = new Query.and(
+            byBranchQuery,
+            byAcademicYearQuery
+        );
+
+        let messages = await classroomMessagesQuery.find();
+        return messages.map(message => message.attributes);
+    }
+
+    return {
+        postMessage,
+        getClassroomMessages
+    }
+})();
+
 window.UserManager = UserManager;
 window.EventManager = EventManager;
 window.CircularManager = CircularManager;
 window.StudyMaterialManager = StudyMaterialManager;
+window.Messenger = Messenger;
 
 window.testUserData = {
     name: "Admin",
