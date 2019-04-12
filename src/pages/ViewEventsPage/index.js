@@ -56,9 +56,8 @@ class ViewEventsPage extends Component {
                             <React.Fragment>
                                 {this.state.events.map(event => {
                                     let date = new Date(event.datetime);
-                                    let dateString = date.toLocaleDateString();
-                                    let amOrPm = (hours % 24) >= 12 ? "PM" : "AM";
                                     let hours = date.getHours();
+                                    let amOrPm = (hours % 24) >= 12 ? "PM" : "AM";
                                     let minutes = date.getMinutes();
                                     hours = hours % 12 === 0 ? 12 : hours % 12;
 
