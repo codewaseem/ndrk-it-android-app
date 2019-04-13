@@ -37,7 +37,8 @@
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "ionic:build": "yarn build"
+    "ionic:build": "yarn build",
+    "build-native" : "yarn build && ionic cap update && ionic cap sync && ionic cap copy && ionic cap open android"
   },
   "eslintConfig": {
     "extends": "react-app"
