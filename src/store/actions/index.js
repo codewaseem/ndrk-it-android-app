@@ -336,10 +336,8 @@ export const getClassroomMessages = ({ branch, academicYear }, silent = true) =>
             (!silent) && dispatch(notify(successNotifyConfig("Syncing messages...")));
             let messages = await Messenger.getClassroomMessages(branch, academicYear);
             if (messages && messages.length) {
-                console.log('setting messages');
                 dispatch(setMessages(messages));
             } else if (messages.length === 0) {
-                console.log("No messages yet!");
                 (!silent) && dispatch(notify({ ...successNotifyConfig("Done", "No messages yet!"), status: "info" }));
             }
         } catch (e) {
@@ -351,7 +349,6 @@ export const getClassroomMessages = ({ branch, academicYear }, silent = true) =>
 
 export const subscribeToClassroom = ({ branch, academicYear }, onMessageReceived) => {
     return async function (dispatch) {
-        console.log(branch, academicYear);
         let subscription = await Messenger.subscribeToClassroom(branch, academicYear, (message) => {
             dispatch(addMessage(message));
             if (onMessageReceived && typeof onMessageReceived === "function") {

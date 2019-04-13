@@ -109,7 +109,7 @@ const defaultNotification = {
     status: 'info',
     position: 'bc',
     dismissible: true,
-    dismissAfter: 5000,
+    dismissAfter: 2500,
     allowHTML: true,
     closeButton: true
 };

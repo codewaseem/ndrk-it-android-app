@@ -43,7 +43,6 @@ class StudentHomePage extends Component {
 
    
     componentDidMount() {
-        console.log(this.props);
         let user = this.props.user;
         if (user && user.type === User_Types.Student) {
             let { branch, academicYear } = user;

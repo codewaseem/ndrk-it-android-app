@@ -7,31 +7,31 @@ import moment from "moment";
 import { playSound } from "../../helpers";
 
 moment.updateLocale('en', {
-    relativeTime : {
-        past: function(input) {
-          return input === 'just now'
-            ? input
-            : input + ' ago'
+    relativeTime: {
+        past: function (input) {
+            return input === 'just now'
+                ? input
+                : input + ' ago'
         },
-        s  : 'just now',
+        s: 'just now',
         future: "in %s",
-        ss : '%d seconds',
-        m:  "a minute",
+        ss: '%d seconds',
+        m: "a minute",
         mm: "%d minutes",
-        h:  "an hour",
+        h: "an hour",
         hh: "%d hours",
-        d:  "a day",
+        d: "a day",
         dd: "%d days",
-        M:  "a month",
+        M: "a month",
         MM: "%d months",
-        y:  "a year",
+        y: "a year",
         yy: "%d years"
     }
 });
 
 const MessageBox = ({ me, message, ...props }) => {
     return (
-        <section className={`message-box-container ${me ? "me" : "you"}`} {...props}>
+        <section className={`message-box-container ${me ? "me" : "you"} ${(!me && message.isFaculty) && "faculty"}`} {...props}>
             <header>
                 {message.fromName} {me ? "(Me)" : ""}
             </header>
@@ -61,11 +61,11 @@ class ChatPage extends Component {
     }
 
     startChatSync = async () => {
-        let {branch, academicYear} = this.props.match.params;
+        let { branch, academicYear } = this.props.match.params;
         this.chatSyncId = setInterval(() => {
-            this.props.getClassroomMessages({branch,  academicYear});
-        }, 60 * 1000);
-        this.props.subscribeToNewMessages({branch, academicYear}, () => {
+            this.props.getClassroomMessages({ branch, academicYear });
+        }, 30 * 1000);
+        this.props.subscribeToNewMessages({ branch, academicYear }, () => {
             playSound();
         });
     }
@@ -132,7 +132,7 @@ class ChatPage extends Component {
     componentDidMount() {
         if (this.props.user) {
             let { branch, academicYear } = this.props.match.params;
-            this.props.getClassroomMessages({ branch, academicYear });
+            this.props.getClassroomMessages({ branch, academicYear }, false);
         }
         this.scrollToBottom();
         this.startChatSync();
@@ -142,10 +142,10 @@ class ChatPage extends Component {
         this.scrollToBottom();
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.stopChatSync();
     }
-    
+
     onChangeHandler = (e) => {
 
 

@@ -10,7 +10,7 @@
 
 .message-box-container>header {
     font-size: xx-small;
-    color: darkslategray;
+    color: teal;
     margin-top:-15px;
 }
 
@@ -91,3 +91,19 @@
     justify-content: space-around;
 }
 
+.message-box-container.you.faculty {
+    background-color: #1e2023;
+    color: white;
+}
+
+.message-box-container.you.faculty::before {
+    background-color: #1e2023;
+}
+
+.message-box-container.you.faculty>header{
+    color: darkcyan;
+}
+
+.message-box-container.you.faculty>footer {
+    color: lightgray;
+}

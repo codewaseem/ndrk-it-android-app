@@ -519,7 +519,7 @@ class Message extends ParseObject {
         super("Message");
     }
 
-    setFields(message, branch, academicYear, fromName, fromEmail) {
+    setFields(message, branch, academicYear, fromName, fromEmail, isFaculty = false) {
         if (!message || !branch || !academicYear || !fromName || !fromEmail) {
             throw new Error("Required details not provided! [Message]");
         } else {
@@ -528,6 +528,7 @@ class Message extends ParseObject {
             this.set("academicYear", academicYear);
             this.set("fromName", fromName);
             this.set("fromEmail", fromEmail);
+            this.set("isFaculty", isFaculty);
         }
     }
 }
@@ -561,7 +562,7 @@ export const Messenger = (function () {
             throw new Error("You are not allowed to post message in this branch");
         }
 
-        return _saveMessage(message, branch, academicYear, name, email);
+        return _saveMessage(message, branch, academicYear, name, email, true);
     }
 
     async function _handleStudentPostMessage(message, givenBranch, givenYear) {
@@ -573,9 +574,9 @@ export const Messenger = (function () {
         return _saveMessage(message, branch, academicYear, name, email);
     }
 
-    async function _saveMessage(message, branch, academicYear, name, email) {
+    async function _saveMessage(message, branch, academicYear, name, email, isFaculty = false) {
         let newMessage = new Message();
-        newMessage.setFields(message, branch, academicYear, name, email);
+        newMessage.setFields(message, branch, academicYear, name, email, isFaculty);
         let postedMessage = await newMessage.save();
 
         return postedMessage.attributes;
@@ -591,7 +592,7 @@ export const Messenger = (function () {
         return messages.map(message => message.attributes);
     }
 
-    async function subscribeToClassroom(branch, academicYear, onMessageReceived = () => {}) {
+    async function subscribeToClassroom(branch, academicYear, onMessageReceived = () => { }) {
 
         if (!messageSubscription) {
             academicYear = +academicYear;
@@ -602,16 +603,16 @@ export const Messenger = (function () {
 
             messageSubscription = await query.subscribe();
             messageSubscription.on("create", (messageObj) => {
-               if(typeof onMessageReceived === "function"){
-                   onMessageReceived(messageObj.attributes);
-               }
+                if (typeof onMessageReceived === "function") {
+                    onMessageReceived(messageObj.attributes);
+                }
             });
 
         }
         return messageSubscription;
     }
 
-    async function unsubscribeFromClassroom( ){
+    async function unsubscribeFromClassroom() {
         messageSubscription = await messageSubscription.unsubscribe();
     }
 

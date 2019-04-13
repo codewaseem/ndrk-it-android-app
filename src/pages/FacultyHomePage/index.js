@@ -11,7 +11,7 @@ import { withChangedTitle, withUser, onlyFaculty } from "../../context";
 import AddStudyMaterialPage from "../AddStudyMaterialPage";
 import ViewStudyMaterialsPage from "../ViewStudyMaterialsPage";
 import ChatPage from "../ChatPage";
-
+import ChatPageSelector from "../ChatPageSelector";
 
 
 const FacultyMenu = withChangedTitle("Faculty Home")(withUser((props) => {
@@ -46,7 +46,8 @@ class FacultyHomePage extends Component {
                     <Route path={match.path + FacultyHomeRoutes.ADD_CIRCULAR} component={AddCircularPage} />
                     <Route path={match.path + FacultyHomeRoutes.ADD_STUDY_MATERIALS} component={AddStudyMaterialPage} />
                     <Route path={match.path + FacultyHomeRoutes.VIEW_STUDY_MATERIALS} component={ViewStudyMaterialsPage} />
-                    <Route path={match.path + FacultyHomeRoutes.CHAT} component={ChatPage} />
+                    <Route exact path={match.path + FacultyHomeRoutes.CHAT} component={ChatPageSelector} />
+                    <Route  path={match.path + FacultyHomeRoutes.CHAT + "/:branch/:academicYear"} component={ChatPage} />
                     <Route component={FourNotFourPage} />
                 </Switch>
             </React.Fragment>

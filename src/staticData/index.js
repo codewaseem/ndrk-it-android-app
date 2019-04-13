@@ -7,6 +7,12 @@ import slide5 from "../images/5.jpg";
 import slide6 from "../images/6.jpg";
 import slide7 from "../images/7.jpg";
 
+import one from "../images/one.svg"
+import two from "../images/two.svg"
+import three from "../images/three.svg"
+import four from "../images/four.svg"
+
+
 import imgAbout from "../images/about.svg";
 import imgAdmission from "../images/admission.svg";
 import imgDepartment from "../images/department.svg";
@@ -333,4 +339,26 @@ export const GeneralOptionsForStudents = [
         imgSrc: imgContact,
         url: "/contact"
     }
+];
+
+export const getClassroomOptions = (branch) => [
+    {
+        name: "1st Year",
+        imgSrc: one,
+        url: "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/1",
+    },
+    {
+        name: "2nd Year",
+        imgSrc: two,
+        url:  "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/2",
+    },{
+        name: "3rd Year",
+        imgSrc: three,
+        url:  "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/3",
+    },{
+        name: "4th Year",
+        imgSrc: four,
+        url:  "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch +"/4",
+    },
+
 ];
