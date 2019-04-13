@@ -536,6 +536,8 @@ ParseObject.registerSubclass("Message", Message);
 
 export const Messenger = (function () {
 
+    let messageSubscription = undefined;
+
     function postMessage(message, branch, academicYear) {
         academicYear = +academicYear;
         if (!message || !branch || !academicYear) {
@@ -581,23 +583,44 @@ export const Messenger = (function () {
 
     async function getClassroomMessages(branch, academicYear) {
         academicYear = +academicYear;
-        let byBranchQuery = new Query(Message);
-        byBranchQuery.equalTo("branch", branch);
-        let byAcademicYearQuery = new Query(Message);
-        byAcademicYearQuery.equalTo("academicYear", academicYear);
+        let query = new Query(Message);
+        query.equalTo("branch", branch);
+        query.equalTo("academicYear", academicYear);
 
-        let classroomMessagesQuery = new Query.and(
-            byBranchQuery,
-            byAcademicYearQuery
-        );
-
-        let messages = await classroomMessagesQuery.find();
+        let messages = await query.find();
         return messages.map(message => message.attributes);
     }
 
+    async function subscribeToClassroom(branch, academicYear, onMessageReceived = () => {}) {
+
+        if (!messageSubscription) {
+            academicYear = +academicYear;
+            let query = new Query(Message);
+            query.equalTo("branch", branch);
+            query.equalTo("academicYear", academicYear);
+            query.notEqualTo("fromEmail", UserManager.getCurrentUser().email);
+
+            messageSubscription = await query.subscribe();
+            messageSubscription.on("create", (messageObj) => {
+               if(typeof onMessageReceived === "function"){
+                   onMessageReceived(messageObj.attributes);
+               }
+            });
+
+        }
+        return messageSubscription;
+    }
+
+    async function unsubscribeFromClassroom( ){
+        messageSubscription = await messageSubscription.unsubscribe();
+    }
+
+
     return {
         postMessage,
-        getClassroomMessages
+        getClassroomMessages,
+        subscribeToClassroom,
+        unsubscribeFromClassroom
     }
 })();
 

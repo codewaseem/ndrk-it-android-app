@@ -4,6 +4,7 @@ import { IonButton, IonTextarea, IonIcon } from "@ionic/react";
 import { withChangedTitle, withChat } from "../../context";
 import { withRouter } from "react-router";
 import moment from "moment";
+import { playSound } from "../../helpers";
 
 moment.updateLocale('en', {
     relativeTime : {
@@ -59,15 +60,19 @@ class ChatPage extends Component {
         tempDisplayMessage: null
     }
 
-    startChatSync = () => {
+    startChatSync = async () => {
         let {branch, academicYear} = this.props.match.params;
         this.chatSyncId = setInterval(() => {
             this.props.getClassroomMessages({branch,  academicYear});
-        }, 15 * 1000);
+        }, 60 * 1000);
+        this.props.subscribeToNewMessages({branch, academicYear}, () => {
+            playSound();
+        });
     }
 
     stopChatSync = () => {
         clearInterval(this.chatSyncId);
+        this.props.unsubscribe();
     }
 
     handleSendButtonClick = async () => {

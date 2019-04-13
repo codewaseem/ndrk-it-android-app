@@ -1,5 +1,5 @@
 import React from "react";
-import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages, setAppTitle } from "../store/actions";
+import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages, setAppTitle, subscribeToClassroom, unsubscribeFromClassroom } from "../store/actions";
 import { connect } from "react-redux";
 import { notify } from "reapop";
 import { RoutesURL } from "../staticData";
@@ -197,6 +197,12 @@ export function withChat(OriginalComponent) {
             },
             getClassroomMessages: (data, silent) => {
                 return dispatch(getClassroomMessages(data, silent));
+            },
+            subscribeToNewMessages : (data, onMessage) => {
+                return dispatch(subscribeToClassroom(data, onMessage));
+            },
+            unsubscribe : () => {
+                return dispatch(unsubscribeFromClassroom());
             }
         }
     }
