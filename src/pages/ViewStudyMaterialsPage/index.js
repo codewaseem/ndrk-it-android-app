@@ -7,7 +7,7 @@ import { getStudyMaterials } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 import { IonGrid, IonRow, IonCol, IonCard, IonLabel, IonIcon, IonCardSubtitle, IonCardHeader, IonText, IonButton } from "@ionic/react";
 import { getPostfixedYear } from "../../helpers";
-import { noVerify as imgNoVerify } from "../../staticData/images";
+import { noVerify as imgNoVerify } from "../../staticData";
 
 class ViewStudyMaterials extends Component {
 

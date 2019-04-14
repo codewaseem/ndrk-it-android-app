@@ -7,7 +7,7 @@ import { FormImage } from "../../components/FormItems";
 import { connect } from "react-redux";
 import { getUnverifiedAccountsAction } from "../../store/actions";
 import { withChangedTitle, onlyAdmin } from "../../context";
-import { noVerify as imgNoVerify } from "../../staticData/images";
+import { noVerify as imgNoVerify } from "../../staticData";
 
 class VerifyAccountsPage extends Component {
 

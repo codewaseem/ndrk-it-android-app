@@ -7,7 +7,7 @@ import { Gender_Options, User_Types } from "../../server";
 import { connect } from "react-redux";
 import { findUserByEmailAction, setVerified, updateUserInfo } from "../../store/actions";
 import { withChangedTitle, onlyAdmin } from "../../context";
-import { usn as imgUsn, update as imgUpdate, name as imgName, year as imgYear, branch as imgBranch, noVerify as imgNoVerify } from "../../staticData/images";
+import { usn as imgUsn, update as imgUpdate, name as imgName, year as imgYear, branch as imgBranch, noVerify as imgNoVerify } from "../../staticData";
 
 
 class UpdateProfilePage extends Component {

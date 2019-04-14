@@ -11,7 +11,7 @@ const DepartmentsPage = () => {
                 departmentsInfo.map(department => {
                     return (
                         <IonCard key={department.title}>
-                            <img alt="Department Image" src={department.imgSrc}></img>
+                            <img alt="Department" src={department.imgSrc}></img>
                             <IonCardHeader style={{ textAlign: "center" }}>
                                 <IonCardTitle>{department.title}</IonCardTitle>
                             </IonCardHeader>

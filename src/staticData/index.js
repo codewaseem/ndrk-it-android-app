@@ -3,6 +3,7 @@ import * as imageStore from "./images";
 
 export { departmentsInfo } from "./departmentsPageInfo";
 
+export * from "./images";
 
 export const RoutesURL = {
     HOME: "/",

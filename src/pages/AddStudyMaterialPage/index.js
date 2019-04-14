@@ -7,7 +7,7 @@ import { uploadStudyMaterial } from "../../store/actions";
 import { connect } from "react-redux";
 import { Capacitor } from "@capacitor/core";
 import mime from "mime";
-import { studyMaterial as imgStudy, year as imgYear  } from "../../staticData/images";
+import { studyMaterial as imgStudy, year as imgYear  } from "../../staticData";
 
 
 class AddStudyMaterialPage extends Component {

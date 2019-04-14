@@ -5,7 +5,7 @@ import CenteredPage from "../CenteredPage";
 import { withChangedTitle } from "../../context";
 import { connect } from "react-redux";
 import { addEvent } from "../../store/actions";
-import { event as imgEvent } from "../../staticData/images";
+import { event as imgEvent } from "../../staticData";
 
 
 class AddEventPage extends Component {

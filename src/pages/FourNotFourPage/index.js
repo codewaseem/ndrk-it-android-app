@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import { four04 as img404 } from "../../staticData/images";
+import { four04 as img404 } from "../../staticData";
 import { FormImage } from "../../components/FormItems";
 import { IonText } from "@ionic/react";
 

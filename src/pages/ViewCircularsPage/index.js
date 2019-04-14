@@ -8,7 +8,7 @@ import { withChangedTitle } from "../../context";
 import { IonCard, IonCardSubtitle, IonCardHeader, IonText, IonCardTitle, IonCardContent } from "@ionic/react";
 import moment from "moment";
 import { RoutesURL } from "../../staticData";
-import { noVerify as imgNoVerify } from "../../staticData/images";
+import { noVerify as imgNoVerify } from "../../staticData";
 
 class ViewCircularsPage extends Component {
 

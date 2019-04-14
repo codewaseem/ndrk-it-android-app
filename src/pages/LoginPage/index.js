@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import { loginAvatar as imgLoginAvatar } from "../../staticData/images";
+import { loginAvatar as imgLoginAvatar } from "../../staticData";
 import { IonInput } from "@ionic/react";
 import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
 import { RoutesURL } from "../../staticData";

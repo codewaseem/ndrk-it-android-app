@@ -7,7 +7,7 @@ import { withChangedTitle, withUser, withNotify, onlyNonUser } from "../../conte
 import { Link, Redirect } from "react-router-dom";
 import { isValidEmail, isValidUsn, getBranchCodeFromUSN } from "../../helpers";
 import { Gender_Options } from "../../server";
-import { student as imgStudentSignUp, name as imgName, year as imgYear, usn as imgUsn } from "../../staticData/images";
+import { student as imgStudentSignUp, name as imgName, year as imgYear, usn as imgUsn } from "../../staticData";
 
 class StudentSignUpPage extends Component {
 
