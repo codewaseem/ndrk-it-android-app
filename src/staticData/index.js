@@ -50,7 +50,16 @@ export const RoutesURL = {
     PASSWORD_RESET: "/password-reset",
     LOGOUT: "/logout",
     VIEW_EVENTS: "/common-events",
-    VIEW_CIRCULARS: "/common-circulars"
+    VIEW_CIRCULARS: "/common-circulars",
+    ADMISSIONS: "/admissions",
+    ABOUT: "/about",
+    DEPARTMENTS: "/departments",
+    FACILITIES: "/facilities",
+    GALLERY : "/gallery",
+    LOCATE:"/locate",
+    CONTACT: "/contact",
+    EVENTS: "/events",
+    CIRCULAR: "/circulars"
 };
 
 export const AdminHomeRoutes = {
@@ -92,47 +101,47 @@ export const homePageOptions = [
     {
         name: "Admissions",
         imgSrc: imgAdmission,
-        url: "/admissions"
+        url: RoutesURL.ADMISSIONS
     },
     {
         name: "Departments",
         imgSrc: imgDepartment,
-        url: "/departments"
+        url: RoutesURL.DEPARTMENTS
     },
     {
         name: "Facilities",
         imgSrc: imgFacility,
-        url: "/facilities"
+        url: RoutesURL.FACILITIES
     },
     {
         name: "Events",
         imgSrc: imgEvent,
-        url: "/events"
+        url: RoutesURL.EVENTS
     },
     {
         name: "Gallery",
         imgSrc: imgGallery,
-        url: "/gallery"
+        url: RoutesURL.GALLERY
     },
     {
         name: "Notification",
         imgSrc: imgNotification,
-        url: "/notifications"
+        url: RoutesURL.CIRCULAR
     },
     {
         name: "About",
         imgSrc: imgAbout,
-        url: "/about"
+        url: RoutesURL.ABOUT
     },
     {
         name: "Locate",
         imgSrc: imgMap,
-        url: "/locate"
+        url: RoutesURL.LOCATE
     },
     {
         name: "Contact",
         imgSrc: imgContact,
-        url: "/contact"
+        url: RoutesURL.CONTACT
     }
 ];
 
@@ -260,7 +269,6 @@ export const StudentHomeRoutes = {
     CHAT : "/chat",
     EXAMS: "/exams",
     RESULT: "/results",
-    MY_PROFILE: "/my-profile"
 }
 
 export const StudentHomeOptions = [
@@ -300,12 +308,6 @@ export const StudentHomeOptions = [
         url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.CHAT
     },
     ...loginOrLogoutOptionsData.loggedIn
-
-    // {
-    //     name: "My Profile",
-    //     imgSrc: imgMyProfile, 
-    //     url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.MY_PROFILE
-    // }
 ];
 
 export const GeneralOptionsForStudents = [
@@ -322,22 +324,22 @@ export const GeneralOptionsForStudents = [
     {
         name: "Facilities",
         imgSrc: imgFacility,
-        url: "/facilities"
+        url: RoutesURL.FACILITIES
     },
     {
         name: "Gallery",
         imgSrc: imgGallery,
-        url: "/gallery"
+        url: RoutesURL.GALLERY
     },
     {
         name: "Locate",
         imgSrc: imgMap,
-        url: "/locate"
+        url: RoutesURL.LOCATE
     },
     {
         name: "Contact",
         imgSrc: imgContact,
-        url: "/contact"
+        url: RoutesURL.CONTACT
     }
 ];
 

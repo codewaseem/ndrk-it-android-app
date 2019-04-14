@@ -1,0 +1,22 @@
+.admission-section {
+    padding: 10px;
+}
+
+.admission-section section {
+    padding: 10px;
+}
+
+.admission-section h2 {
+    text-align: center;
+    text-decoration-line: underline;
+    text-decoration-color: teal;
+    font-size: 1.3em;
+}
+
+.admission-section p, .admission-section li {
+    font-size: small;
+}
+
+.admission-section section:not(:last-child) {
+    border-bottom: 2px solid teal;
+}
