@@ -6,6 +6,12 @@ import slide4 from "../images/4.jpg";
 import slide5 from "../images/5.jpg";
 import slide6 from "../images/6.jpg";
 import slide7 from "../images/7.jpg";
+import slide8 from "../images/slide8.jpg";
+import slide9 from "../images/slide9.jpg";
+import slide10 from "../images/slide10.jpg";
+import slide11 from "../images/slide11.jpg";
+import slide12 from "../images/slide12.jpg";
+import slide13 from "../images/slide13.jpg";
 
 import one from "../images/one.svg"
 import two from "../images/two.svg"
@@ -52,6 +58,12 @@ import mgv from "../images/mgv.jpg";
 import deepak from "../images/deepak.jpg";
 import defaultAvatar from "../images/user.svg";
 
+import lib1 from "../images/lib1.jpg";
+import lib2 from "../images/lib2.jpg";
+import lib3 from "../images/lib3.jpg";
+import lib4 from "../images/lib4.jpg";
+
+
 export {
     slide0,
     slide1,
@@ -61,6 +73,12 @@ export {
     slide5,
     slide6,
     slide7,
+    slide8,
+    slide9,
+    slide10,
+    slide11,
+    slide12,
+    slide13,
     one,
     two,
     three,
@@ -100,5 +118,9 @@ export {
     me,
     mgv,
     deepak,
-    defaultAvatar
+    defaultAvatar,
+    lib1,
+    lib2,
+    lib3,
+    lib4,
 };

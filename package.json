@@ -19,6 +19,8 @@
     "react": "^16.8.5",
     "react-block-ui": "^1.1.3",
     "react-dom": "^16.8.5",
+    "react-images": "^0.5.19",
+    "react-photo-gallery": "^6.3.4",
     "react-redux": "^6.0.1",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
@@ -38,7 +40,7 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "ionic:build": "yarn build",
-    "build-native" : "yarn build && ionic cap update && ionic cap sync && ionic cap copy && ionic cap open android"
+    "build-native": "yarn build && ionic cap update && ionic cap sync && ionic cap copy && ionic cap open android"
   },
   "eslintConfig": {
     "extends": "react-app"

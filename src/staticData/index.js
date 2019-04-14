@@ -2,6 +2,7 @@
 import * as imageStore from "./images";
 
 export { departmentsInfo } from "./departmentsPageInfo";
+export { facilitiesInfo } from "./facilitiesPageInfo";
 
 export * from "./images";
 
