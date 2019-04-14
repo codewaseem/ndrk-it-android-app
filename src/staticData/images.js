@@ -14,6 +14,14 @@ import slide12 from "../images/slide12.jpg";
 import slide13 from "../images/slide13.jpg";
 import founders from "../images/founders.jpg";
 import founders1 from "../images/founders1.jpg";
+import training1 from "../images/training1.jpg"
+import training2 from "../images/training2.jpg"
+import training3 from "../images/training3.jpg"
+import training4 from "../images/training4.jpg"
+import bus from "../images/bus.jpg";
+import sports from "../images/sports.jpg";
+import hostel from "../images/hostel.jpg";
+
 
 import chairperson from "../images/chairperson.jpg";
 
@@ -129,5 +137,12 @@ export {
     lib4,
     founders,
     founders1,
-    chairperson
+    chairperson,
+    training1,
+    training2,
+    training3,
+    training4,
+    bus,
+    sports,
+    hostel
 };

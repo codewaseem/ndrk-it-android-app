@@ -2,7 +2,7 @@ import React from "react";
 import Page from "../Page";
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/react';
 import { withChangedTitle } from "../../context";
-import { facilitiesInfo, defaultImageSliderOptions } from "../../staticData";
+import { facilitiesInfo, defaultImageSliderOptions, bus, hostel, sports } from "../../staticData";
 import ImageSlider from "../../components/ImageSlider";
 
 
@@ -13,7 +13,7 @@ const FacilitiesPage = () => {
                 facilitiesInfo.map(info => {
                     return (
                         <IonCard key={info.title}>
-                            <ImageSlider pager options={defaultImageSliderOptions} imagesData={info.images} style={{maxHeight:"250px"}} />
+                            <ImageSlider key={info.title} pager options={defaultImageSliderOptions} imagesData={info.images} style={{maxHeight:"250px"}} />
                             <IonCardHeader style={{ textAlign: "center" }}>
                                 <IonCardTitle>{info.title}</IonCardTitle>
                             </IonCardHeader>
@@ -27,7 +27,24 @@ const FacilitiesPage = () => {
                     );
                 })
             }
-
+            <IonCard>
+                <img src={bus} alt="Bus" />
+                <IonCardHeader>
+                    <IonCardTitle>Transportation</IonCardTitle>
+                </IonCardHeader>
+            </IonCard>
+            <IonCard>
+                <img src={hostel} alt="Hostel" />
+                <IonCardHeader>
+                    <IonCardTitle>Hostel</IonCardTitle>
+                </IonCardHeader>
+            </IonCard>
+            <IonCard>
+                <img src={sports} alt="Sports" />
+                <IonCardHeader>
+                    <IonCardTitle>Sports</IonCardTitle>
+                </IonCardHeader>
+            </IonCard>
         </Page>
     );
 }

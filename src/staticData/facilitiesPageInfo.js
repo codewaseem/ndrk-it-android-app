@@ -1,4 +1,4 @@
-import { slide2, lib1, lib2, lib3, lib4 } from "./images";
+import { slide2, lib1, lib2, lib3, lib4, training1, training2, training3, training4 } from "./images";
 
 export const facilitiesInfo = [
     {
@@ -20,5 +20,13 @@ along with 10 prominent dailies.
             `
         ]
 
+    },
+    {
+        images:[{src: training1, alt:"Library one"}, {src: training2, alt:"Library one"}, {src: training3, alt:"Library one"}, {src: training4, alt:"Library one"} ],
+        title: "Traning & Placement Aid",
+        paras: [
+            "The Training and Placement Cell, guided by a set of rules and principles, strives to maintain good relationship not only with industries/colleges but also within the college by coordinating with departments to achieve the mission of KIT. ",
+            "To generate students of competent standards so as to be successful in the corporate world. Also, to enhance the employability of our students by imparting the necessary skills to meet the expectations of the industry."
+        ]
     }
 ]
