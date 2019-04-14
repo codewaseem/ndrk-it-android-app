@@ -34,6 +34,7 @@ import AdmissionsPage from './pages/AdmissionsPage';
 import DepartmentsPage from './pages/DepartmentsPage';
 import FacilitiesPage from './pages/FacilitiesPage';
 import GalleryPage from './pages/GalleryPage';
+import AboutUsPage from './pages/AboutUsPage';
 
 class App extends Component {
 
@@ -66,6 +67,7 @@ class App extends Component {
                   <Route path={RoutesURL.CIRCULAR} component={ViewCircularsPage} />
                   <Route path={RoutesURL.FACILITIES} component={FacilitiesPage} />
                   <Route path={RoutesURL.GALLERY} component={GalleryPage} />
+                  <Route path={RoutesURL.ABOUT} component={AboutUsPage} />
                   <Route component={FourNotFourPage} />
                 </Switch>
               </IonContent>

@@ -12,6 +12,10 @@ import slide10 from "../images/slide10.jpg";
 import slide11 from "../images/slide11.jpg";
 import slide12 from "../images/slide12.jpg";
 import slide13 from "../images/slide13.jpg";
+import founders from "../images/founders.jpg";
+import founders1 from "../images/founders1.jpg";
+
+import chairperson from "../images/chairperson.jpg";
 
 import one from "../images/one.svg"
 import two from "../images/two.svg"
@@ -123,4 +127,7 @@ export {
     lib2,
     lib3,
     lib4,
+    founders,
+    founders1,
+    chairperson
 };
