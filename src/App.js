@@ -35,6 +35,7 @@ import DepartmentsPage from './pages/DepartmentsPage';
 import FacilitiesPage from './pages/FacilitiesPage';
 import GalleryPage from './pages/GalleryPage';
 import AboutUsPage from './pages/AboutUsPage';
+import LocateUsPage from './pages/LocateUsPage';
 
 class App extends Component {
 
@@ -68,6 +69,8 @@ class App extends Component {
                   <Route path={RoutesURL.FACILITIES} component={FacilitiesPage} />
                   <Route path={RoutesURL.GALLERY} component={GalleryPage} />
                   <Route path={RoutesURL.ABOUT} component={AboutUsPage} />
+                  <Route path={RoutesURL.LOCATE} component={LocateUsPage} />
+
                   <Route component={FourNotFourPage} />
                 </Switch>
               </IonContent>
