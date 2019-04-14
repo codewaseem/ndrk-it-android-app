@@ -10,9 +10,9 @@ const AboutUsPage = () => {
             <IonCard>
                 <img src={founders1} alt="Founder" />
                 <IonCardHeader>
-                    <IonCardSubtitle>
+                    <IonCardTitle>
                         Introduction
-                    </IonCardSubtitle>
+                    </IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
                     <IonText>
