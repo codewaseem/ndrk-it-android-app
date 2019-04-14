@@ -18,7 +18,7 @@ const AdmissionsPage = () => {
                All of our undergraduate degree programs are tech-focused and idea-driven, which means you’ll learn to speak the language of innovation 
                whether you’re studying computer science, electronics and communications, civil engineering, and mechanical engineering.
                </p>
-               <br />
+               <br /><br />
                <p>
                Apply for admission at  N.D.R.K I.T. 
                Our application is free, and we’re currently accepting applicants for our upcomming academic year 2019-2020.
@@ -31,8 +31,8 @@ const AdmissionsPage = () => {
                 <IonCardHeader color="dark"> <IonCardTitle>Courses Offered</IonCardTitle></IonCardHeader>
                <IonCardContent style={{paddingTop:"10px"}}>
                    <ul>
-                       <li>Computer Science & Engineering</li>
-                       <li>Electronics and Communications</li>
+                       <li>Computer Science Engineering</li>
+                       <li>Electronic Communications Engineering</li>
                        <li>Civil Engineering</li>
                        <li>Mechanical Engineering</li>
                    </ul>
@@ -49,7 +49,7 @@ const AdmissionsPage = () => {
                        aggregate of 45% for general-merit students and 40% for reserved categories students.   
                         
                    </p>
-               <br />
+               <br /><br />
 
                    <p>
                        Students who have completed 3-years of diploma in engineering can directly join for
@@ -67,7 +67,7 @@ const AdmissionsPage = () => {
                    Get in touch with our admission counselor to discuss your need and determine your best pathway to an affordable education at N.D.R.K I.T!   
                         
                    </p>
-               <br />
+               <br /><br />
                    
                    <p>
                         Our fees are as per the government norms with no additional management fees for C.E.T/N.E.E.T students.

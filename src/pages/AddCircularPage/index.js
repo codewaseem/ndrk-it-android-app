@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { IonInput, IonTextarea } from "@ionic/react";
-import imgNotification from "../../images/notification.svg";
 import { FormItem, FormIconLabel, FormButton, FormImage, Form, DateTimeInput } from "../../components/FormItems";
 import CenteredPage from "../CenteredPage";
 import { withChangedTitle } from "../../context";
 import { connect } from "react-redux";
 import { addCircular } from "../../store/actions";
+import { notification as imgNotification } from "../../staticData/images";
 
 class AddCircularPage extends Component {
 

@@ -1,41 +1,7 @@
-import slide0 from "../images/0.jpg";
-import slide1 from "../images/1.jpg";
-import slide2 from "../images/2.jpg";
-import slide3 from "../images/3.jpg";
-import slide4 from "../images/4.jpg";
-import slide5 from "../images/5.jpg";
-import slide6 from "../images/6.jpg";
-import slide7 from "../images/7.jpg";
 
-import one from "../images/one.svg"
-import two from "../images/two.svg"
-import three from "../images/three.svg"
-import four from "../images/four.svg"
+import * as imageStore from "./images";
 
-
-import imgAbout from "../images/about.svg";
-import imgAdmission from "../images/admission.svg";
-import imgDepartment from "../images/department.svg";
-import imgFacility from "../images/facility.svg";
-import imgEvent from "../images/event.svg";
-import imgGallery from "../images/gallery.svg";
-import imgMap from "../images/locate.svg";
-import imgContact from "../images/contact.svg";
-import imgNotification from "../images/notification.svg";
-import imgLogin from "../images/login.svg";
-import imgSignup from "../images/signup.svg";
-import imgLogout from "../images/logout.svg";
-import imgVerify from "../images/verify.svg";
-import imgStudent from "../images/student_signup.svg";
-import imgFaculty from "../images/lecturer.svg";
-import imgHome from "../images/home.svg";
-import imgExam from "../images/exam.svg";
-import imgResult from "../images/result.svg";
-import imgStudyMaterial from "../images/study_material.svg";
-import imgAsk from "../images/ask.svg";
-import imgBook from "../images/notebook.svg";
-// import imgMyProfile from "../images/myprofile.svg";
-
+export { departmentsInfo } from "./departmentsPageInfo";
 
 
 export const RoutesURL = {
@@ -49,23 +15,21 @@ export const RoutesURL = {
     ADMIN_HOME: "/admin",
     PASSWORD_RESET: "/password-reset",
     LOGOUT: "/logout",
-    VIEW_EVENTS: "/common-events",
-    VIEW_CIRCULARS: "/common-circulars",
     ADMISSIONS: "/admissions",
     ABOUT: "/about",
     DEPARTMENTS: "/departments",
     FACILITIES: "/facilities",
-    GALLERY : "/gallery",
-    LOCATE:"/locate",
+    GALLERY: "/gallery",
+    LOCATE: "/locate",
     CONTACT: "/contact",
-    EVENTS: "/events",
-    CIRCULAR: "/circulars"
+    EVENTS: "/common-events",
+    CIRCULAR: "/common-circulars"
 };
 
 export const AdminHomeRoutes = {
-    VERIFY_ACCOUNTS : "/verify-accounts",
-    VIEW_STUDENTS : "/view-students",
-    VIEW_FACULTY : "/view-faculty",
+    VERIFY_ACCOUNTS: "/verify-accounts",
+    VIEW_STUDENTS: "/view-students",
+    VIEW_FACULTY: "/view-faculty",
     ADD_EVENT: "/add-event",
     ADD_CIRCULAR: "/add-circular",
     UPDATE_PROFILE: "/update-profile"
@@ -77,14 +41,14 @@ export const PARSE_APP_ID = "APPLICATION_ID";
 export const STUDENT_SIGNUP_URL = PARSE_SERVER_URL + "/student-signup"
 
 export const homePageSliderImagesData = [
-    { src: slide0, alt: "Slide 0" },
-    { src: slide1, alt: "Slide 1" },
-    { src: slide2, alt: "Slide 2" },
-    { src: slide3, alt: "Slide 3" },
-    { src: slide4, alt: "Slide 4" },
-    { src: slide5, alt: "Slide 5" },
-    { src: slide6, alt: "Slide 6" },
-    { src: slide7, alt: "Slide 7" }
+    { src: imageStore.slide0, alt: "Slide 0" },
+    { src: imageStore.slide1, alt: "Slide 1" },
+    { src: imageStore.slide2, alt: "Slide 2" },
+    { src: imageStore.slide3, alt: "Slide 3" },
+    { src: imageStore.slide4, alt: "Slide 4" },
+    { src: imageStore.slide5, alt: "Slide 5" },
+    { src: imageStore.slide6, alt: "Slide 6" },
+    { src: imageStore.slide7, alt: "Slide 7" }
 ];
 
 
@@ -100,47 +64,47 @@ export const defaultImageSliderOptions = {
 export const homePageOptions = [
     {
         name: "Admissions",
-        imgSrc: imgAdmission,
+        imgSrc: imageStore.admission,
         url: RoutesURL.ADMISSIONS
     },
     {
         name: "Departments",
-        imgSrc: imgDepartment,
+        imgSrc: imageStore.department,
         url: RoutesURL.DEPARTMENTS
     },
     {
         name: "Facilities",
-        imgSrc: imgFacility,
+        imgSrc: imageStore.facility,
         url: RoutesURL.FACILITIES
     },
     {
         name: "Events",
-        imgSrc: imgEvent,
+        imgSrc: imageStore.event,
         url: RoutesURL.EVENTS
     },
     {
         name: "Gallery",
-        imgSrc: imgGallery,
+        imgSrc: imageStore.gallery,
         url: RoutesURL.GALLERY
     },
     {
         name: "Notification",
-        imgSrc: imgNotification,
+        imgSrc: imageStore.notification,
         url: RoutesURL.CIRCULAR
     },
     {
         name: "About",
-        imgSrc: imgAbout,
+        imgSrc: imageStore.about,
         url: RoutesURL.ABOUT
     },
     {
         name: "Locate",
-        imgSrc: imgMap,
+        imgSrc: imageStore.locate,
         url: RoutesURL.LOCATE
     },
     {
         name: "Contact",
-        imgSrc: imgContact,
+        imgSrc: imageStore.contact,
         url: RoutesURL.CONTACT
     }
 ];
@@ -148,7 +112,7 @@ export const homePageOptions = [
 export const IfAdminOptions = [
     {
         name: "Admin Home",
-        imgSrc: imgVerify,
+        imgSrc: imageStore.verify,
         url: "/admin"
     }
 ];
@@ -156,34 +120,34 @@ export const IfAdminOptions = [
 export const IfFacultyOptions = [
     {
         name: "Faculty Home",
-        imgSrc: imgFaculty,
-        url : "/faculty"
+        imgSrc: imageStore.faculty,
+        url: "/faculty"
     }
 ];
 
 export const IfStudentOptions = [
     {
         name: "Student Home",
-        imgSrc: imgStudent,
-        url : "/student"
+        imgSrc: imageStore.student,
+        url: "/student"
     }
 ]
 
 export const loginOrLogoutOptionsData = {
     loggedIn: [{
         name: "Logout",
-        imgSrc: imgLogout,
+        imgSrc: imageStore.logout,
         url: RoutesURL.LOGOUT
     }],
     loggedOut: [
         {
             name: "Sign Up",
-            imgSrc: imgSignup,
+            imgSrc: imageStore.signup,
             url: RoutesURL.STUDENT_SIGNUP
         },
         {
             name: "Login",
-            imgSrc: imgLogin,
+            imgSrc: imageStore.login,
             url: RoutesURL.LOGIN
         }
     ]
@@ -193,69 +157,69 @@ export const loginOrLogoutOptionsData = {
 export const AdminHomeOptions = [
     {
         name: "Verify Accounts",
-        imgSrc : imgVerify,
-        url : RoutesURL.ADMIN_HOME + AdminHomeRoutes.VERIFY_ACCOUNTS
+        imgSrc: imageStore.verify,
+        url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.VERIFY_ACCOUNTS
     },
     {
         name: "View Students",
-        imgSrc: imgStudent,
+        imgSrc: imageStore.student,
         url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.VIEW_STUDENTS
     },
     {
         name: "View Faculty",
-        imgSrc: imgFaculty,
+        imgSrc: imageStore.faculty,
         url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.VIEW_FACULTY
     },
     {
-        name:"Add Event",
-        imgSrc: imgEvent,
+        name: "Add Event",
+        imgSrc: imageStore.event,
         url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.ADD_EVENT
     },
     {
-        name:"Add Circular",
-        imgSrc: imgNotification,
-        url:RoutesURL.ADMIN_HOME + AdminHomeRoutes.ADD_CIRCULAR
+        name: "Add Circular",
+        imgSrc: imageStore.notification,
+        url: RoutesURL.ADMIN_HOME + AdminHomeRoutes.ADD_CIRCULAR
     },
     ...loginOrLogoutOptionsData.loggedIn
 ];
 
 export const FacultyHomeRoutes = {
-    ADD_EVENT : "/add-event",
+    ADD_EVENT: "/add-event",
     ADD_CIRCULAR: "/add-circular",
-    ADD_STUDY_MATERIALS : "/add-study-material",
-    VIEW_STUDY_MATERIALS : "/view-study-material",
-    CHAT : "/chat",
+    ADD_STUDY_MATERIALS: "/add-study-material",
+    VIEW_STUDY_MATERIALS: "/view-study-material",
+    CHAT: "/chat",
 }
 
 export const FacultyHomeOptions = [
     {
         name: "Home",
-        imgSrc : imgHome,
-        url : RoutesURL.HOME
+        imgSrc: imageStore.home,
+        url: RoutesURL.HOME
     },
     {
         name: "Add Event",
-        imgSrc: imgEvent,
+        imgSrc: imageStore.event,
         url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_EVENT
     },
     {
         name: "Add Circular",
-        imgSrc: imgNotification,
+        imgSrc: imageStore.notification,
         url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_CIRCULAR
     },
     {
         name: "Add Study Materials",
-        imgSrc: imgBook,
+        imgSrc: imageStore.book,
         url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.ADD_STUDY_MATERIALS
     },
     {
-        name : "View Study Materials",
-        imgSrc: imgStudyMaterial,
-        url : RoutesURL.FACULTY_HOME + FacultyHomeRoutes.VIEW_STUDY_MATERIALS
+        name: "View Study Materials",
+        imgSrc: imageStore.studyMaterial,
+        url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.VIEW_STUDY_MATERIALS
     },
     {
         name: "Chat (Q&A)",
-        imgSrc: imgAsk,
+        imgSrc: imageStore.ask,
         url: RoutesURL.FACULTY_HOME + FacultyHomeRoutes.CHAT
     },
     ...loginOrLogoutOptionsData.loggedIn
@@ -263,10 +227,10 @@ export const FacultyHomeOptions = [
 
 
 export const StudentHomeRoutes = {
-    VIEW_EVENTS : "/branch-events",
-    VIEW_CIRCULARS: "/branch-circulars",
-    VIEW_STUDY_MATERIALS : "/view-study-material",
-    CHAT : "/chat",
+    BRANCH_EVENTS: "/branch-events",
+    BRANCH_CIRCULARS: "/branch-circulars",
+    VIEW_STUDY_MATERIALS: "/view-study-material",
+    CHAT: "/chat",
     EXAMS: "/exams",
     RESULT: "/results",
 }
@@ -274,37 +238,37 @@ export const StudentHomeRoutes = {
 export const StudentHomeOptions = [
     {
         name: "Home",
-        imgSrc : imgHome,
-        url : RoutesURL.HOME
+        imgSrc: imageStore.home,
+        url: RoutesURL.HOME
     },
     {
         name: "Exams",
-        imgSrc : imgExam,
-        url : RoutesURL.STUDENT_HOME + StudentHomeRoutes.EXAMS
+        imgSrc: imageStore.exam,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.EXAMS
     },
     {
         name: "Results",
-        imgSrc : imgResult,
-        url : RoutesURL.STUDENT_HOME + StudentHomeRoutes.RESULT
+        imgSrc: imageStore.result,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.RESULT
     },
     {
         name: "View Study Materials",
-        imgSrc: imgStudyMaterial,
+        imgSrc: imageStore.studyMaterial,
         url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_STUDY_MATERIALS
     },
     {
         name: "Branch Events",
-        imgSrc: imgEvent,
-        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_EVENTS
+        imgSrc: imageStore.event,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.BRANCH_EVENTS
     },
     {
         name: "Branch Circulars",
-        imgSrc: imgNotification,
-        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.VIEW_CIRCULARS
+        imgSrc: imageStore.notification,
+        url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.BRANCH_CIRCULARS
     },
     {
         name: "Chat (Q&A)",
-        imgSrc: imgAsk,
+        imgSrc: imageStore.ask,
         url: RoutesURL.STUDENT_HOME + StudentHomeRoutes.CHAT
     },
     ...loginOrLogoutOptionsData.loggedIn
@@ -313,32 +277,32 @@ export const StudentHomeOptions = [
 export const GeneralOptionsForStudents = [
     {
         name: "Common Events",
-        imgSrc: imgEvent,
-        url: RoutesURL.VIEW_EVENTS
+        imgSrc: imageStore.event,
+        url: RoutesURL.EVENTS
     },
     {
         name: "Common Circulars",
-        imgSrc: imgNotification,
-        url: RoutesURL.VIEW_CIRCULARS
+        imgSrc: imageStore.notification,
+        url: RoutesURL.CIRCULAR
     },
     {
         name: "Facilities",
-        imgSrc: imgFacility,
+        imgSrc: imageStore.facility,
         url: RoutesURL.FACILITIES
     },
     {
         name: "Gallery",
-        imgSrc: imgGallery,
+        imgSrc: imageStore.gallery,
         url: RoutesURL.GALLERY
     },
     {
         name: "Locate",
-        imgSrc: imgMap,
+        imgSrc: imageStore.locate,
         url: RoutesURL.LOCATE
     },
     {
         name: "Contact",
-        imgSrc: imgContact,
+        imgSrc: imageStore.contact,
         url: RoutesURL.CONTACT
     }
 ];
@@ -346,21 +310,21 @@ export const GeneralOptionsForStudents = [
 export const getClassroomOptions = (branch) => [
     {
         name: "1st Year",
-        imgSrc: one,
+        imgSrc: imageStore.one,
         url: "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/1",
     },
     {
         name: "2nd Year",
-        imgSrc: two,
-        url:  "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/2",
-    },{
+        imgSrc: imageStore.two,
+        url: "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/2",
+    }, {
         name: "3rd Year",
-        imgSrc: three,
-        url:  "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/3",
-    },{
+        imgSrc: imageStore.three,
+        url: "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/3",
+    }, {
         name: "4th Year",
-        imgSrc: four,
-        url:  "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch +"/4",
+        imgSrc: imageStore.four,
+        url: "/faculty" + FacultyHomeRoutes.CHAT + "/" + branch + "/4",
     },
 
 ];

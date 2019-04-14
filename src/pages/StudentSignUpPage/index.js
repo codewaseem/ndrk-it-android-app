@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import imgStudentSignUp from "../../images/student_signup.svg";
-import imgUsn from "../../images/usn.svg";
-import imgName from "../../images/name.svg";
-import imgYear from "../../images/year.svg";
-
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
 import { RoutesURL } from "../../staticData";
@@ -12,6 +7,7 @@ import { withChangedTitle, withUser, withNotify, onlyNonUser } from "../../conte
 import { Link, Redirect } from "react-router-dom";
 import { isValidEmail, isValidUsn, getBranchCodeFromUSN } from "../../helpers";
 import { Gender_Options } from "../../server";
+import { student as imgStudentSignUp, name as imgName, year as imgYear, usn as imgUsn } from "../../staticData/images";
 
 class StudentSignUpPage extends Component {
 

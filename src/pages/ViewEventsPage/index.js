@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import SectionedPage from "../SectionedPage";
 import { FormImage } from "../../components/FormItems";
-import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getUpcomingEvents } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 import { IonCard, IonCardSubtitle, IonCardHeader, IonText, IonCardTitle, IonCardContent } from "@ionic/react";
 import moment from "moment";
+import { RoutesURL } from "../../staticData";
+import { noVerify as imgNoVerify } from "../../staticData/images";
 
 class ViewEventsPage extends Component {
 
@@ -22,7 +23,7 @@ class ViewEventsPage extends Component {
 
     getEvents = async () => {
         let type = "branch";
-        if (this.props.location.pathname === "/common-events")
+        if (this.props.location.pathname === RoutesURL.EVENTS)
             type = "all";
 
         let events = await this.props.getEvents(type);

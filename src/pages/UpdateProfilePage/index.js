@@ -2,17 +2,12 @@ import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import { Form, FormItem, FormIconLabel, FormImageLabel, SelectInput, FormButton } from "../../components/FormItems";
 import { IonInput, IonSelectOption, IonText } from "@ionic/react";
-import imgUsn from "../../images/usn.svg";
-import imgName from "../../images/name.svg";
-import imgYear from "../../images/year.svg";
-import imgBranch from "../../images/branch.svg";
 import { FormImage } from "../../components/FormItems";
-import imgNoVerify from "../../images/no-verify.svg";
-import imgUpdate from "../../images/update.svg";
 import { Gender_Options, User_Types } from "../../server";
 import { connect } from "react-redux";
 import { findUserByEmailAction, setVerified, updateUserInfo } from "../../store/actions";
 import { withChangedTitle, onlyAdmin } from "../../context";
+import { usn as imgUsn, update as imgUpdate, name as imgName, year as imgYear, branch as imgBranch, noVerify as imgNoVerify } from "../../staticData/images";
 
 
 class UpdateProfilePage extends Component {

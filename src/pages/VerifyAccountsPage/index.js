@@ -4,10 +4,10 @@ import { IonText } from "@ionic/react";
 import SectionedPage from "../SectionedPage";
 import UserInfoCardList from "../../components/UserInfoCardList";
 import { FormImage } from "../../components/FormItems";
-import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getUnverifiedAccountsAction } from "../../store/actions";
 import { withChangedTitle, onlyAdmin } from "../../context";
+import { noVerify as imgNoVerify } from "../../staticData/images";
 
 class VerifyAccountsPage extends Component {
 

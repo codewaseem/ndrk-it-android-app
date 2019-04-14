@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { IonInput, IonTextarea } from "@ionic/react";
-import imgEvent from "../../images/exam.svg";
 import { FormItem, FormIconLabel, FormButton, FormImage, Form, DateTimeInput } from "../../components/FormItems";
 import CenteredPage from "../CenteredPage";
 import { withChangedTitle } from "../../context";
 import { connect } from "react-redux";
 import { addEvent } from "../../store/actions";
+import { event as imgEvent } from "../../staticData/images";
+
 
 class AddEventPage extends Component {
 

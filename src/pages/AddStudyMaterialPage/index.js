@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import imgStudy from "../../images/study_material.svg";
-import imgYear from "../../images/year.svg";
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { FormItem, Form, FormButton, FormImage, FormIconLabel, FormImageLabel, SelectInput } from "../../components/FormItems";
 import { withChangedTitle, withUser, withNotify } from "../../context";
@@ -9,6 +7,8 @@ import { uploadStudyMaterial } from "../../store/actions";
 import { connect } from "react-redux";
 import { Capacitor } from "@capacitor/core";
 import mime from "mime";
+import { studyMaterial as imgStudy, year as imgYear  } from "../../staticData/images";
+
 
 class AddStudyMaterialPage extends Component {
 

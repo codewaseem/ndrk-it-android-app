@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import SectionedPage from "../SectionedPage";
 import { FormImage } from "../../components/FormItems";
-import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getStudyMaterials } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 import { IonGrid, IonRow, IonCol, IonCard, IonLabel, IonIcon, IonCardSubtitle, IonCardHeader, IonText, IonButton } from "@ionic/react";
 import { getPostfixedYear } from "../../helpers";
+import { noVerify as imgNoVerify } from "../../staticData/images";
 
 class ViewStudyMaterials extends Component {
 

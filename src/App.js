@@ -31,13 +31,7 @@ import StudentHomePage from './pages/StudentHomePage';
 import ViewEventsPage from './pages/ViewEventsPage';
 import ViewCircularsPage from './pages/ViewCircularsPage';
 import AdmissionsPage from './pages/AdmissionsPage';
-
-// import StudentHome from "./components/StudentHome";
-// import FacultyHome from "./components/FacultyHome";
-// import AdminHome from "./components/AdminHome";
-// import AddEventPage from "./pages/AddEventPage";
-// import ChatPage from "./components/ChatPage";
-// import AddCircularPage from "./pages/AddCircularPage";
+import DepartmentsPage from './pages/DepartmentsPage';
 
 class App extends Component {
 
@@ -63,10 +57,12 @@ class App extends Component {
                   <Route path={RoutesURL.FACULTY_HOME} component={FacultyHomePage} />
                   <Route path={RoutesURL.ADMIN_HOME} component={AdminHomePage} />
                   <Route path={RoutesURL.STUDENT_HOME} component={StudentHomePage} />
-                  <Route path={RoutesURL.VIEW_EVENTS} component={ViewEventsPage} />
-                  <Route path={RoutesURL.VIEW_CIRCULARS} component={ViewCircularsPage} />
                   <Route path={RoutesURL.LOGOUT} component={LogoutPage} />
                   <Route path={RoutesURL.ADMISSIONS} component={AdmissionsPage} />
+                  <Route path={RoutesURL.DEPARTMENTS} component={DepartmentsPage} />
+                  <Route path={RoutesURL.EVENTS} component={ViewEventsPage} />
+                  <Route path={RoutesURL.CIRCULAR} component={ViewCircularsPage} />
+
                   <Route component={FourNotFourPage} />
                 </Switch>
               </IonContent>

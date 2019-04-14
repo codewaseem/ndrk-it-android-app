@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import imgFaculty from "../../images/lecturer.svg";
-import imgBranch from "../../images/branch.svg";
-import imgName from "../../images/name.svg";
-
+import {faculty as imgFaculty, branch as imgBranch , name as imgName} from "../../staticData/images";
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
 // import { Link } from "react-router-dom";

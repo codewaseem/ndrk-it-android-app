@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import SectionedPage from "../SectionedPage";
 import { FormImage } from "../../components/FormItems";
-import imgNoVerify from "../../images/no-verify.svg";
 import { connect } from "react-redux";
 import { getCirculars } from "../../store/actions";
 import { withChangedTitle } from "../../context";
 import { IonCard, IonCardSubtitle, IonCardHeader, IonText, IonCardTitle, IonCardContent } from "@ionic/react";
 import moment from "moment";
+import { RoutesURL } from "../../staticData";
+import { noVerify as imgNoVerify } from "../../staticData/images";
 
 class ViewCircularsPage extends Component {
 
@@ -22,7 +23,7 @@ class ViewCircularsPage extends Component {
 
     getCirculars = async () => {
         let type = "branch";
-        if (this.props.location.pathname === "/common-circulars")
+        if (this.props.location.pathname === RoutesURL.CIRCULAR)
             type = "all";
 
         let circulars = await this.props.getCirculars(type);

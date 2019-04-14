@@ -66,8 +66,8 @@ class StudentHomePage extends Component {
                     <Route path={match.path + StudentHomeRoutes.EXAMS} component={ExamPage} />
                     <Route path={match.path + StudentHomeRoutes.RESULT} component={ResultPage} />
 
-                    <Route path={match.path + StudentHomeRoutes.VIEW_EVENTS} component={ViewEventsPage} />
-                    <Route path={match.path + StudentHomeRoutes.VIEW_CIRCULARS} component={ViewCircularsPage} />
+                    <Route path={match.path + StudentHomeRoutes.BRANCH_EVENTS} component={ViewEventsPage} />
+                    <Route path={match.path + StudentHomeRoutes.BRANCH_CIRCULARS} component={ViewCircularsPage} />
                     <Route path={match.path + StudentHomeRoutes.VIEW_STUDY_MATERIALS} component={ViewStudyMaterialsPage} />
                     <Route exact path={match.path + StudentHomeRoutes.CHAT} component={ChatPageSelector} />
                     <Route  path={match.path + StudentHomeRoutes.CHAT + "/:branch/:academicYear"} component={ChatPage} />
