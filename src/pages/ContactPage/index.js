@@ -1,6 +1,6 @@
 import React from "react";
 import Page from "../Page";
-import { IonCard, IonCardHeader, IonCardContent, IonText, IonCardSubtitle, IonCardTitle } from "@ionic/react";
+import { IonCard, IonCardHeader, IonCardContent, IonCardTitle } from "@ionic/react";
 import { slide0 } from "../../staticData";
 import { withChangedTitle } from "../../context";
 
