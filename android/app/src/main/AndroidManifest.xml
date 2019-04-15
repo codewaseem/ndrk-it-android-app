@@ -14,8 +14,6 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:name="in.ndrk.it.MainActivity"
             android:label="@string/title_activity_main"
-            android:exported="true"
-            android:enabled="true"
             android:theme="@style/AppTheme.NoActionBarLaunch">
 
             <intent-filter>

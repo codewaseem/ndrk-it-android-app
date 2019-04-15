@@ -37,6 +37,7 @@ import GalleryPage from './pages/GalleryPage';
 import AboutUsPage from './pages/AboutUsPage';
 import LocateUsPage from './pages/LocateUsPage';
 import ContactPage from './pages/ContactPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 class App extends Component {
 
@@ -72,6 +73,7 @@ class App extends Component {
                   <Route path={RoutesURL.ABOUT} component={AboutUsPage} />
                   <Route path={RoutesURL.LOCATE} component={LocateUsPage} />
                   <Route path={RoutesURL.CONTACT} component={ContactPage} />
+                  <Route path={RoutesURL.PASSWORD_RESET} component={ResetPasswordPage} />
                   <Route component={FourNotFourPage} />
                 </Switch>
               </IonContent>

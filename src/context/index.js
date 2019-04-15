@@ -1,5 +1,5 @@
 import React from "react";
-import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages, setAppTitle, subscribeToClassroom, unsubscribeFromClassroom } from "../store/actions";
+import { checkLogin, login, studentSignUp, facultySignUp, logoutUser, postMessage, getClassroomMessages, setAppTitle, subscribeToClassroom, unsubscribeFromClassroom, resetPassword } from "../store/actions";
 import { connect } from "react-redux";
 import { notify } from "reapop";
 import { RoutesURL } from "../staticData";
@@ -65,6 +65,9 @@ export function withUser(OriginalComponent) {
             },
             logoutUser: () => {
                 dispatch(logoutUser());
+            },
+            resetPassword: (email) => {
+                return dispatch(resetPassword(email));
             }
         }
     }

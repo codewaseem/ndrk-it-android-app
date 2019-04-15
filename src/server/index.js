@@ -310,6 +310,14 @@ export const UserManager = (function () {
         return accounts.map(account => account.attributes);
     }
 
+    async function resetPassword(email) {
+        let done =  await User.requestPasswordReset(email);
+        console.log(done);
+        if(done) return true;
+
+        return false;
+    }
+
     return {
         signUp,
         login,
@@ -321,6 +329,7 @@ export const UserManager = (function () {
         updateUserInfo,
         getStudents,
         getFaculty,
+        resetPassword,
         getCurrentUser: () => (loggedInUserData)
     }
 })();

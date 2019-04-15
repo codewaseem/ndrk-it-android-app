@@ -257,6 +257,15 @@ export const getFaculty = () => {
     );
 }
 
+export const resetPassword = (email) => {
+    return asyncQueryActionHelper(
+        UserManager.resetPassword.bind(null, email),
+        "Password reset link sent to your email!",
+        "Couldn't send email!",
+        "Trying to send password reset link..."
+    );
+}
+
 
 export const addEvent = (data) => {
     return asyncQueryActionHelper(
