@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
 import { loginAvatar as imgLoginAvatar } from "../../staticData";
 import { IonInput } from "@ionic/react";
-import { FormItem, Form, FormButton, FormFooter, FormImage, FormIconLabel, DontHaveAnAccount } from "../../components/FormItems";
+import { FormItem, Form, FormButton, FormImage, FormIconLabel } from "../../components/FormItems";
 import { withChangedTitle, onlyNonUser, withUser } from "../../context";
 import { Redirect } from "react-router-dom";
 import { getUserHomeUrl } from "../../helpers";
