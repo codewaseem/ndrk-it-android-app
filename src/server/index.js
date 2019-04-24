@@ -96,11 +96,17 @@ export const UserManager = (function () {
             if (academicYear <= 0 || academicYear > 4) {
                 throw new Error("Invalid year");
             }
+
+            await _checkIsUniqueField("usn", usn);
+
         } else if(type === User_Types.Faculty){
             
             if(!facId) {
                 throw new Error("Faculty Id not provided");
             }
+
+            await _checkIsUniqueField("facId", facId);
+
         }
 
         if (!isValidEmail(email)) {
@@ -156,6 +162,16 @@ export const UserManager = (function () {
         User.logOut();
 
         return userInfo;
+    }
+
+    async function _checkIsUniqueField(field="usn", value) {
+        let usnQuery = new Query(UserInfo);
+        usnQuery.equalTo(field, value);
+        let user = await usnQuery.first();
+        if(user) {
+            throw new Error(`The ${field} is already used.`);
+        }
+        else return;
     }
 
     async function login({ email, password }) {
