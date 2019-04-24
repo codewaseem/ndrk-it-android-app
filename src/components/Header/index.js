@@ -29,11 +29,13 @@ class Header extends Component {
             <IonHeader>
                 <IonToolbar color="dark">
 
-                    <IonButtons slot="start">
-                        <IonButton onClick={this.goBack}>
-                            <IonIcon name="arrow-back" />
-                        </IonButton>
-                    </IonButtons>
+                    {this.props.location.pathname !== "/" &&
+                        <IonButtons slot="start">
+                            <IonButton onClick={this.goBack}>
+                                <IonIcon name="arrow-back" />
+                            </IonButton>
+                        </IonButtons>
+                    }
 
                     <header className="main-header">
                         <IonTitle style={{ visibility: "visible" }} className="title">{this.props.appTitle}</IonTitle>
