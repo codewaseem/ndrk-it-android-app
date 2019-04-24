@@ -22,7 +22,8 @@ class UpdateProfilePage extends Component {
         email: "",
         academicYear: 1,
         graduated: false,
-        verified: true
+        verified: true,
+        facId: ""
     }
 
     onChangeHandler = (e) => {
@@ -40,7 +41,7 @@ class UpdateProfilePage extends Component {
         if (this.props.match.params.email && !this.state.showUpdateForm) {
             const user = await this.props.findByEmail(this.props.match.params.email);
             if (user) {
-                const { type, name, usn, branch, gender, email, academicYear, graduated, verified } = user;
+                const { type, name, usn, branch, gender, email, academicYear, graduated, verified, facId } = user;
                 this.setState(() => {
                     return {
                         showUpdateForm: true,
@@ -53,7 +54,8 @@ class UpdateProfilePage extends Component {
                         email,
                         academicYear,
                         graduated,
-                        verified
+                        verified,
+                        facId
                     }
                 });
 
@@ -146,6 +148,14 @@ class UpdateProfilePage extends Component {
                                 </FormItem>
                             </React.Fragment>
 
+                        }
+                        {(this.state.type === User_Types.Faculty) &&
+                            <React.Fragment>
+                                <FormItem>
+                                    <FormImageLabel imgSrc={imgUsn} />
+                                    <IonInput required={true} onIonChange={this.onChangeHandler} maxlength="10" name="facId" value={this.state.facId} type="text"  placeholder="Faculty's ID"></IonInput>
+                                </FormItem>
+                            </React.Fragment>
                         }
                         <FormItem>
                             <FormIconLabel iconName="mail" />

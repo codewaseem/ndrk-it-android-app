@@ -20,7 +20,7 @@ const FacultyMenu = withChangedTitle("Faculty Home")(withUser((props) => {
     return (<SectionedPage
         sectionsMap={[
             {
-                name: `Welcome, ${props.user && props.user.name}`,
+                name: `Welcome, ${props.user && props.user.name} ${props.user.facId && `(Faculty ID #${props.user.facId})`}`,
                 component: null
             },
             {

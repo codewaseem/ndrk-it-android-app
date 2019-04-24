@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CenteredPage from "../CenteredPage";
-import {faculty as imgFaculty, branch as imgBranch , name as imgName} from "../../staticData";
+import {faculty as imgFaculty, branch as imgBranch , name as imgName, usn as imgId} from "../../staticData";
 import { IonInput, IonSelectOption } from "@ionic/react";
 import { Form, FormButton, FormFooter, FormImage, FormImageLabel, SelectInput, FormItem, FormIconLabel, HaveAnAccount } from "../../components/FormItems";
 // import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ class FacultySignUpPage extends Component {
     state = {
         name: "",
         branch: "",
+        facId:"",
         email: "",
         password: "",
         confirmPassword: "",
@@ -35,7 +36,7 @@ class FacultySignUpPage extends Component {
 
     onSubmitHandler = async (e) => {
         e.preventDefault();
-        let { email, branch, name, password, confirmPassword, gender } = this.state;
+        let { email, branch, name, facId, password, confirmPassword, gender } = this.state;
         let errorCount = 0;
         if (!isValidEmail(email)) {
             this.props.notify("Invalid", "Email is invalid", "error");
@@ -56,13 +57,18 @@ class FacultySignUpPage extends Component {
             errorCount++;
         }
 
+        if (!facId) {
+            this.props.notify("Invalid", "Please enter a proper id", "error");
+            errorCount++;
+        }
+
         if ((!password || !confirmPassword || password !== confirmPassword)) {
             this.props.notify("Invalid", "Password/Confirm Password mismatch!", "error");
             errorCount++;
         }
 
         if (errorCount === 0) {
-            const user = await this.props.facultySignUp({ name, email, branch, password, gender });
+            const user = await this.props.facultySignUp({ name, facId, email, branch, password, gender });
             if (user) {
                 this.setState(() => {
                     return {
@@ -91,6 +97,10 @@ class FacultySignUpPage extends Component {
                     <FormItem>
                         <FormImageLabel imgSrc={imgName} />
                         <IonInput onIonChange={this.onChangeHandler} required name="name" value={this.state.name} type="text" placeholder="Faculty's Name"></IonInput>
+                    </FormItem>
+                    <FormItem>
+                        <FormImageLabel imgSrc={imgId} />
+                        <IonInput onIonChange={this.onChangeHandler} required name="facId" value={this.state.facId} type="text" placeholder="Faculty's ID"></IonInput>
                     </FormItem>
                     <FormItem>
                         <FormImageLabel imgSrc={imgBranch} />

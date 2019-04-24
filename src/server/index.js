@@ -77,7 +77,8 @@ export const UserManager = (function () {
         type,
         usn,
         academicYear,
-        password
+        password,
+        facId
     }) {
         if (!email || !name || !gender || !type || !branch || !password) {
             throw new Error("Basic User info not provided");
@@ -94,6 +95,11 @@ export const UserManager = (function () {
 
             if (academicYear <= 0 || academicYear > 4) {
                 throw new Error("Invalid year");
+            }
+        } else if(type === User_Types.Faculty){
+            
+            if(!facId) {
+                throw new Error("Faculty Id not provided");
             }
         }
 
@@ -137,6 +143,11 @@ export const UserManager = (function () {
                 usn,
                 academicYear: Number(academicYear),
                 graduated: false,
+            }
+        } else if(type === User_Types.Faculty) {
+            info ={
+                ...info,
+                facId
             }
         }
         let userInfo = await newUserInfo.save(info);
@@ -245,7 +256,7 @@ export const UserManager = (function () {
         return saved.attributes;
     }
 
-    async function updateUserInfo(email, { name, gender, type, branch, usn, academicYear, graduated }) {
+    async function updateUserInfo(email, { name, gender, type, branch, usn, academicYear, graduated, facId }) {
 
         if (!name || !gender || !type || !branch) {
             throw new Error("Basic User info not provided");
@@ -262,6 +273,10 @@ export const UserManager = (function () {
 
             if (academicYear <= 0 || academicYear > 4) {
                 throw new Error("Invalid year");
+            }
+        } else if(type === User_Types.Faculty) {
+            if(!facId) {
+                throw new Error("Faculty's ID not provided");
             }
         }
 
@@ -283,6 +298,11 @@ export const UserManager = (function () {
         if (type === User_Types.Student) {
             graduated = Boolean(graduated);
             toUpdate = { ...toUpdate, usn, academicYear, graduated }
+        } else if(type === User_Types.Faculty) {
+            toUpdate = {
+                ...toUpdate,
+                facId
+            }
         }
         let updatedData = await userInfo.save(toUpdate);
 
