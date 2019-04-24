@@ -375,5 +375,11 @@ export const unsubscribeFromClassroom = () => {
     }
 }
 
-window.postMessage = postMessage;
-window.getClassroomMessages = getClassroomMessages;
+export const deleteUser = (email) => {
+    return asyncQueryActionHelper(
+        UserManager.deleteUser.bind(null, email),
+        "User deleted!",
+        null,
+        "Deleting user..."
+    )
+}

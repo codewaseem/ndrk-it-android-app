@@ -1,4 +1,4 @@
-import Parse, { User, Object as ParseObject, Query, File as ParseFile } from "parse";
+import Parse, { User, Object as ParseObject, Query, File as ParseFile, Cloud } from "parse";
 import { PARSE_APP_ID, PARSE_SERVER_URL } from "../staticData";
 import { isValidEmail, isValidUsn } from "../helpers";
 
@@ -99,9 +99,9 @@ export const UserManager = (function () {
 
             await _checkIsUniqueField("usn", usn);
 
-        } else if(type === User_Types.Faculty){
-            
-            if(!facId) {
+        } else if (type === User_Types.Faculty) {
+
+            if (!facId) {
                 throw new Error("Faculty Id not provided");
             }
 
@@ -150,8 +150,8 @@ export const UserManager = (function () {
                 academicYear: Number(academicYear),
                 graduated: false,
             }
-        } else if(type === User_Types.Faculty) {
-            info ={
+        } else if (type === User_Types.Faculty) {
+            info = {
                 ...info,
                 facId
             }
@@ -164,11 +164,11 @@ export const UserManager = (function () {
         return userInfo;
     }
 
-    async function _checkIsUniqueField(field="usn", value) {
+    async function _checkIsUniqueField(field = "usn", value) {
         let usnQuery = new Query(UserInfo);
         usnQuery.equalTo(field, value);
         let user = await usnQuery.first();
-        if(user) {
+        if (user) {
             throw new Error(`The ${field} is already used.`);
         }
         else return;
@@ -287,13 +287,21 @@ export const UserManager = (function () {
                 throw new Error("Invalid USN");
             }
 
+            await _checkIsUniqueField("usn", usn);
+
+
             if (academicYear <= 0 || academicYear > 4) {
                 throw new Error("Invalid year");
             }
-        } else if(type === User_Types.Faculty) {
-            if(!facId) {
+
+
+        } else if (type === User_Types.Faculty) {
+            if (!facId) {
                 throw new Error("Faculty's ID not provided");
             }
+
+            await _checkIsUniqueField("facId", facId);
+
         }
 
         if (!Branches[branch]) {
@@ -314,7 +322,7 @@ export const UserManager = (function () {
         if (type === User_Types.Student) {
             graduated = Boolean(graduated);
             toUpdate = { ...toUpdate, usn, academicYear, graduated }
-        } else if(type === User_Types.Faculty) {
+        } else if (type === User_Types.Faculty) {
             toUpdate = {
                 ...toUpdate,
                 facId
@@ -347,11 +355,33 @@ export const UserManager = (function () {
     }
 
     async function resetPassword(email) {
-        let done =  await User.requestPasswordReset(email);
+        let done = await User.requestPasswordReset(email);
         console.log(done);
-        if(done) return true;
+        if (done) return true;
 
         return false;
+    }
+
+    async function deleteUser(email) {
+
+
+        let userDeleted = await Cloud.run("deleteUserByEmail", {
+            email
+        })
+        .then(async (data) => {
+            if(data && data.id){
+                let userInfoQuery = new Query(UserInfo);
+                userInfoQuery.equalTo("email", email);
+                let userInfo = await userInfoQuery.first();
+                let deletedUserInfo = await userInfo.destroy();
+                return deletedUserInfo;
+            } else {
+                throw new Error("User not deleted/doesn't exists");
+            }
+        });
+        if (userDeleted) {
+            return true;
+        } else return false;
     }
 
     return {
@@ -366,6 +396,7 @@ export const UserManager = (function () {
         getStudents,
         getFaculty,
         resetPassword,
+        deleteUser,
         getCurrentUser: () => (loggedInUserData)
     }
 })();

@@ -5,9 +5,10 @@ import { IonInput, IonSelectOption, IonText } from "@ionic/react";
 import { FormImage } from "../../components/FormItems";
 import { Gender_Options, User_Types } from "../../server";
 import { connect } from "react-redux";
-import { findUserByEmailAction, setVerified, updateUserInfo } from "../../store/actions";
+import { findUserByEmailAction, setVerified, updateUserInfo, deleteUser } from "../../store/actions";
 import { withChangedTitle, onlyAdmin } from "../../context";
-import { usn as imgUsn, update as imgUpdate, name as imgName, year as imgYear, branch as imgBranch, noVerify as imgNoVerify } from "../../staticData";
+import { usn as imgUsn, update as imgUpdate, name as imgName, year as imgYear, branch as imgBranch, noVerify as imgNoVerify, RoutesURL } from "../../staticData";
+import { Redirect } from "react-router";
 
 
 class UpdateProfilePage extends Component {
@@ -23,7 +24,8 @@ class UpdateProfilePage extends Component {
         academicYear: 1,
         graduated: false,
         verified: true,
-        facId: ""
+        facId: "",
+        redirect:false
     }
 
     onChangeHandler = (e) => {
@@ -90,7 +92,21 @@ class UpdateProfilePage extends Component {
         });
     }
 
+    deleteUser = async () => {
+        let done = await this.props.deleteUser(this.state.email);
+        if(done) {
+            this.setState(() => {
+                return {
+                    redirect : true
+                }
+            });
+        }
+    }
+
     render() {
+        if(this.state.redirect) {
+            return <Redirect to={RoutesURL.ADMIN_HOME} />
+        }
         if (this.state.showUpdateForm) {
 
             return (
@@ -153,7 +169,7 @@ class UpdateProfilePage extends Component {
                             <React.Fragment>
                                 <FormItem>
                                     <FormImageLabel imgSrc={imgUsn} />
-                                    <IonInput required={true} onIonChange={this.onChangeHandler} maxlength="10" name="facId" value={this.state.facId} type="text"  placeholder="Faculty's ID"></IonInput>
+                                    <IonInput required={true} onIonChange={this.onChangeHandler} maxlength="10" name="facId" value={this.state.facId} type="text" placeholder="Faculty's ID"></IonInput>
                                 </FormItem>
                             </React.Fragment>
                         }
@@ -162,6 +178,7 @@ class UpdateProfilePage extends Component {
                             <IonInput disabled onIonChange={this.onChangeHandler} required name="email" value={this.state.email} type="email" placeholder="Email"></IonInput>
                         </FormItem>
                         {!this.state.verified && <FormButton onClick={this.setVerified} type="button" color="primary" buttonText="Verify Account" />}
+                        <FormButton onClick={this.deleteUser} type="button" color="danger" buttonText={this.state.verified ? "Delete" : "Reject"} />
                         <FormButton type="button" onClick={this.onUpdate} buttonText="Update Details" />
                     </Form>
 
@@ -192,6 +209,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateUserInfo: (email, data) => {
             return dispatch(updateUserInfo(email, data, "Account details updated!", "Failed to update account details"));
+        },
+        deleteUser: (email) => {
+            return dispatch(deleteUser(email));
         }
     }
 }
