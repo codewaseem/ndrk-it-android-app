@@ -3,5 +3,5 @@
   "appName": "NDRK IT",
   "bundledWebRuntime": false,
   "webDir": "build",
-  "linuxAndroidStudioPath" : "/home/waseem/android-studio/bin/studio.sh"
+  "linuxAndroidStudioPath" : "/home/waseem/apps/android-studio/bin/studio.sh"
 }
