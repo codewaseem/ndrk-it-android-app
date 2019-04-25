@@ -97,7 +97,7 @@ export const UserManager = (function () {
                 throw new Error("Invalid year");
             }
 
-            await _checkIsUniqueField("usn", usn);
+            await _checkIsUniqueField("usn", usn, email);
 
         } else if (type === User_Types.Faculty) {
 
@@ -105,7 +105,7 @@ export const UserManager = (function () {
                 throw new Error("Faculty Id not provided");
             }
 
-            await _checkIsUniqueField("facId", facId);
+            await _checkIsUniqueField("facId", facId, email);
 
         }
 
@@ -164,9 +164,10 @@ export const UserManager = (function () {
         return userInfo;
     }
 
-    async function _checkIsUniqueField(field = "usn", value) {
+    async function _checkIsUniqueField(field = "usn", value, email) {
         let usnQuery = new Query(UserInfo);
         usnQuery.equalTo(field, value);
+        usnQuery.notEqualTo("email", email);
         let user = await usnQuery.first();
         if (user) {
             throw new Error(`The ${field} is already used.`);
@@ -287,7 +288,7 @@ export const UserManager = (function () {
                 throw new Error("Invalid USN");
             }
 
-            await _checkIsUniqueField("usn", usn);
+            await _checkIsUniqueField("usn", usn, email);
 
 
             if (academicYear <= 0 || academicYear > 4) {
@@ -300,7 +301,7 @@ export const UserManager = (function () {
                 throw new Error("Faculty's ID not provided");
             }
 
-            await _checkIsUniqueField("facId", facId);
+            await _checkIsUniqueField("facId", facId, email);
 
         }
 
