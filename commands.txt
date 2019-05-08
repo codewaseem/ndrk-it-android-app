@@ -25,6 +25,18 @@ sudo apt install git-all
 
 npm install -g ionic
 
+## Run gedit ~/.bashrc and then add the following lines at last of the file
+
+export JAVA_HOME=/usr/lib/jvm/java-12-oracle
+export JRE_HOME=/usr/lib/jvm/java-12-oracle/jre
+export PATH=$PATH:$HOME/android-studio/bin
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+
+
+
 ## Inside project directory
 
 npm install
