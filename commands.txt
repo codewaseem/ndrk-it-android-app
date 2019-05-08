@@ -20,3 +20,18 @@ sudo apt-get update && sudo apt-get install --no-install-recommends yarn
 
 sudo apt install git-all
 
+
+## Install Ionic Framework
+
+npm install -g ionic
+
+## Inside project directory
+
+npm install
+
+
+## To start app in web browser 
+yarn start
+
+## To build app in android-studio
+yarn build
