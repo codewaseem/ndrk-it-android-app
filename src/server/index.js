@@ -385,6 +385,21 @@ export const UserManager = (function () {
         } else return false;
     }
 
+    async function changeAdminPassword(password) {
+
+        try {
+            let user = User.current();
+            let result = await user.save({
+                password
+            });
+            if(result) {
+                alert("Password changed!")
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return {
         signUp,
         login,
@@ -398,7 +413,8 @@ export const UserManager = (function () {
         getFaculty,
         resetPassword,
         deleteUser,
-        getCurrentUser: () => (loggedInUserData)
+        getCurrentUser: () => (loggedInUserData),
+        changeAdminPassword
     }
 })();
 
